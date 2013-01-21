@@ -29,7 +29,8 @@ require(['jquery'], function ($) {
 
   var tests = [
     'test/models/ContactTest',
-    'test/collections/ContactListTest'
+    'test/collections/ContactListTest',
+    'test/views/pc/ItemViewTest'
   ];
 
   $(function () {

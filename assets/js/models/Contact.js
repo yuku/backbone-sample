@@ -20,6 +20,10 @@ function (_, Backbone, LocalStorage, md5) {
       if (attrs.email) {
         if (!/[^\s@]+@\S+\.\S+/.test(attrs.email)) {
           errors.email = 'Invalid address';
+        } else if (this.collection.find(function (contact) {
+              return this !== contact && contact.get('email') === attrs.email;
+            })) {
+          errors.email = 'This address is already in use';
         }
       }
       return _.isEmpty(errors) ? null : errors;

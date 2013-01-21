@@ -30,6 +30,13 @@ function (Contact, ContactList) {
 
     equal(errors.name, 'Name is required', 'It requires name attr');
     equal(errors.email, 'Invalid address', 'It checks email attr\'s format');
+
+    contact.set('email', 'abc@sample.com');
+    var other = contact_list.create();
+    other.set('email', contact.get('email'), {validate: true});
+    errors = other.validationError;
+    equal(errors.email, 'This address is already in use',
+      'It checks unique constraint on email attr');
   });
 
   test('#index', 3, function () {

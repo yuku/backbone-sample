@@ -35,6 +35,15 @@ function (Contact, ContactList) {
         expect(errors).toBeDefined();
         expect(errors.email).toBe('Invalid address');
       });
+
+      it('should check unique constraint on email attr', function () {
+        contact.set('email', 'abc@sample.com');
+        var other = contact_list.create();
+        other.set('email', contact.get('email'), {validate: true});
+        var errors = other.validationError;
+        expect(errors).toBeDefined();
+        expect(errors.email).toBe('This address is already in use');
+      });
     });
 
     describe('#index', function () {

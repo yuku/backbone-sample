@@ -1,16 +1,22 @@
 define([
-  'models/Contact'
+  'models/Contact',
+  'collections/ContactList'
 ],
-function (Contact) {
+function (Contact, ContactList) {
 
   'use strict';
 
-  var contact;
+  var contact, contact_list;
 
   module('Contact', {
     setup: function () {
-      contact = new Contact();
+      contact_list = new ContactList();
+      contact = contact_list.create();
     }
+  });
+
+  test('#initialize throws an error if constructor called directly', function () {
+    throws(function () { new Contact(); }, Error);
   });
 
   test('#validate', 3, function () {
@@ -35,9 +41,13 @@ function (Contact) {
     equal(contact.index(), 'あ');
   });
 
+  test('#index returns an empty character by default', function () {
+    equal(contact.index(), '');
+  });
+
   test('#updateHash is a change:email event handler', 1, function () {
     this.spy(Contact.prototype, 'updateHash');
-    contact = new Contact();
+    contact = contact_list.create();
     contact.set('email', 'whoami@sample.com');
     ok(contact.updateHash.calledOnce);
   });

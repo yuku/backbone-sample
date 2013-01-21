@@ -1,14 +1,24 @@
 define([
-  'models/Contact'
+  'models/Contact',
+  'collections/ContactList'
 ],
-function (Contact) {
+function (Contact, ContactList) {
 
   'use strict';
 
   describe('Contact', function () {
-    var contact;
+
+    var contact, contact_list;
+
     beforeEach(function () {
-      contact = new Contact();
+      contact_list = new ContactList();
+      contact = contact_list.create();
+    });
+
+    describe('#initialize', function () {
+      it('should throw an error if constructor called directly', function () {
+        expect(function () { new Contact(); }).toThrow();
+      });
     });
 
     describe('#validate', function () {
@@ -37,12 +47,16 @@ function (Contact) {
         contact.set('name', 'あいう');
         expect(contact.index()).toBe('あ');
       });
+
+      it('should return an empty character by default', function () {
+        expect(contact.index()).toBe('');
+      });
     });
 
     describe('#updateHash', function () {
       it("should be set as a change:email event handler", function () {
         spyOn(Contact.prototype, 'updateHash');
-        contact = new Contact();
+        contact = contact_list.create();
         contact.set('email', 'whoami@sample.com');
         expect(contact.updateHash).toHaveBeenCalled();
       });

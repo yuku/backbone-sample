@@ -14,18 +14,17 @@ function (Contact, ContactList) {
     }
   });
 
-  test('models are sorted by Contact#index', function () {
+  test('#model', 1, function () {
+    strictEqual(contact_list.model, Contact, 'It is Contact');
+  });
+
+  test('#models', 1, function () {
     contact_list.reset([
       {name: 'abc'},
       {name: 'cde'},
       {name: 'bcd'}
     ]);
-    equal(contact_list.at(0).get('name'), 'abc');
-    equal(contact_list.at(1).get('name'), 'bcd');
-    equal(contact_list.at(2).get('name'), 'cde');
-  });
-
-  test('#model is Contact', 1, function () {
-    strictEqual(contact_list.model, Contact);
+    deepEqual(contact_list.pluck('name'), ['abc', 'bcd', 'cde'],
+      'It is sorted by Contact#index');
   });
 });

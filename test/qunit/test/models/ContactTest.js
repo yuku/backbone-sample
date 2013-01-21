@@ -15,11 +15,12 @@ function (Contact, ContactList) {
     }
   });
 
-  test('#initialize throws an error if constructor called directly', function () {
-    throws(function () { new Contact(); }, Error);
+  test('#initialize', 1, function () {
+    throws(function () { new Contact(); }, Error,
+      'It throws an error if constructor called directly');
   });
 
-  test('#validate', 3, function () {
+  test('#validate', 4, function () {
     contact.set({
       name: '',
       email: 'abc'
@@ -27,34 +28,31 @@ function (Contact, ContactList) {
     var errors = contact.validationError;
     ok(errors);
 
-    equal(errors.name, 'Name is required');
-    equal(errors.email, 'Invalid address');
+    equal(errors.name, 'Name is required', 'It requires name attr');
+    equal(errors.email, 'Invalid address', 'It checks email attr\'s format');
   });
 
-  test('#index returns the capitalized first character', function () {
+  test('#index', 3, function () {
+    equal(contact.index(), '',
+      'It returns an empty character by default');
+
     contact.set('name', 'abc');
-    equal(contact.index(), 'A');
-  });
+    equal(contact.index(), 'A',
+      'It returns the capitalized first character');
 
-  test('#index returns the first character for non-ascii name', function () {
     contact.set('name', 'あいう');
-    equal(contact.index(), 'あ');
+    equal(contact.index(), 'あ',
+      'It returns the first character for non-ascii name');
   });
 
-  test('#index returns an empty character by default', function () {
-    equal(contact.index(), '');
-  });
-
-  test('#updateHash is a change:email event handler', 1, function () {
+  test('#updateHash', 2, function () {
     this.spy(Contact.prototype, 'updateHash');
     contact = contact_list.create();
-    contact.set('email', 'whoami@sample.com');
-    ok(contact.updateHash.calledOnce);
-  });
-
-  test('#updateHash updates a hash attr', 1, function () {
     var prev = contact.get('hash');
     contact.set('email', 'whoami@sample.com');
-    notEqual(contact.get('hash'), prev);
+    ok(contact.updateHash.calledOnce,
+      'It is change:email event handler');
+    notEqual(contact.get('hash'), prev,
+      'It updates hash attr');
   });
 });

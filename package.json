@@ -1,0 +1,9 @@
+{
+  "author": "Yuku Takahashi <taka84u9@gmail.com>",
+  "name": "Contacts",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "0.4.0rc4",
+    "grunt-contrib-jst": "~0.3.2"
+  }
+}

@@ -33,7 +33,9 @@ require(['jquery', 'jasmine-html'], function ($, jasmine) {
 
   'use strict';
 
-  var specs = [];
+  var specs = [
+    'spec/models/ContactSpec'
+  ];
 
   var jasmineEnv = jasmine.getEnv();
   jasmineEnv.updateInterval = 1000;

@@ -34,7 +34,8 @@ require(['jquery', 'jasmine-html'], function ($, jasmine) {
   'use strict';
 
   var specs = [
-    'spec/models/ContactSpec'
+    'spec/models/ContactSpec',
+    'spec/collections/ContactListSpec'
   ];
 
   var jasmineEnv = jasmine.getEnv();

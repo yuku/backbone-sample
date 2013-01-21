@@ -28,7 +28,8 @@ require(['jquery'], function ($) {
   'use strict';
 
   var tests = [
-    'test/models/ContactTest'
+    'test/models/ContactTest',
+    'test/collections/ContactListTest'
   ];
 
   $(function () {

@@ -1,0 +1,6 @@
+[submodule "sub_modules/bootstrap"]
+	path = sub_modules/bootstrap
+	url = git://github.com/twitter/bootstrap.git
+[submodule "submodules/bootstrap"]
+	path = submodules/bootstrap
+	url = git://github.com/twitter/bootstrap.git

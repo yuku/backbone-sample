@@ -8,6 +8,7 @@ function (Backbone, ItemView) {
 
   return Backbone.View.extend({
     tagName: 'ul',
+    className: 'unstyled',
     initialize: function () {
       this.count = 0;  // the number of child itemviews
       this.listenTo(this.collection, 'add', this.append);

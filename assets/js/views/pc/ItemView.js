@@ -18,15 +18,11 @@ function (_, Backbone, JST) {
       return this;
     },
     presenter: function () {
-      var data = _.defaults(this.model.toJSON(), {
+      return _.defaults(this.model.toSafeJSON(), {
         id: this.model.id,
         phone: '',
         email: ''
       });
-      _.each(data, function (value, name) {
-        data[name] = _.escape(value);
-      });
-      return data;
     }
   });
 });

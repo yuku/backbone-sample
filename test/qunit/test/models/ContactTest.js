@@ -55,11 +55,18 @@ function (Contact, ContactList) {
   test('#updateHash', 2, function () {
     this.spy(Contact.prototype, 'updateHash');
     contact = contact_list.create();
-    var prev = contact.get('hash');
+    var previous = contact.get('hash');
+    var prevCount = contact.updateHash.callCount;
     contact.set('email', 'whoami@sample.com');
-    ok(contact.updateHash.calledOnce,
+    equal(contact.updateHash.callCount - prevCount, 1,
       'It is change:email event handler');
-    notEqual(contact.get('hash'), prev,
+    notEqual(contact.get('hash'), previous,
       'It updates hash attr');
+  });
+
+  test('#toSafeJSON', 1, function () {
+    contact.set('name', '<script>');
+    equal(contact.toSafeJSON().name, '&lt;script&gt;',
+      'It returns html escaped toJSON object');
   });
 });

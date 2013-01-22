@@ -76,5 +76,12 @@ function (Contact, ContactList) {
         expect(contact.get('hash')).not.toEqual(prev);
       });
     });
+
+    describe('#toSafeJSON', function () {
+      it('should return html escaped toJSON object', function () {
+        contact.set('name', '<script>');
+        expect(contact.toSafeJSON().name).toEqual('&lt;script&gt;');
+      });
+    });
   });
 });

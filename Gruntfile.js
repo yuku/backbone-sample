@@ -5,7 +5,8 @@ module.exports = function (grunt) {
   'use strict';
 
   [
-    'grunt-contrib-jst'
+    'grunt-contrib-jst',
+    'grunt-contrib-watch'
   ].forEach(function (name) {
     grunt.loadNpmTasks(name);
   });
@@ -25,6 +26,13 @@ module.exports = function (grunt) {
             return src.replace(/(^\s+|\s+$)/gm, '');
           }
         }
+      }
+    },
+
+    watch: {
+      jst: {
+        files: ['assets/js/templates/**/*.html'],
+        tasks: ['jst']
       }
     }
   });

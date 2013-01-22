@@ -13,7 +13,13 @@ return __p;
 this["JST"]["pc/item"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
-__p+='';
+__p+='<a href="#'+
+( id )+
+'">\n  '+
+( name )+
+'\n  '+
+( email )+
+'\n</a>\n';
 }
 return __p;
 };

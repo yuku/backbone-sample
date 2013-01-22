@@ -44,6 +44,11 @@ module.exports = function (grunt) {
     less: {
       options: {
         compress: true
+      },
+      pc: {
+        files: {
+          'assets/css/pc.css': 'assets/less/pc.less'
+        }
       }
     }
   });

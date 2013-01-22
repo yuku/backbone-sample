@@ -1,5 +1,11 @@
-<%= name %>
-<%= email %>
-<% if (phone) { %>
-  <%= phone %>
-<% } %>
+<ul class="pager">
+  <li class="previous"><a href="#<%= id %>/edit">Edit</a></li>
+</ul>
+<dl class="dl-horizontal">
+  <dt>Name</dt>
+  <dd><%= name %></dd>
+  <dt>Email</dt>
+  <dd><%= email %></dd>
+  <dt>Phone</dt>
+  <dd><%= phone %></dd>
+</dl>

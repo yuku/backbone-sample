@@ -30,7 +30,8 @@ function (_, Backbone, md5) {
       return (this.get('name') || '').charAt(0).toUpperCase();
     },
     updateHash: function () {
-      this.set('hash', md5(this.get('email')));
+      var email = this.get('email') || 'dummy';
+      this.set('hash', md5(email.toLowerCase()));
     }
   });
 });

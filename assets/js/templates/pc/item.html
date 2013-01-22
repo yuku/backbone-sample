@@ -1,4 +1,6 @@
 <a href="#<%= id %>">
-  <%= name %>
-  <%= email %>
+  <img src="http://www.gravatar.com/avatar/<%= hash %>"/>
+  <h3><%= name %></h3>
+  <% if (email) { %><p><%= email %></p><% } %>
+  <% if (phone) { %><p><%= phone %></p><% } %>
 </a>

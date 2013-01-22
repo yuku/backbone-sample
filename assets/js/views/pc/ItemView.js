@@ -18,7 +18,11 @@ function (_, Backbone, JST) {
       return this;
     },
     presenter: function () {
-      var data = this.model.toJSON();
+      var data = _.defaults(this.model.toJSON(), {
+        id: this.model.id,
+        phone: '',
+        email: ''
+      });
       _.each(data, function (value, name) {
         data[name] = _.escape(value);
       });

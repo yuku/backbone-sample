@@ -1,15 +1,13 @@
 define([
   'underscore',
   'backbone',
-  'backbone.localStorage',
   'md5'
 ],
-function (_, Backbone, LocalStorage, md5) {
+function (_, Backbone, md5) {
 
   'use strict';
 
   return Backbone.Model.extend({
-    localStorage: new LocalStorage('contact'),
     initialize: function () {
       this.listenTo(this, 'change:email', this.updateHash);
       if (!this.collection) throw new Error("Don't create directly");

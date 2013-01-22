@@ -18,5 +18,23 @@ __p+='';
 return __p;
 };
 
+this["JST"]["pc/show"] = function(obj){
+var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+with(obj||{}){
+__p+=''+
+( name )+
+'\n'+
+( email )+
+'\n';
+ if (phone) { 
+;__p+='\n  '+
+( phone )+
+'\n';
+ } 
+;__p+='\n';
+}
+return __p;
+};
+
   return this["JST"];
 });

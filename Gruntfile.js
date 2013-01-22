@@ -6,6 +6,7 @@ module.exports = function (grunt) {
 
   [
     'grunt-contrib-jst',
+    'grunt-contrib-less',
     'grunt-contrib-watch'
   ].forEach(function (name) {
     grunt.loadNpmTasks(name);
@@ -33,6 +34,16 @@ module.exports = function (grunt) {
       jst: {
         files: ['assets/js/templates/**/*.html'],
         tasks: ['jst']
+      },
+      less: {
+        files: ['assets/less/*.less'],
+        tasks: ['less']
+      }
+    },
+
+    less: {
+      options: {
+        compress: true
       }
     }
   });

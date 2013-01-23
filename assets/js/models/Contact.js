@@ -21,7 +21,7 @@ function (_, Backbone, md5) {
           errors.email = 'Invalid address';
         } else if (this.collection.find(function (contact) {
               return this !== contact && contact.get('email') === attrs.email;
-            })) {
+            }, this)) {
           errors.email = 'This address is already in use';
         }
       }

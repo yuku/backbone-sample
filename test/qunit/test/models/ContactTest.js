@@ -25,18 +25,23 @@ function (Contact, ContactList) {
       name: '',
       email: 'abc'
     }, {validate: true});
-    var errors = contact.validationError;
-    ok(errors);
+    var errors = contact.validationError || {};
 
     equal(errors.name, 'Name is required', 'It requires name attr');
     equal(errors.email, 'Invalid address', 'It checks email attr\'s format');
 
     contact.set('email', 'abc@sample.com');
+
     var other = contact_list.create();
     other.set('email', contact.get('email'), {validate: true});
-    errors = other.validationError;
+    errors = other.validationError || {};
     equal(errors.email, 'This address is already in use',
       'It checks unique constraint on email attr');
+
+    contact.set({}, {validate: true});
+    errors = contact.validationError || {};
+    equal(errors.email, undefined,
+      'It doesn\'t check unique constraint against `this`');
   });
 
   test('#index', 3, function () {

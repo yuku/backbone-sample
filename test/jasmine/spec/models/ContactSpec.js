@@ -40,9 +40,11 @@ function (Contact, ContactList) {
         contact.set('email', 'abc@sample.com');
         var other = contact_list.create();
         other.set('email', contact.get('email'), {validate: true});
-        var errors = other.validationError;
-        expect(errors).toBeDefined();
+        var errors = other.validationError || {};
         expect(errors.email).toBe('This address is already in use');
+        contact.set({}, {validate: true});
+        errors = contact.validationError || {};
+        expect(errors.email).toBeUndefined();
       });
     });
 

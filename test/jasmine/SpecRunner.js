@@ -41,7 +41,8 @@ require(['jquery', 'jasmine-html'], function ($, jasmine) {
     'spec/collections/ContactListSpec',
     'spec/views/pc/ItemViewSpec',
     'spec/views/pc/ListViewSpec',
-    'spec/views/pc/EditViewSpec'
+    'spec/views/pc/EditViewSpec',
+    'spec/views/pc/NewViewSpec'
   ];
 
   var jasmineEnv = jasmine.getEnv();

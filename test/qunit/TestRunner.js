@@ -35,7 +35,8 @@ require(['jquery'], function ($) {
     'test/collections/ContactListTest',
     'test/views/pc/ItemViewTest',
     'test/views/pc/ListViewTest',
-    'test/views/pc/EditViewTest'
+    'test/views/pc/EditViewTest',
+    'test/views/pc/NewViewTest'
   ];
 
   $(function () {

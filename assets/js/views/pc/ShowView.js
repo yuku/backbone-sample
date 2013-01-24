@@ -12,15 +12,11 @@ function (_, Backbone, JST) {
       this.listenTo(this.model, 'change', this.render);
     },
     render: function () {
-      this.$el.html(JST['pc/show'](this.presenter()));
+      this.$el.html(JST['pc/show']({source: this.presenter()}));
       return this;
     },
     presenter: function () {
-      return _.defaults(this.model.toSafeJSON(), {
-        id: this.model.cid,
-        phone: '',
-        email: ''
-      });
+      return _.defaults(this.model.toSafeJSON(), {id: this.model.cid});
     }
   });
 });

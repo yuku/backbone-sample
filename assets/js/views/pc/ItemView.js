@@ -14,15 +14,11 @@ function (_, Backbone, JST) {
       this.listenTo(this.model, 'remove', this.remove);
     },
     render: function () {
-      this.$el.html(JST['pc/item'](this.presenter()));
+      this.$el.html(JST['pc/item']({source: this.presenter()}));
       return this;
     },
     presenter: function () {
-      return _.defaults(this.model.toSafeJSON(), {
-        id: this.model.id,
-        phone: '',
-        email: ''
-      });
+      return _.defaults(this.model.toSafeJSON(), {id: this.model.id});
     }
   });
 });

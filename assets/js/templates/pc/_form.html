@@ -6,22 +6,23 @@
   <div class="control-group">
     <label class="control-label" for="name">Name</label>
     <div class="controls">
-      <input type="text" id="name" name="name" value="<%= source.name %>"
-        placeholder="Name" required/>
+      <input type="text" id="name" name="name"
+        value="<%= source.name || '' %>" placeholder="Name" required/>
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="email">Email</label>
     <div class="controls">
-      <input type="text" id="email" name="email" value="<%= source.email %>"
-        placeholder="Email" pattern="[^\s@]+@\S+\.\S+"/>
+      <input type="text" id="email" name="email"
+        value="<%= source.email || '' %>" placeholder="Email"
+        pattern="[^\s@]+@\S+\.\S+"/>
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="phone">Phone</label>
     <div class="controls">
-      <input type="text" id="phone" name="phone" value="<%= source.phone %>"
-        placeholder="Phone"/>
+      <input type="text" id="phone" name="phone"
+        value="<%= source.phone || '' %>" placeholder="Phone"/>
     </div>
   </div>
   <div class="form-actions">

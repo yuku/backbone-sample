@@ -22,9 +22,11 @@ function (Backbone, AppView) {
     },
     new_or_show: function (id) {
       if (id === 'new') {
-        this.trigger('route:new');
+        //this.trigger('route:new');
+        this.trigger('route', 'new');
       } else {
-        this.trigger('route:show', id);
+        //this.trigger('route:show', id);
+        this.trigger('route', 'show', [id]);
       }
     }
   });

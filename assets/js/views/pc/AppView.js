@@ -17,9 +17,7 @@ function (Backbone, ListView, ShowView, EditView, NewView, JST) {
       'click .new': 'navigateToNew'
     },
     initialize: function () {
-      this.listenTo(this.options.router, 'route:show', this.showContact);
-      this.listenTo(this.options.router, 'route:edit', this.editContact);
-      this.listenTo(this.options.router, 'route:new', this.newContact);
+      this.listenTo(this.options.router, 'route', this.dispatch);
     },
     // View methods
     // ------------
@@ -31,8 +29,22 @@ function (Backbone, ListView, ShowView, EditView, NewView, JST) {
       this.$('#contactlist').append(this.listview.render().el);
       return this;
     },
-    showContact: function (id) {
+    dispatch: function (name, args) {
+      if (!_.include(['index', 'show', 'edit', 'new'], name)) return;
       if (this.mainview) this.mainview.remove();
+      switch (name) {
+        case 'show':
+          this.showContact.apply(this, args);
+          break;
+        case 'edit':
+          this.editContact.apply(this, args);
+          break;
+        case 'new':
+          this.newContact.apply(this, args);
+          break;
+      }
+    },
+    showContact: function (id) {
       var model = this.collection.get(id);
       if (!model) return;
       this.mainview = new ShowView({model: model});

@@ -19,6 +19,9 @@ require.config({
     'backbone': {
       exports: 'Backbone',
       deps: ['jquery', 'underscore']
+    },
+    'jst': {
+      exports: 'JST'
     }
   }
 });

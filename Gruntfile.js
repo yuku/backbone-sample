@@ -19,7 +19,6 @@ module.exports = function (grunt) {
           'assets/js/jst.js': ['assets/js/templates/**/*.html']
         },
         options: {
-          amdWrapper: true,
           processName: function (filename) {
             return filename.match(/((?:mobile|pc)\/.*).html$/)[1];
           },

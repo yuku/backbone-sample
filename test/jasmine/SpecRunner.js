@@ -22,6 +22,9 @@ require.config({
       exports: 'Backbone',
       deps: ['jquery', 'underscore']
     },
+    'jst': {
+      exports: 'JST'
+    },
     'jasmine-html': {
       exports: 'jasmine',
       deps: ['jasmine']

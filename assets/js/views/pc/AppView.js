@@ -17,7 +17,9 @@ function (Backbone, ListView, ShowView, EditView, NewView, JST) {
       'click .new': 'navigateToNew'
     },
     initialize: function () {
+      _.bindAll(this, 'onResize', 'fitContainers');
       this.listenTo(this.options.router, 'route', this.dispatch);
+      $(window).on('resize', this.onResize);
     },
     // View methods
     // ------------
@@ -27,7 +29,17 @@ function (Backbone, ListView, ShowView, EditView, NewView, JST) {
         collection: this.collection
       });
       this.$('#contactlist').append(this.listview.render().el);
+      _.defer(this.fitContainers);
       return this;
+    },
+    fitContainers: function () {
+      var height = $(window).height();
+      // Fit #contactlist
+      var sidebarcontent = this.$('#sidebar-content');
+      sidebarcontent.height(height - sidebarcontent.offset().top);
+      // Fit #main
+      var main = this.$('#main');
+      main.height(height - main.offset().top);
     },
     dispatch: function (name, args) {
       if (!_.include(['index', 'show', 'edit', 'new'], name)) return;
@@ -79,6 +91,9 @@ function (Backbone, ListView, ShowView, EditView, NewView, JST) {
     navigateToNew: function (e) {
       e.preventDefault();
       this.options.router.navigate('new', true);
+    },
+    onResize: function () {
+      this.fitContainers();
     }
   });
 });

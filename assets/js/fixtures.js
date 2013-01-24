@@ -1,7 +1,7 @@
 define(function () {
-  
+
   'use strict';
-  
+
   return [
     {
       name: "Barack Obama",

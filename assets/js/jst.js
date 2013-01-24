@@ -19,7 +19,7 @@ return __p;
 this["JST"]["pc/app"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
-__p+='<div id="sidebar">\n  <a href="#new" class="btn new">New</a>\n  <div id="contactlist">\n  </div>\n</div>\n<div id="main">\n</div>\n';
+__p+='<div id="header">\n  <h1>Contacts</h1>\n</div>\n<div id="content">\n  <div id="sidebar" class="clearfix">\n    <div id="sidebar-header">\n      <a href="#new" class="new">New Contact</a>\n    </div>\n    <div id="sidebar-content">\n      <div id="contactlist">\n      </div>\n    </div>\n  </div>\n  <div id="main">\n  </div>\n</div>\n';
 }
 return __p;
 };
@@ -41,7 +41,7 @@ __p+='<a href="#'+
 ( source.id )+
 '">\n  <img src="http://www.gravatar.com/avatar/'+
 ( source.hash )+
-'"/>\n  <h3>'+
+'"\n    class="thumbnail"/>\n  <h3>'+
 ( source.name )+
 '</h3>\n  ';
  if (source.email) { 

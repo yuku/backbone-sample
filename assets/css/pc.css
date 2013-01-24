@@ -851,3 +851,12 @@ a.label:hover,a.badge:hover{color:#ffffff;text-decoration:none;cursor:pointer;}
 .show{display:block;}
 .invisible{visibility:hidden;}
 .affix{position:fixed;}
+#header{position:fixed;background-color:#eeeeee;border-bottom:solid 1px #ccc;color:#555555;z-index:1000;top:0;left:0;width:100%;}
+#content{margin-top:60px;}
+#sidebar{float:left;position:relative;width:300px;border-right:solid 1px #ccc;}#sidebar .new{display:block;height:30px;line-height:30px;text-align:center;}
+#sidebar-header{border-bottom:solid 1px #ccc;}
+#sidebar-content{overflow:hidden;position:relative;}
+#contactlist{overflow-x:hidden;overflow-y:auto;outline:none;height:100%;}#contactlist li{white-space:nowrap;position:relative;margin:0;overflow:visible;text-align:left;border-bottom:solid 1px #ccc;background-color:#eeeeee;border-left:solid 5px #eeeeee;}#contactlist li.selected{border-left:solid 5px #9d261d;background-color:#ffffff;}
+#contactlist li a{padding:0px 0px 30px 100px;min-height:60px;display:block;text-decoration:none!important;color:#2f3e46;}#contactlist li a h3{margin:0px;line-height:26px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:16px;}
+#contactlist li a .thumbnail{float:left;max-height:80px;max-width:80px;top:1px;left:1px;position:absolute;margin-right:10px;border-width:0;background-color:#ffffff;}
+#main{margin-left:300px;overflow-x:hidden;overflow-y:auto;}

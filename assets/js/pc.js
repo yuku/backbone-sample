@@ -1,20 +1,22 @@
 define([
   'backbone',
   'routers/pc',
-  'collections/ContactList'
+  'collections/ContactList',
+  'fixtures'
 ],
-function (Backbone, Router, ContactList) {
+function (Backbone, Router, ContactList, fixtures) {
 
   'use strict';
 
   var app = {
     root: '/contacts',
-    contactlist: new ContactList([
-      {name: 'Yuku Takahashi', email: 'taka84u9@gmail.com'},
-      {name: 'Yuku Takahashi', email: 'ytakahas@gmail.com'}
-    ])
+    contactlist: new ContactList()
   };
-  //app.contact_list.fetch();
+  app.contactlist.fetch();
+  if (app.contactlist.size() === 0) {
+    app.contactlist.update(fixtures);
+    app.contactlist.invoke('save');
+  }
 
   new Router({app: app});
 

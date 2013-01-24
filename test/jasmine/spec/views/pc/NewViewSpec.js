@@ -20,6 +20,7 @@ function (_, ContactList, NewView) {
     afterEach(function () {
       newview.remove();
       contact.destroy();
+      contactlist.reset();
     });
 
     describe('#renderValidationMessage', function () {

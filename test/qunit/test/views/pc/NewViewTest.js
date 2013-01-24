@@ -18,6 +18,7 @@ function (_, ContactList, NewView) {
     teardown: function () {
       newview.remove();
       contact.destroy();
+      contactlist.reset();
     }
   });
 

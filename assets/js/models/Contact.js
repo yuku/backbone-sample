@@ -7,11 +7,13 @@ function (_, Backbone, md5) {
 
   'use strict';
 
+  // Contact.prototype.collection is set to ContactList instance in
+  // collections/ContactList due to the circular dependency problem.
+
   return Backbone.Model.extend({
     initialize: function () {
       this.listenTo(this, 'change:email', this.updateHash);
       if (!this.get('hash')) this.updateHash();
-      if (!this.collection) throw new Error("Don't create directly");
     },
     validate: function (attrs) {
       var errors = {};

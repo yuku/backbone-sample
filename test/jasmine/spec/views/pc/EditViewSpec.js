@@ -17,6 +17,11 @@ function (_, ContactList, EditView) {
       editview = new EditView({model: contact});
     });
 
+    afterEach(function () {
+      editview.remove();
+      contactlist.reset();
+    });
+
     describe('#renderValidationMessage', function () {
       it('should be called on model\'s `invalid` event', function () {
         spyOn(EditView.prototype, 'renderValidationMessage');

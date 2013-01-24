@@ -6,18 +6,23 @@ function (Contact, ContactList) {
 
   'use strict';
 
-  var contact, contact_list;
+  var contact, contactlist;
 
   module('Contact', {
     setup: function () {
-      contact_list = new ContactList();
-      contact = contact_list.create();
+      contactlist = new ContactList();
+      contact = new Contact();
+    },
+    teardown: function () {
+      contact.destroy();
+      contactlist.reset();
     }
   });
 
-  test('#initialize', 1, function () {
-    throws(function () { new Contact(); }, Error,
-      'It throws an error if constructor called directly');
+  test('new instance', function () {
+    ok(contact.collection instanceof ContactList,
+      'It refer ContactList instance by #collection');
+    ok(!contactlist.get(contact), 'It isn\'t added to the collection');
   });
 
   test('#validate', 4, function () {
@@ -31,8 +36,9 @@ function (Contact, ContactList) {
     equal(errors.email, 'Invalid address', 'It checks email attr\'s format');
 
     contact.set('email', 'abc@sample.com');
+    contactlist.add(contact);
 
-    var other = contact_list.create();
+    var other = new Contact();
     other.set('email', contact.get('email'), {validate: true});
     errors = other.validationError || {};
     equal(errors.email, 'This address is already in use',
@@ -59,7 +65,7 @@ function (Contact, ContactList) {
 
   test('#updateHash', 2, function () {
     this.spy(Contact.prototype, 'updateHash');
-    contact = contact_list.create();
+    contact = contactlist.create();
     var previous = contact.get('hash');
     var prevCount = contact.updateHash.callCount;
     contact.set('email', 'whoami@sample.com');

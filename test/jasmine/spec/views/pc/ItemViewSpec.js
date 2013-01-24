@@ -8,40 +8,46 @@ function (ContactList, ItemView) {
 
   describe('ItemView', function () {
 
-    var contact, contact_list, item_view;
+    var contact, contactlist, itemview;
 
     beforeEach(function () {
-      contact_list = new ContactList();
-      contact = contact_list.create();
-      item_view = new ItemView({model: contact});
+      contactlist = new ContactList();
+      contact = contactlist.create();
+      itemview = new ItemView({model: contact});
+    });
+
+    afterEach(function () {
+      itemview.remove();
+      contact.destroy();
+      contactlist.reset();
     });
 
     describe('#render', function () {
       it("should be called on model's change event", function () {
         spyOn(ItemView.prototype, 'render');
-        item_view = new ItemView({model: contact});
+        itemview = new ItemView({model: contact});
         contact.trigger('change');
-        expect(item_view.render).toHaveBeenCalled();
+        expect(itemview.render).toHaveBeenCalled();
       });
 
       it('should return view itself', function () {
-        expect(item_view.render()).toBe(item_view);
+        expect(itemview.render()).toBe(itemview);
       });
     });
 
     describe('#remove', function () {
       it("should be called on model's remove event", function () {
         spyOn(ItemView.prototype, 'remove');
-        item_view = new ItemView({model: contact});
+        itemview = new ItemView({model: contact});
         contact.trigger('remove');
-        expect(item_view.remove).toHaveBeenCalled();
+        expect(itemview.remove).toHaveBeenCalled();
       });
     });
 
     describe('#presenter', function () {
       it('should return escaped model attrs', function () {
         contact.set('name', '<script>');
-        expect(item_view.presenter().name).toBe('&lt;script&gt;');
+        expect(itemview.presenter().name).toBe('&lt;script&gt;');
       });
     });
   });

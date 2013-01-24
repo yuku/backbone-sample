@@ -8,16 +8,25 @@ function (Contact, ContactList) {
 
   describe('Contact', function () {
 
-    var contact, contact_list;
+    var contact, contactlist;
 
     beforeEach(function () {
-      contact_list = new ContactList();
-      contact = contact_list.create();
+      contactlist = new ContactList();
+      contact = new Contact();
     });
 
-    describe('#initialize', function () {
-      it('should throw an error if constructor called directly', function () {
-        expect(function () { new Contact(); }).toThrow();
+    afterEach(function () {
+      contact.destroy();
+      contactlist.reset();
+    });
+
+    describe('new instance', function () {
+      it('should not added to the collection', function () {
+        expect(!!contactlist.get(contact)).toBe(false);
+      });
+
+      it('should refer ContactList instance by #collection', function () {
+        expect(contact.collection instanceof ContactList).toBe(true);
       });
     });
 
@@ -38,7 +47,9 @@ function (Contact, ContactList) {
 
       it('should check unique constraint on email attr', function () {
         contact.set('email', 'abc@sample.com');
-        var other = contact_list.create();
+        contactlist.add(contact);
+
+        var other = new Contact();
         other.set('email', contact.get('email'), {validate: true});
         var errors = other.validationError || {};
         expect(errors.email).toBe('This address is already in use');
@@ -67,7 +78,7 @@ function (Contact, ContactList) {
     describe('#updateHash', function () {
       it("should be set as a change:email event handler", function () {
         spyOn(Contact.prototype, 'updateHash');
-        contact = contact_list.create();
+        contact = new Contact();
         contact.set('email', 'whoami@sample.com');
         expect(contact.updateHash).toHaveBeenCalled();
       });

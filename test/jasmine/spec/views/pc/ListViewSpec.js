@@ -9,41 +9,46 @@ function (_, ContactList, ListView) {
 
   describe('ListView', function () {
 
-    var contact_list, list_view;
+    var contactlist, listview;
 
     beforeEach(function () {
-      contact_list = new ContactList();
-      list_view = new ListView({collection: contact_list});
+      contactlist = new ContactList();
+      listview = new ListView({collection: contactlist});
+    });
+
+    afterEach(function () {
+      listview.remove();
+      contactlist.reset();
     });
 
     describe('#count', function () {
       it('should initially be 0', function () {
-        expect(list_view.count).toBe(0);
+        expect(listview.count).toBe(0);
       });
 
       it('should equal to the size of collection', function () {
-        _.times(3, function () {contact_list.create();});
-        expect(list_view.count).toBe(3);
-        contact_list.at(0).destroy();
-        expect(list_view.count).toBe(2);
+        _.times(3, function () {contactlist.create();});
+        expect(listview.count).toBe(3);
+        contactlist.at(0).destroy();
+        expect(listview.count).toBe(2);
       });
     });
 
     describe('#append', function () {
       it('should called on add event', function () {
         spyOn(ListView.prototype, 'append');
-        list_view = new ListView({collection: contact_list});
-        var contact = contact_list.create({}, {silent: true});
-        contact_list.trigger('add', contact);
-        expect(list_view.append).toHaveBeenCalled();
+        listview = new ListView({collection: contactlist});
+        var contact = contactlist.create({}, {silent: true});
+        contactlist.trigger('add', contact);
+        expect(listview.append).toHaveBeenCalled();
       });
 
       it('should be called if collection initially has models', function () {
         spyOn(ListView.prototype, 'append');
-        _.times(3, function () {contact_list.create();});
-        list_view = new ListView({collection: contact_list});
-        list_view.render();
-        expect(list_view.append.calls.length).toBe(3);
+        _.times(3, function () {contactlist.create();});
+        listview = new ListView({collection: contactlist});
+        listview.render();
+        expect(listview.append.calls.length).toBe(3);
       });
     });
   });

@@ -6,25 +6,33 @@ function (Contact, ContactList) {
 
   'use strict';
 
-  var contact_list;
+  var contactlist;
 
   module('ContactList', {
     setup: function () {
-      contact_list = new ContactList();
+      contactlist = new ContactList();
+    },
+    teardown: function () {
+      contactlist.reset();
     }
   });
 
+  test('Singleton', function () {
+    var other = new ContactList();
+    strictEqual(contactlist, other, 'It is singleton');
+  });
+
   test('#model', 1, function () {
-    strictEqual(contact_list.model, Contact, 'It is Contact');
+    strictEqual(contactlist.model, Contact, 'It is Contact');
   });
 
   test('#models', 1, function () {
-    contact_list.reset([
+    contactlist.reset([
       {name: 'abc'},
       {name: 'cde'},
       {name: 'bcd'}
     ]);
-    deepEqual(contact_list.pluck('name'), ['abc', 'bcd', 'cde'],
+    deepEqual(contactlist.pluck('name'), ['abc', 'bcd', 'cde'],
       'It is sorted by Contact#index');
   });
 });

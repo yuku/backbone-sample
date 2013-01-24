@@ -14,6 +14,8 @@ function (Backbone, ItemView) {
       this.listenTo(this.collection, 'add', this.append);
       this.listenTo(this.collection, 'remove', function () { this.count--; });
     },
+    // View methods
+    // ------------
     render: function () {
       this.collection.each(function (model) {
         this.append(model);
@@ -32,6 +34,14 @@ function (Backbone, ItemView) {
         item_view.$el.insertBefore(this.$el.children()[index]);
       }
       this.count++;
+    },
+    select: function (id) {
+      var model = this.collection.get(id);
+      this.$('.selected').removeClass('selected');
+      if (model) {
+        var index = this.collection.indexOf(model);
+        $(this.$el.children()[index]).addClass('selected');
+      }
     }
   });
 });

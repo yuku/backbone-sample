@@ -32,6 +32,8 @@ function (Backbone, ListView, ShowView, EditView, NewView, JST) {
     dispatch: function (name, args) {
       if (!_.include(['index', 'show', 'edit', 'new'], name)) return;
       if (this.mainview) this.mainview.remove();
+      args || (args = []);
+      this.listview.select(args[0]);
       switch (name) {
         case 'show':
           this.showContact.apply(this, args);

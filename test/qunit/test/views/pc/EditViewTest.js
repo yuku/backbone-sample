@@ -39,6 +39,13 @@ function (_, ContactList, EditView) {
     ok(editview.onCancel.calledOnce, 'It is called when .cancel is clicked');
   });
 
+  test('#onSubmit', 1, function () {
+    this.spy(EditView.prototype, 'onSubmit');
+    editview = new EditView({model: contact});
+    editview.render().$('form').submit();
+    ok(editview.onSubmit.calledOnce, 'It is called when form submitted');
+  });
+
   test('#getValues', 1, function () {
     contact.set({
       name: 'foo',

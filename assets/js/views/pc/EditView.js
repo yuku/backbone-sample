@@ -39,9 +39,10 @@ function (_, Backbone, JST) {
       var self = this;
       this.$('.alert').hide();
       this.model.save(this.getValues(), {
-        wait: true
-      }).done(function () {
-        self.trigger('updated');
+        wait: true,
+        success: function () {
+          self.trigger('updated');
+        }
       });
     },
     onCancel: function (e) {

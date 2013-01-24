@@ -42,6 +42,15 @@ function (_, ContactList, EditView) {
       });
     });
 
+    describe('#onSubmit', function () {
+      it('should be called when form submitted', function () {
+        spyOn(EditView.prototype, 'onSubmit').andCallThrough();
+        editview = new EditView({model: contact});
+        editview.render().$('form').submit();
+        expect(editview.onSubmit).toHaveBeenCalled();
+      });
+    });
+
     describe('#getValues', function () {
       it('should return name-value object of form tag', function () {
         contact.set({

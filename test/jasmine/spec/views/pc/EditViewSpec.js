@@ -31,22 +31,6 @@ function (_, ContactList, EditView) {
       });
     });
 
-    describe('#onCancel', function () {
-      it('should be called when .cancel is clicked', function () {
-        spyOn(EditView.prototype, 'onCancel');
-        editview = new EditView({model: contact});
-        editview.render().$('.cancel').click();
-        expect(editview.onCancel).toHaveBeenCalled();
-      });
-
-      it('should trigger `canceled` event', function () {
-        var flag;
-        editview.on('canceled', function () { flag = true; });
-        editview.onCancel(document.createEvent('Event'));
-        expect(flag).toBe(true);
-      });
-    });
-
     describe('#onSubmit', function () {
       it('should be called when form submitted', function () {
         spyOn(EditView.prototype, 'onSubmit').andCallThrough();

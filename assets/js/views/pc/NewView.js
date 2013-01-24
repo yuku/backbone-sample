@@ -8,9 +8,6 @@ function (_, Backbone, JST) {
   'use strict';
 
   return Backbone.View.extend({
-    events: {
-      'click .cancel': 'onCancel'
-    },
     initialize: function () {
       this.listenTo(this.model, 'invalid', this.renderValidationMessage);
     },
@@ -45,10 +42,6 @@ function (_, Backbone, JST) {
           self.trigger('created');
         }
       });
-    },
-    onCancel: function (e) {
-      e.preventDefault();
-      this.trigger('canceled');
     },
     // Helper methods
     // --------------

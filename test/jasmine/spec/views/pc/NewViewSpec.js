@@ -32,22 +32,6 @@ function (_, ContactList, NewView) {
       });
     });
 
-    describe('#onCancel', function () {
-      it('should be called when .cancel is clicked', function () {
-        spyOn(NewView.prototype, 'onCancel');
-        newview = new NewView({model: contact});
-        newview.render().$('.cancel').click();
-        expect(newview.onCancel).toHaveBeenCalled();
-      });
-
-      it('should trigger `canceled` event', function () {
-        var flag;
-        newview.on('canceled', function () { flag = true; });
-        newview.onCancel(document.createEvent('Event'));
-        expect(flag).toBe(true);
-      });
-    });
-
     describe('#onSubmit', function () {
       it('should be called when form submitted', function () {
         spyOn(NewView.prototype, 'onSubmit').andCallThrough();

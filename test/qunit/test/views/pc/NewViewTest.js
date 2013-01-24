@@ -30,16 +30,6 @@ function (_, ContactList, NewView) {
       'It is called on model\'s `invalid` event');
   });
 
-  test('#onCancel', 2, function () {
-    this.spy(NewView.prototype, 'onCancel');
-    newview = new NewView({model: contact});
-    newview.on('canceled', function () {
-      ok(true, 'It triggers a `canceled` event');
-    });
-    newview.render().$('.cancel').click();
-    ok(newview.onCancel.calledOnce, 'It is called when .cancel is clicked');
-  });
-
   test('#onSubmit', 3, function () {
     this.spy(NewView.prototype, 'onSubmit');
     contact.set('name', 'Somebody');

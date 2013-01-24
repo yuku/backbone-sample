@@ -30,16 +30,6 @@ function (_, ContactList, EditView) {
       'It is called on model\'s `invalid` event');
   });
 
-  test('#onCancel', 2, function () {
-    this.spy(EditView.prototype, 'onCancel');
-    editview = new EditView({model: contact});
-    editview.on('canceled', function () {
-      ok(true, 'It triggers a `canceled` event');
-    });
-    editview.render().$('.cancel').click();
-    ok(editview.onCancel.calledOnce, 'It is called when .cancel is clicked');
-  });
-
   test('#onSubmit', 1, function () {
     this.spy(EditView.prototype, 'onSubmit');
     editview = new EditView({model: contact});

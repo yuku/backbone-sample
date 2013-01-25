@@ -11,7 +11,11 @@ __p+='<form class="form-horizontal">\n  <div class="alert alert-error alert-bloc
 ( source.phone || '' )+
 '" placeholder="Phone"/>\n    </div>\n  </div>\n  <div class="form-actions">\n    <button class="btn btn-primary submit">Submit</button>\n    <a href="#'+
 ( source.id )+
-'" class="btn cancel">Cancel</a>\n  </div>\n</form>\n';
+'" class="btn cancel">Cancel</a>\n    ';
+ if (source.id) { 
+;__p+='\n      <span class="btn btn-danger delete">Delete</span>\n    ';
+ } 
+;__p+='\n  </div>\n</form>\n';
 }
 return __p;
 };

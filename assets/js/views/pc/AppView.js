@@ -73,6 +73,10 @@ function (Backbone, ListView, ShowView, EditView, NewView, JST) {
         // navigate to show page and trigger 'route:show' event
         this.options.router.navigate(this.mainview.model.id, true);
       }, this);
+      this.mainview.on('deleted', function () {
+        // navigate to index page and trigger 'route:index' event
+        this.options.router.navigate('', true);
+      }, this);
       this.$('#main').append(this.mainview.render().el);
     },
     newContact: function () {

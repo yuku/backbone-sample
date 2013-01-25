@@ -28,5 +28,8 @@
   <div class="form-actions">
     <button class="btn btn-primary submit">Submit</button>
     <a href="#<%= source.id %>" class="btn cancel">Cancel</a>
+    <% if (source.id) { %>
+      <span class="btn btn-danger delete">Delete</span>
+    <% } %>
   </div>
 </form>

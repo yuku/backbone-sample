@@ -8,9 +8,13 @@ function (_, Backbone, JST) {
   'use strict';
 
   return Backbone.View.extend({
+    events: {
+      'click .delete': 'onClickDelete'
+    },
     initialize: function () {
       this.listenTo(this.model, 'invalid', this.renderValidationMessage);
     },
+    className: 'edit-view',
     // View methods
     // ------------
     render: function () {
@@ -41,6 +45,10 @@ function (_, Backbone, JST) {
           self.trigger('updated');
         }
       });
+    },
+    onClickDelete: function () {
+      this.model.destroy();
+      this.trigger('deleted');
     },
     // Helper methods
     // --------------

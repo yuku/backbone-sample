@@ -5,6 +5,7 @@ module.exports = function (grunt) {
   'use strict';
 
   [
+    'grunt-contrib-concat',
     'grunt-contrib-jst',
     'grunt-contrib-less',
     'grunt-contrib-watch'
@@ -13,6 +14,14 @@ module.exports = function (grunt) {
   });
 
   grunt.initConfig({
+    concat: {
+      css: {
+        files: {
+          'assets/css/mobile.css': ['assets/css/vendor/jquery.mobile-1.2.0.min.css', 'assets/css/mobile.css']
+        }
+      }
+    },
+
     jst: {
       options: {
         processName: function (filename) {
@@ -41,7 +50,7 @@ module.exports = function (grunt) {
       },
       less: {
         files: ['assets/less/*.less'],
-        tasks: ['less']
+        tasks: ['less', 'concat']
       }
     },
 

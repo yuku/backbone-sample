@@ -3,9 +3,10 @@ define([
   'backbone',
   'models/Contact',
   'views/mobile/IndexPage',
-  'views/mobile/NewPage'
+  'views/mobile/NewPage',
+  'views/mobile/ShowPage'
 ],
-function (mobile, Backbone, Contact, IndexPage, NewPage) {
+function (mobile, Backbone, Contact, IndexPage, NewPage, ShowPage) {
 
   'use strict';
 
@@ -42,6 +43,13 @@ function (mobile, Backbone, Contact, IndexPage, NewPage) {
       page.on('created', function () {
         this.navigate(page.model.id, true);
       }, this);
+    },
+    show: function (id) {
+      var model = this.app.contactlist.get(id);
+      if (!model) return;
+      var page = new ShowPage({model: model});
+      page.show({firstpage: firstpage});
+      firstpage = false;
     }
   });
 });

@@ -1,0 +1,67 @@
+<div data-role="header">
+  <a href="#" data-icon="back" class="back ui-btn-left">All Contacts</a>
+  <h1>Info</h1>
+  <a href="#<%= source.id %>/edit" class="edit ui-btn-right">Edit</a>
+</div>
+<div data-role="content">
+  <div class="contact-head">
+    <div class="avatar">
+      <img src="http://www.gravatar.com/avatar/<%= source.hash %>"/>
+    </div>
+    <div class="name">
+      <h3 data-name="name"><%= source.name %></h3>
+    </div>
+  </div>
+  <ul data-role="listview" data-inset="true">
+    <% if (source.phone) { %>
+      <li data-icon="false">
+        <a href="tel:<%= source.phone %>">
+          <dl>
+            <dt>Phone</dt>
+            <dd><%= source.phone || '' %></dd>
+          </dl>
+        </a>
+      </li>
+    <% } %>
+    <% if (source.email) { %>
+      <li data-icon="false" data-name="email">
+        <a href="mailto:<%= source.email %>">
+          <dl>
+            <dt>Email</dt>
+            <dd><%= source.email  || '' %></dd>
+          </dl>
+        </a>
+      </li>
+    <% } %>
+    <% if (source.twitter) { %>
+      <li data-icon="false" data-name="twitter">
+        <a href="https://twitter.com/<%= source.twitter %>" target="_blank">
+          <dl>
+            <dt>Twitter</dt>
+            <dd><%= source.twitter %></dd>
+          </dl>
+        </a>
+      </li>
+    <% } %>
+    <% if (source.github) { %>
+      <li data-icon="false" data-name="github">
+        <a href="https://github.com/<%= source.github %>" target="_blank">
+          <dl>
+            <dt>GitHub</dt>
+            <dd><%= source.github %></dd>
+          </dl>
+        </a>
+      </li>
+    <% } %>
+    <% if (source.facebook) { %>
+      <li data-icon="false" data-name="facebook">
+        <a href="https://www.facebook.com/<%= source.facebook %>" target="_blank">
+          <dl>
+            <dt>Facebook</dt>
+            <dd><%= source.facebook %></dd>
+          </dl>
+        </a>
+      </li>
+    <% } %>
+  </ul>
+</div>

@@ -1,8 +1,9 @@
 define([
+  'underscore',
   'backbone',
   'jst/mobile'
 ],
-function (Backbone, JST) {
+function (_, Backbone, JST) {
 
   'use strict';
 

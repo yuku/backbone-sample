@@ -1,4 +1,6 @@
 define([
+  'jquery',
+  'underscore',
   'backbone',
   './ListView',
   './ShowView',
@@ -6,7 +8,7 @@ define([
   './NewView',
   'jst/pc'
 ],
-function (Backbone, ListView, ShowView, EditView, NewView, JST) {
+function ($, _, Backbone, ListView, ShowView, EditView, NewView, JST) {
 
   'use strict';
 

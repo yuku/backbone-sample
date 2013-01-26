@@ -1,8 +1,9 @@
 define([
+  'jquery',
   'backbone',
   './ItemView'
 ],
-function (Backbone, ItemView) {
+function ($, Backbone, ItemView) {
 
   'use strict';
 

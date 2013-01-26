@@ -38,7 +38,7 @@ this["JST"]["edit"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+=''+
-( JST['pc/_form']({source: source}) )+
+( JST['_form']({source: source}) )+
 '\n';
 }
 return __p;
@@ -74,7 +74,7 @@ this["JST"]["new"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+=''+
-( JST['pc/_form']({source: source}) )+
+( JST['_form']({source: source}) )+
 '\n';
 }
 return __p;

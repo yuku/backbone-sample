@@ -53,6 +53,11 @@ module.exports = function (grunt) {
         files: {
           'assets/css/pc.css': 'assets/less/pc.less'
         }
+      },
+      mobile: {
+        files: {
+          'assets/css/mobile.css': 'assets/less/mobile.less'
+        }
       }
     }
   });

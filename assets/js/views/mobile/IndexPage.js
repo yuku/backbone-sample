@@ -27,7 +27,7 @@ function (Page, ListView, JST) {
       });
       this.listenTo(this.collection, 'all', this.remove);
       this.$el
-        .html(JST.index())
+        .html(JST['mobile/index']())
         .find('[data-role=content]').append(listview.render().el);
     },
     remove: function () {

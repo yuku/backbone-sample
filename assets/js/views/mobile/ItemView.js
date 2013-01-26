@@ -16,7 +16,7 @@ function (_, Backbone, JST) {
     // View methods
     // ------------
     render: function () {
-      this.$el.html(JST.item({source: this.presenter()}));
+      this.$el.html(JST['mobile/item']({source: this.presenter()}));
       return this;
     },
     presenter: function () {

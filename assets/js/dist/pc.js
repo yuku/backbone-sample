@@ -14206,7 +14206,7 @@ define("backbone", ["jquery","underscore"], (function (global) {
 
 this["JST"] = this["JST"] || {};
 
-this["JST"]["_form"] = function(obj){
+this["JST"]["pc/_form"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+='<form class="form-horizontal">\n  <div class="alert alert-error alert-block" style="display: none;">\n    <ul>\n    </ul>\n  </div>\n  <div class="control-group">\n    <label class="control-label" for="name">Name</label>\n    <div class="controls">\n      <input type="text" id="name" name="name"\n        value="'+
@@ -14232,7 +14232,7 @@ __p+='<form class="form-horizontal">\n  <div class="alert alert-error alert-bloc
 return __p;
 };
 
-this["JST"]["app"] = function(obj){
+this["JST"]["pc/app"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+='<div id="header">\n  <h1>Contacts</h1>\n</div>\n<div id="content">\n  <div id="sidebar" class="clearfix">\n    <div id="sidebar-header">\n      <a href="#new" class="new">New Contact</a>\n    </div>\n    <div id="sidebar-content">\n      <div id="contactlist">\n      </div>\n    </div>\n  </div>\n  <div id="main">\n  </div>\n</div>\n';
@@ -14240,17 +14240,17 @@ __p+='<div id="header">\n  <h1>Contacts</h1>\n</div>\n<div id="content">\n  <div
 return __p;
 };
 
-this["JST"]["edit"] = function(obj){
+this["JST"]["pc/edit"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+=''+
-( JST['_form']({source: source}) )+
+( JST['pc/_form']({source: source}) )+
 '\n';
 }
 return __p;
 };
 
-this["JST"]["item"] = function(obj){
+this["JST"]["pc/item"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+='<a href="#'+
@@ -14276,17 +14276,17 @@ __p+='<a href="#'+
 return __p;
 };
 
-this["JST"]["new"] = function(obj){
+this["JST"]["pc/new"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+=''+
-( JST['_form']({source: source}) )+
+( JST['pc/_form']({source: source}) )+
 '\n';
 }
 return __p;
 };
 
-this["JST"]["show"] = function(obj){
+this["JST"]["pc/show"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+='<ul class="pager">\n  <li class="previous"><a href="#'+
@@ -14348,7 +14348,7 @@ function (_, Backbone, JST) {
       this.listenTo(this.model, 'remove', this.remove);
     },
     render: function () {
-      this.$el.html(JST.item({source: this.presenter()}));
+      this.$el.html(JST['pc/item']({source: this.presenter()}));
       return this;
     },
     presenter: function () {
@@ -14420,7 +14420,7 @@ function (_, Backbone, JST) {
       this.listenTo(this.model, 'change', this.render);
     },
     render: function () {
-      this.$el.html(JST.show({source: this.presenter()}));
+      this.$el.html(JST['pc/show']({source: this.presenter()}));
       return this;
     },
     presenter: function () {
@@ -14449,7 +14449,7 @@ function (_, Backbone, JST) {
     // View methods
     // ------------
     render: function () {
-      this.$el.html(JST.edit({source: this.presenter()}));
+      this.$el.html(JST['pc/edit']({source: this.presenter()}));
       // Since `submit` is undelegate-able in Internet Explorer, it is needed
       // to add event listener directrly to the form tag.
       this.$('form').on('submit', _.bind(this.onSubmit, this));
@@ -14512,7 +14512,7 @@ function (_, Backbone, JST) {
     // View methods
     // ------------
     render: function () {
-      this.$el.html(JST['new']({source: this.presenter()}));
+      this.$el.html(JST['pc/new']({source: this.presenter()}));
       // Since `submit` is undelegate-able in Internet Explorer, it is needed
       // to add event listener directrly to the form tag.
       this.$('form').on('submit', _.bind(this.onSubmit, this));
@@ -14584,7 +14584,7 @@ function ($, _, Backbone, ListView, ShowView, EditView, NewView, JST) {
     // View methods
     // ------------
     render: function () {
-      this.$el.html(JST.app());
+      this.$el.html(JST['pc/app']());
       this.listview = new ListView({
         collection: this.collection
       });

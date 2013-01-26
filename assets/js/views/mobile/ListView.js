@@ -23,7 +23,7 @@ function (Backbone, ItemView, JST) {
         if (index !== contact.index()) {
           index = contact.index();
           // Insert list-divider
-          this.$el.append(JST.divider({index: index}));
+          this.$el.append(JST['mobile/divider']({index: index}));
         }
         var itemview = new ItemView({
           model: contact

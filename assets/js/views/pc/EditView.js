@@ -18,7 +18,7 @@ function (_, Backbone, JST) {
     // View methods
     // ------------
     render: function () {
-      this.$el.html(JST.edit({source: this.presenter()}));
+      this.$el.html(JST['pc/edit']({source: this.presenter()}));
       // Since `submit` is undelegate-able in Internet Explorer, it is needed
       // to add event listener directrly to the form tag.
       this.$('form').on('submit', _.bind(this.onSubmit, this));

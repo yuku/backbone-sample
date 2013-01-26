@@ -22,7 +22,7 @@ function (_, Page, JST) {
     // View methods
     // ------------
     render: function () {
-      this.$el.html(JST.edit({source: this.presenter()}));
+      this.$el.html(JST['mobile/edit']({source: this.presenter()}));
       // Since `submit` is undelegate-able in Internet Explorer, it is needed
       // to add event listener directrly to the form tag.
       this.$('form').on('submit', this.onSubmit);

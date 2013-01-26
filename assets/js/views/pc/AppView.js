@@ -26,7 +26,7 @@ function ($, _, Backbone, ListView, ShowView, EditView, NewView, JST) {
     // View methods
     // ------------
     render: function () {
-      this.$el.html(JST.app());
+      this.$el.html(JST['pc/app']());
       this.listview = new ListView({
         collection: this.collection
       });

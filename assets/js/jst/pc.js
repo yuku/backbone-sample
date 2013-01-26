@@ -1,6 +1,6 @@
 this["JST"] = this["JST"] || {};
 
-this["JST"]["_form"] = function(obj){
+this["JST"]["pc/_form"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+='<form class="form-horizontal">\n  <div class="alert alert-error alert-block" style="display: none;">\n    <ul>\n    </ul>\n  </div>\n  <div class="control-group">\n    <label class="control-label" for="name">Name</label>\n    <div class="controls">\n      <input type="text" id="name" name="name"\n        value="'+
@@ -26,7 +26,7 @@ __p+='<form class="form-horizontal">\n  <div class="alert alert-error alert-bloc
 return __p;
 };
 
-this["JST"]["app"] = function(obj){
+this["JST"]["pc/app"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+='<div id="header">\n  <h1>Contacts</h1>\n</div>\n<div id="content">\n  <div id="sidebar" class="clearfix">\n    <div id="sidebar-header">\n      <a href="#new" class="new">New Contact</a>\n    </div>\n    <div id="sidebar-content">\n      <div id="contactlist">\n      </div>\n    </div>\n  </div>\n  <div id="main">\n  </div>\n</div>\n';
@@ -34,17 +34,17 @@ __p+='<div id="header">\n  <h1>Contacts</h1>\n</div>\n<div id="content">\n  <div
 return __p;
 };
 
-this["JST"]["edit"] = function(obj){
+this["JST"]["pc/edit"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+=''+
-( JST['_form']({source: source}) )+
+( JST['pc/_form']({source: source}) )+
 '\n';
 }
 return __p;
 };
 
-this["JST"]["item"] = function(obj){
+this["JST"]["pc/item"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+='<a href="#'+
@@ -70,17 +70,17 @@ __p+='<a href="#'+
 return __p;
 };
 
-this["JST"]["new"] = function(obj){
+this["JST"]["pc/new"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+=''+
-( JST['_form']({source: source}) )+
+( JST['pc/_form']({source: source}) )+
 '\n';
 }
 return __p;
 };
 
-this["JST"]["show"] = function(obj){
+this["JST"]["pc/show"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+='<ul class="pager">\n  <li class="previous"><a href="#'+

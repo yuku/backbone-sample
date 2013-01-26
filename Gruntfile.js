@@ -30,7 +30,7 @@ module.exports = function (grunt) {
     jst: {
       options: {
         processName: function (filename) {
-          return filename.match(/([^\/]*).html$/)[1];
+          return filename.match(/((?:mobile|pc)\/.*).html$/)[1];
         },
         processContent: function (src) {
           return src.replace(/(^\s+|\s+$)/gm, '');

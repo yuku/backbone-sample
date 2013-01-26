@@ -12,7 +12,7 @@ function (_, Backbone, JST) {
       this.listenTo(this.model, 'change', this.render);
     },
     render: function () {
-      this.$el.html(JST.show({source: this.presenter()}));
+      this.$el.html(JST['pc/show']({source: this.presenter()}));
       return this;
     },
     presenter: function () {

@@ -14,7 +14,7 @@ function (_, Page, JST) {
     // View methods
     // ------------
     render: function () {
-      this.$el.html(JST.show({source: this.presenter()}));
+      this.$el.html(JST['mobile/show']({source: this.presenter()}));
       return this;
     },
     // Helper methods

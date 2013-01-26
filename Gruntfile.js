@@ -14,17 +14,22 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     jst: {
-      compile: {
-        files: {
-          'assets/js/jst.js': ['assets/js/templates/**/*.html']
+      options: {
+        processName: function (filename) {
+          return filename.match(/([^\/]*).html$/)[1];
         },
-        options: {
-          processName: function (filename) {
-            return filename.match(/((?:mobile|pc)\/.*).html$/)[1];
-          },
-          processContent: function (src) {
-            return src.replace(/(^\s+|\s+$)/gm, '');
-          }
+        processContent: function (src) {
+          return src.replace(/(^\s+|\s+$)/gm, '');
+        }
+      },
+      pc: {
+        files: {
+          'assets/js/jst/pc.js': ['assets/js/templates/pc/*.html']
+        }
+      },
+      mobile: {
+        files: {
+          'assets/js/jst/mobile.js': ['assets/js/templates/mobile/*.html']
         }
       }
     },

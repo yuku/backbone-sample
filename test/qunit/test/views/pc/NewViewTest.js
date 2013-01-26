@@ -46,11 +46,15 @@ function (_, ContactList, NewView) {
     contact.set({
       name: 'foo',
       email: 'bar@sample.com',
-      phone: ''
+      phone: '',
+      github: '',
+      twitter: '',
+      facebook: ''
     });
     newview.render();
     deepEqual(newview.getValues(),
-      _.pick(contact.attributes, 'name', 'email', 'phone'),
+      _.pick(contact.attributes,
+        'name', 'email', 'phone', 'github', 'twitter', 'facebook'),
       'It returns name-value object of form tag');
   });
 });

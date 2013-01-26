@@ -41,11 +41,15 @@ function (_, ContactList, EditView) {
     contact.set({
       name: 'foo',
       email: 'bar@sample.com',
-      phone: ''
+      phone: '',
+      github: '',
+      twitter: '',
+      facebook: ''
     });
     editview.render();
     deepEqual(editview.getValues(),
-      _.pick(contact.attributes, 'name', 'email', 'phone'),
+      _.pick(contact.attributes,
+        'name', 'email', 'phone', 'github', 'twitter', 'facebook'),
       'It returns name-value object of form tag');
   });
 });

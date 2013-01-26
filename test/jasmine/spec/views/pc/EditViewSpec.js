@@ -45,11 +45,15 @@ function (_, ContactList, EditView) {
         contact.set({
           name: 'foo',
           email: 'bar@sample.com',
-          phone: ''
+          phone: '',
+          github: '',
+          twitter: '',
+          facebook: ''
         });
         editview.render();
         expect(editview.getValues())
-          .toEqual(_.pick(contact.attributes, 'name', 'email', 'phone'));
+          .toEqual(_.pick(contact.attributes,
+              'name', 'email', 'phone', 'github', 'twitter', 'facebook'));
       });
     });
   });

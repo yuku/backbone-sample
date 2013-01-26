@@ -54,11 +54,15 @@ function (_, ContactList, NewView) {
         contact.set({
           name: 'foo',
           email: 'bar@sample.com',
-          phone: ''
+          phone: '',
+          github: '',
+          twitter: '',
+          facebook: ''
         });
         newview.render();
         expect(newview.getValues())
-          .toEqual(_.pick(contact.attributes, 'name', 'email', 'phone'));
+          .toEqual(_.pick(contact.attributes,
+              'name', 'email', 'phone', 'github', 'twitter', 'facebook'));
       });
     });
   });

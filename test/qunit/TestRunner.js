@@ -20,7 +20,10 @@ require.config({
       exports: 'Backbone',
       deps: ['jquery', 'underscore']
     },
-    'jst': {
+    'jst/pc': {
+      exports: 'JST'
+    },
+    'jst/mobile': {
       exports: 'JST'
     }
   }

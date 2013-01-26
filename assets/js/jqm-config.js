@@ -1,4 +1,7 @@
-define(['jquery'], function () {
+define([
+  'jquery'
+],
+function ($) {
 
   'use strict';
 
@@ -9,6 +12,8 @@ define(['jquery'], function () {
       linkBindingEnabled: false,
       hashListeningEnabled: false,
       pushStateEnabled: false,
+
+      autoInitializePage: false,
 
       defaultPageTransition: 'slide'
     });

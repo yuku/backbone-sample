@@ -14,6 +14,7 @@ var require = {
     'jquery': {
       exports: 'jQuery'
     },
+    'jquery.mobile': ['jquery', 'jqm-config'],
     'underscore': {
       exports: '_'
     },

@@ -12,7 +12,7 @@
 (function ( root, doc, factory ) {
 	if ( typeof define === "function" && define.amd ) {
 		// AMD. Register as an anonymous module.
-		define( [ "jquery", "jqm-config" ], function ( $ ) {
+		define( [ "jquery" ], function ( $ ) {
 			factory( $, root, doc );
 			return $.mobile;
 		});

@@ -1,9 +1,14 @@
 define([
-  'backbone'
+  'jquery',
+  'jquery.mobile',
+  'backbone',
+  'underscore'
 ],
-function (Backbone) {
+function ($, mobile, Backbone, _) {
 
   'use strict';
+
+  var firstpage = true;
 
   return Backbone.View.extend({
     constructor: function () {
@@ -23,20 +28,11 @@ function (Backbone) {
       options || (options = {});
       _.defaults(options, this.options);
       this.render().$el.appendTo($('body'));
-      if (options.firstpage) {
-        options.transition || (options.transition = 'none');
-        // jQuery Mobile は最初のページが挿入されると自動的に初期化を行う。
-        // 初期化完了時に呼ばれる pagecreate イベントが発生するまで
-        // ページを表示行できない。
-        this.$el.on('pagecreate', function () {
-          $.mobile.changePage($(this), options);
-        });
+      if (firstpage) {
+        firstpage = false;
+        mobile.initializePage();
       } else {
-        //if (event instanceof PopStateEvent && options.reverse == null) {
-        //  // {pushState: true} で戻るボタンが押された時
-        //  options.reverse = true;
-        //}
-        $.mobile.changePage(this.$el, options);
+        mobile.changePage(this.$el, options);
       }
     }
   });

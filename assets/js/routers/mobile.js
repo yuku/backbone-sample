@@ -1,5 +1,4 @@
 define([
-  'jquery.mobile',
   'backbone',
   'models/Contact',
   'views/mobile/IndexPage',
@@ -7,7 +6,7 @@ define([
   'views/mobile/ShowPage',
   'views/mobile/EditPage'
 ],
-function (mobile, Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
+function (Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
 
   'use strict';
 
@@ -31,7 +30,7 @@ function (mobile, Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
     },
     index: function () {
       var page = new IndexPage({collection: this.app.contactlist});
-      page.show({firstpage: firstpage});
+      page.show();
       firstpage = false;
     },
     'new': function () {
@@ -39,23 +38,23 @@ function (mobile, Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
         model: new Contact(),
         collection: this.app.contactlist
       });
-      page.show({firstpage: firstpage});
-      firstpage = false;
+      page.show();
       page.on('created', function () {
         this.navigate(page.model.id, true);
       }, this);
+      firstpage = false;
     },
     show: function (id) {
       var model = this.app.contactlist.get(id);
-      if (!model) return;
+      if (!model) this.navigate('', true);
       var page = new ShowPage({model: model});
-      page.show({firstpage: firstpage});
+      page.show();
       firstpage = false;
     },
     edit: function (id) {
       if (firstpage) this.navigate(id, {trigger: true, replace: true});
       var model = this.app.contactlist.get(id);
-      if (!model) return;
+      if (!model) this.navigate('', true);
       var page = new EditPage({model: model});
       page.show();
       page.on('updated', function () {

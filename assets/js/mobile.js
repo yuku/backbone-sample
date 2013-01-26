@@ -1,10 +1,12 @@
-define([
+require([
+  'jquery',
+  'jquery.mobile',
   'backbone',
   'routers/mobile',
   'collections/ContactList',
   'fixtures'
 ],
-function (Backbone, Router, ContactList, fixtures) {
+function ($, mobile, Backbone, Router, ContactList, fixtures) {
 
   'use strict';
 
@@ -20,6 +22,7 @@ function (Backbone, Router, ContactList, fixtures) {
 
   new Router({app: app});
 
-  Backbone.history.start({root: app.root});
-
+  $(function () {
+    Backbone.history.start({root: app.root});
+  });
 });

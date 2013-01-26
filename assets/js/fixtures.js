@@ -14,7 +14,6 @@ define(function () {
     },
     {
       name: "Yuku Takahashi",
-      nickname: "yuku_t",
       email: "taka84u9@gmail.com",
       twitter: "taka84u9",
       github: "taka84u9"

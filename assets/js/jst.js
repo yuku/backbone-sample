@@ -9,7 +9,13 @@ __p+='<form class="form-horizontal">\n  <div class="alert alert-error alert-bloc
 ( source.email || '' )+
 '" placeholder="Email"\n        pattern="[^\\s@]+@\\S+\\.\\S+"/>\n    </div>\n  </div>\n  <div class="control-group">\n    <label class="control-label" for="phone">Phone</label>\n    <div class="controls">\n      <input type="text" id="phone" name="phone"\n        value="'+
 ( source.phone || '' )+
-'" placeholder="Phone"/>\n    </div>\n  </div>\n  <div class="form-actions">\n    <button class="btn btn-primary submit">Submit</button>\n    <a href="#'+
+'" placeholder="Phone"/>\n    </div>\n  </div>\n  <div class="control-group">\n    <label class="control-label" for="facebook">Facebook</label>\n    <div class="controls">\n      <input type="text" id="facebook" name="facebook"\n        value="'+
+( source.facebook || '' )+
+'" placeholder="Facebook"/>\n    </div>\n  </div>\n  <div class="control-group">\n    <label class="control-label" for="twitter">Twitter</label>\n    <div class="controls">\n      <input type="text" id="twitter" name="twitter"\n        value="'+
+( source.twitter || '' )+
+'" placeholder="Twitter"/>\n    </div>\n  </div>\n  <div class="control-group">\n    <label class="control-label" for="github">GitHub</label>\n    <div class="controls">\n      <input type="text" id="github" name="github"\n        value="'+
+( source.github || '' )+
+'" placeholder="GitHub"/>\n    </div>\n  </div>\n  <div class="form-actions">\n    <button class="btn btn-primary submit">Submit</button>\n    <a href="#'+
 ( source.id )+
 '" class="btn cancel">Cancel</a>\n    ';
  if (source.id) { 
@@ -82,10 +88,34 @@ __p+='<ul class="pager">\n  <li class="previous"><a href="#'+
 '/edit">Edit</a></li>\n</ul>\n<dl class="dl-horizontal">\n  <dt>Name</dt>\n  <dd>'+
 ( source.name )+
 '</dd>\n  <dt>Email</dt>\n  <dd>'+
-( source.email || '' )+
+( source.email || '&nbsp;' )+
 '</dd>\n  <dt>Phone</dt>\n  <dd>'+
-( source.phone || '' )+
-'</dd>\n</dl>\n';
+( source.phone || '&nbsp;' )+
+'</dd>\n  ';
+ if (source.facebook) { 
+;__p+='\n    <dt>Facebook</dt>\n    <dd>\n      <a href="https://www.facebook.com/'+
+( source.facebook )+
+'"\n          target="_blank">\n        '+
+( source.facebook )+
+'\n      </a>\n    </dd>\n  ';
+ } 
+;__p+='\n  ';
+ if (source.twitter) { 
+;__p+='\n    <dt>Twitter</dt>\n    <dd>\n      <a href="https://twitter.com/'+
+( source.twitter )+
+'" target="_blank">\n        '+
+( source.twitter )+
+'\n      </a>\n    </dd>\n  ';
+ } 
+;__p+='\n  ';
+ if (source.github) { 
+;__p+='\n    <dt>Github</dt>\n    <dd>\n      <a href="https://github.com/'+
+( source.github )+
+'" target="_blank">\n        '+
+( source.github )+
+'\n      </a>\n    </dd>\n  ';
+ } 
+;__p+='\n</dl>\n';
 }
 return __p;
 };

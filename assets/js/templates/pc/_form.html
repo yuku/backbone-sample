@@ -25,6 +25,27 @@
         value="<%= source.phone || '' %>" placeholder="Phone"/>
     </div>
   </div>
+  <div class="control-group">
+    <label class="control-label" for="facebook">Facebook</label>
+    <div class="controls">
+      <input type="text" id="facebook" name="facebook"
+        value="<%= source.facebook || '' %>" placeholder="Facebook"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="twitter">Twitter</label>
+    <div class="controls">
+      <input type="text" id="twitter" name="twitter"
+        value="<%= source.twitter || '' %>" placeholder="Twitter"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="github">GitHub</label>
+    <div class="controls">
+      <input type="text" id="github" name="github"
+        value="<%= source.github || '' %>" placeholder="GitHub"/>
+    </div>
+  </div>
   <div class="form-actions">
     <button class="btn btn-primary submit">Submit</button>
     <a href="#<%= source.id %>" class="btn cancel">Cancel</a>

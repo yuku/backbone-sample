@@ -5,7 +5,32 @@
   <dt>Name</dt>
   <dd><%= source.name %></dd>
   <dt>Email</dt>
-  <dd><%= source.email || '' %></dd>
+  <dd><%= source.email || '&nbsp;' %></dd>
   <dt>Phone</dt>
-  <dd><%= source.phone || '' %></dd>
+  <dd><%= source.phone || '&nbsp;' %></dd>
+  <% if (source.facebook) { %>
+    <dt>Facebook</dt>
+    <dd>
+      <a href="https://www.facebook.com/<%= source.facebook %>"
+          target="_blank">
+        <%= source.facebook %>
+      </a>
+    </dd>
+  <% } %>
+  <% if (source.twitter) { %>
+    <dt>Twitter</dt>
+    <dd>
+      <a href="https://twitter.com/<%= source.twitter %>" target="_blank">
+        <%= source.twitter %>
+      </a>
+    </dd>
+  <% } %>
+  <% if (source.github) { %>
+    <dt>Github</dt>
+    <dd>
+      <a href="https://github.com/<%= source.github %>" target="_blank">
+        <%= source.github %>
+      </a>
+    </dd>
+  <% } %>
 </dl>

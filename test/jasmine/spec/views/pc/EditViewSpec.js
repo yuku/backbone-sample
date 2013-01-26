@@ -7,7 +7,7 @@ function (_, ContactList, EditView) {
 
   'use strict';
 
-  describe('EditView', function () {
+  describe('pc/EditView', function () {
 
     var contact, contactlist, editview;
 

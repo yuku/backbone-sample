@@ -6,7 +6,7 @@ function (ContactList, ItemView) {
 
   'use strict';
 
-  describe('ItemView', function () {
+  describe('pc/ItemView', function () {
 
     var contact, contactlist, itemview;
 

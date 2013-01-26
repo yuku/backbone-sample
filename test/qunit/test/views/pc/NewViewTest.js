@@ -9,7 +9,7 @@ function (_, ContactList, NewView) {
 
   var contact, contactlist, newview;
 
-  module('NewView', {
+  module('pc/NewView', {
     setup: function () {
       contactlist = new ContactList();
       contact = new contactlist.model(null, {collection: contactlist});

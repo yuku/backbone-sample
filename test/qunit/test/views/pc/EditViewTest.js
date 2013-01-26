@@ -9,7 +9,7 @@ function (_, ContactList, EditView) {
 
   var contact, contactlist, editview;
 
-  module('EditView', {
+  module('pc/EditView', {
     setup: function () {
       contactlist = new ContactList();
       contact = contactlist.create();

@@ -7,7 +7,7 @@ function (_, ContactList, NewView) {
 
   'use strict';
 
-  describe('NewView', function () {
+  describe('pc/NewView', function () {
 
     var contact, contactlist, newview;
 

@@ -8,7 +8,7 @@ function (ContactList, ItemView) {
 
   var contact, contactlist, itemview;
 
-  module('ItemView', {
+  module('pc/ItemView', {
     setup: function () {
       contactlist = new ContactList();
       contact = contactlist.create();

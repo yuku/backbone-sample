@@ -9,7 +9,7 @@ function (_, ContactList, ListView) {
 
   var contactlist, listview;
 
-  module('ListView', {
+  module('pc/ListView', {
     setup: function () {
       contactlist = new ContactList();
       listview = new ListView({collection: contactlist});

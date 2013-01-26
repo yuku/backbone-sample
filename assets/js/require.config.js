@@ -14,6 +14,7 @@ var require = {
     'jquery': {
       exports: 'jQuery'
     },
+    'jquery.mobile': ['jquery', 'jqm-config'],
     'underscore': {
       exports: '_'
     },
@@ -21,7 +22,10 @@ var require = {
       exports: 'Backbone',
       deps: ['jquery', 'underscore']
     },
-    'jst': {
+    'jst/pc': {
+      exports: 'JST'
+    },
+    'jst/mobile': {
       exports: 'JST'
     }
   }

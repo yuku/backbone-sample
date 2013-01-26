@@ -1,14 +1,21 @@
 define([
   'underscore',
-  'backbone',
-  'jst/pc'
+  './Page',
+  'jst/mobile'
 ],
-function (_, Backbone, JST) {
+function (_, Page, JST) {
 
   'use strict';
 
-  return Backbone.View.extend({
+  return Page.extend({
+    events: {
+      pagehide: 'remove'
+    },
+    options: {
+      transition: 'slideup'
+    },
     initialize: function () {
+      _.bindAll(this);
       this.listenTo(this.model, 'invalid', this.renderValidationMessage);
     },
     // View methods
@@ -17,16 +24,15 @@ function (_, Backbone, JST) {
       this.$el.html(JST['new']({source: this.presenter()}));
       // Since `submit` is undelegate-able in Internet Explorer, it is needed
       // to add event listener directrly to the form tag.
-      this.$('form').on('submit', _.bind(this.onSubmit, this));
+      this.$('form').on('submit', this.onSubmit);
       return this;
     },
     renderValidationMessage: function (model, errors) {
-      var lis = _.map(errors, function (value, name) {
-        return '<li><strong>' + name + '</strong> ' + value + '</li>';
-      });
-      this.$('.alert')
-        .show()
-        .find('ul').html(lis.join(''));
+      _.each(errors, function (value, name) {
+        this.$("#error_" + name)
+          .addClass("active")
+          .text(value);
+      }, this);
       return this;
     },
     // Controller methods
@@ -34,7 +40,7 @@ function (_, Backbone, JST) {
     onSubmit: function (e) {
       e.preventDefault();
       var self = this;
-      this.$('.alert').hide();
+      this.$('.error.active').removeClass('active');
       this.model.save(this.getValues(), {
         wait: true,
         success: function () {

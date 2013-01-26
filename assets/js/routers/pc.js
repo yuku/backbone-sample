@@ -1,8 +1,9 @@
 define([
+  'jquery',
   'backbone',
   'views/pc/AppView'
 ],
-function (Backbone, AppView) {
+function ($, Backbone, AppView) {
 
   'use strict';
 

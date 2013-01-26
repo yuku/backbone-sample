@@ -1,0 +1,6 @@
+<a href="#<%= source.id %>">
+  <img src="http://www.gravatar.com/avatar/<%= source.hash %>"/>
+  <h3 class="contact-name"><%= source.name %></h3>
+  <% if (source.phone) { %><p>Phone: <%= source.phone %></p><% } %>
+  <% if (source.email) { %><p>Email: <%= source.email %></p><% } %>
+</a>

@@ -1,7 +1,7 @@
 define([
   'underscore',
   'backbone',
-  'jst/pc'
+  'jst/mobile'
 ],
 function (_, Backbone, JST) {
 
@@ -10,9 +10,11 @@ function (_, Backbone, JST) {
   return Backbone.View.extend({
     tagName: 'li',
     initialize: function () {
-      this.listenTo(this.model, 'change', this.render);
+      //this.listenTo(this.model, 'change', this.render);
       this.listenTo(this.model, 'remove', this.remove);
     },
+    // View methods
+    // ------------
     render: function () {
       this.$el.html(JST.item({source: this.presenter()}));
       return this;

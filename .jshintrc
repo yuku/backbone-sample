@@ -9,11 +9,7 @@
   // keywords
   "undef"    : true,
   "browser"  : true,
-  "jquery"   : true,
   "globals"  : {
-    "_"              : false,
-    "Backbone"       : false,
-
     // RequireJS
     "define"         : false,
     "require"        : false,

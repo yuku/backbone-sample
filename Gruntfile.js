@@ -7,24 +7,41 @@ module.exports = function (grunt) {
   [
     'grunt-contrib-jst',
     'grunt-contrib-less',
+    'grunt-contrib-mincss',
     'grunt-contrib-watch'
   ].forEach(function (name) {
     grunt.loadNpmTasks(name);
   });
 
   grunt.initConfig({
-    jst: {
-      compile: {
+    mincss: {
+      mobile: {
         files: {
-          'assets/js/jst.js': ['assets/js/templates/**/*.html']
+          'assets/css/mobile.css': [
+            'assets/css/vendor/jquery.mobile.structure-1.2.0.css',
+            'assets/css/mobile.css'
+          ]
+        }
+      }
+    },
+
+    jst: {
+      options: {
+        processName: function (filename) {
+          return filename.match(/([^\/]*).html$/)[1];
         },
-        options: {
-          processName: function (filename) {
-            return filename.match(/((?:mobile|pc)\/.*).html$/)[1];
-          },
-          processContent: function (src) {
-            return src.replace(/(^\s+|\s+$)/gm, '');
-          }
+        processContent: function (src) {
+          return src.replace(/(^\s+|\s+$)/gm, '');
+        }
+      },
+      pc: {
+        files: {
+          'assets/js/jst/pc.js': ['assets/js/templates/pc/*.html']
+        }
+      },
+      mobile: {
+        files: {
+          'assets/js/jst/mobile.js': ['assets/js/templates/mobile/*.html']
         }
       }
     },
@@ -36,7 +53,7 @@ module.exports = function (grunt) {
       },
       less: {
         files: ['assets/less/*.less'],
-        tasks: ['less']
+        tasks: ['less', 'mincss']
       }
     },
 
@@ -47,6 +64,11 @@ module.exports = function (grunt) {
       pc: {
         files: {
           'assets/css/pc.css': 'assets/less/pc.less'
+        }
+      },
+      mobile: {
+        files: {
+          'assets/css/mobile.css': 'assets/less/mobile.less'
         }
       }
     }

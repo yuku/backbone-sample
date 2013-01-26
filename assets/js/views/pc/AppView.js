@@ -1,12 +1,14 @@
 define([
+  'jquery',
+  'underscore',
   'backbone',
   './ListView',
   './ShowView',
   './EditView',
   './NewView',
-  'jst'
+  'jst/pc'
 ],
-function (Backbone, ListView, ShowView, EditView, NewView, JST) {
+function ($, _, Backbone, ListView, ShowView, EditView, NewView, JST) {
 
   'use strict';
 
@@ -24,7 +26,7 @@ function (Backbone, ListView, ShowView, EditView, NewView, JST) {
     // View methods
     // ------------
     render: function () {
-      this.$el.html(JST['pc/app']());
+      this.$el.html(JST.app());
       this.listview = new ListView({
         collection: this.collection
       });

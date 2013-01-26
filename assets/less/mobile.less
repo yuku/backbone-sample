@@ -1,0 +1,34 @@
+@import './theme-a';
+@import './theme-b';
+@import './theme-c';
+@import './theme-d';
+@import './structure';
+
+.error {
+  display: none;
+  color: red;
+  &.active {
+    display: block;
+  }
+}
+
+dl.ui-li-desc {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+
+  dt {
+    display: inline-block;
+    width: 30%;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    color: #049CDB;
+  }
+  dd {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 70%;
+  }
+}

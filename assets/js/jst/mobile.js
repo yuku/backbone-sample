@@ -35,9 +35,9 @@ var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+='<div data-role="header">\n  <h1>Edit</h1>\n</div>\n<div data-role="content">\n  <form action="#" method="POST">\n    '+
 ( JST['_form']({source: source}) )+
-'\n    <div class="ui-body ui-body-b">\n      <fieldset class="ui-grid-a">\n        <div class="ui-block-a">\n          <a href="#'+
+'\n    <div class="ui-body ui-body-c">\n      <fieldset class="ui-grid-a">\n        <div class="ui-block-a">\n          <a href="#'+
 ( source.id )+
-'" data-role="button" data-theme="d">Cancel</a>\n        </div>\n        <div class="ui-block-b">\n          <button class="save" data-theme="a">Save</button>\n        </div>\n      </fieldset>\n      <hr/>\n      <span data-role="button" class="delete" data-theme="a">Delete</span>\n    </div>\n  </form>\n</div>\n';
+'" data-role="button" data-theme="c">Cancel</a>\n        </div>\n        <div class="ui-block-b">\n          <button class="save" data-theme="b">Save</button>\n        </div>\n      </fieldset>\n      <hr/>\n      <span data-role="button" class="delete" data-theme="d">Delete</span>\n    </div>\n  </form>\n</div>\n';
 }
 return __p;
 };
@@ -81,7 +81,7 @@ var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){
 __p+='<div data-role="header">\n  <h1>New</h1>\n</div>\n<div data-role="content">\n  <form action="#" method="POST">\n    '+
 ( JST['_form']({source: source}) )+
-'\n    <div class="ui-body ui-body-b">\n      <fieldset class="ui-grid-a">\n        <div class="ui-block-a">\n          <a href="#" data-role="button" data-theme="d">Cancel</a>\n        </div>\n        <div class="ui-block-b">\n          <button class="save" data-theme="a">Save</button>\n        </div>\n      </fieldset>\n    </div>\n  </form>\n</div>\n';
+'\n    <div class="ui-body ui-body-c">\n      <fieldset class="ui-grid-a">\n        <div class="ui-block-a">\n          <a href="#" data-role="button" data-theme="c">Cancel</a>\n        </div>\n        <div class="ui-block-b">\n          <button class="save" data-theme="b">Save</button>\n        </div>\n      </fieldset>\n    </div>\n  </form>\n</div>\n';
 }
 return __p;
 };

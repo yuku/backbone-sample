@@ -21,7 +21,7 @@ function (Backbone) {
     },
     show: function (options) {
       options || (options = {});
-      _.defaults(options, this.options); 
+      _.defaults(options, this.options);
       this.render().$el.appendTo($('body'));
       if (options.firstpage) {
         options.transition || (options.transition = 'none');

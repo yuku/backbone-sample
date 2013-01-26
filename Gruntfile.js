@@ -5,19 +5,22 @@ module.exports = function (grunt) {
   'use strict';
 
   [
-    'grunt-contrib-concat',
     'grunt-contrib-jst',
     'grunt-contrib-less',
+    'grunt-contrib-mincss',
     'grunt-contrib-watch'
   ].forEach(function (name) {
     grunt.loadNpmTasks(name);
   });
 
   grunt.initConfig({
-    concat: {
-      css: {
+    mincss: {
+      mobile: {
         files: {
-          'assets/css/mobile.css': ['assets/css/vendor/jquery.mobile-1.2.0.min.css', 'assets/css/mobile.css']
+          'assets/css/mobile.css': [
+            'assets/css/vendor/jquery.mobile.structure-1.2.0.css',
+            'assets/css/mobile.css'
+          ]
         }
       }
     },
@@ -50,7 +53,7 @@ module.exports = function (grunt) {
       },
       less: {
         files: ['assets/less/*.less'],
-        tasks: ['less', 'concat']
+        tasks: ['less', 'mincss']
       }
     },
 

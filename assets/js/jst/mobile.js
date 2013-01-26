@@ -30,6 +30,18 @@ __p+='<li data-role="list-divider">\n  '+
 return __p;
 };
 
+this["JST"]["edit"] = function(obj){
+var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+with(obj||{}){
+__p+='<div data-role="header">\n  <h1>Edit</h1>\n</div>\n<div data-role="content">\n  <form action="#" method="POST">\n    '+
+( JST['_form']({source: source}) )+
+'\n    <div class="ui-body ui-body-b">\n      <fieldset class="ui-grid-a">\n        <div class="ui-block-a">\n          <a href="#'+
+( source.id )+
+'" data-role="button" data-theme="d">Cancel</a>\n        </div>\n        <div class="ui-block-b">\n          <button class="save" data-theme="a">Save</button>\n        </div>\n      </fieldset>\n      <hr/>\n      <span data-role="button" class="delete" data-theme="a">Delete</span>\n    </div>\n  </form>\n</div>\n';
+}
+return __p;
+};
+
 this["JST"]["index"] = function(obj){
 var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
 with(obj||{}){

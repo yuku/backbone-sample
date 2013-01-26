@@ -1,0 +1,20 @@
+<div data-role="header">
+  <h1>Edit</h1>
+</div>
+<div data-role="content">
+  <form action="#" method="POST">
+    <%= JST['_form']({source: source}) %>
+    <div class="ui-body ui-body-b">
+      <fieldset class="ui-grid-a">
+        <div class="ui-block-a">
+          <a href="#<%= source.id %>" data-role="button" data-theme="d">Cancel</a>
+        </div>
+        <div class="ui-block-b">
+          <button class="save" data-theme="a">Save</button>
+        </div>
+      </fieldset>
+      <hr/>
+      <span data-role="button" class="delete" data-theme="a">Delete</span>
+    </div>
+  </form>
+</div>

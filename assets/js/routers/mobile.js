@@ -4,9 +4,10 @@ define([
   'models/Contact',
   'views/mobile/IndexPage',
   'views/mobile/NewPage',
-  'views/mobile/ShowPage'
+  'views/mobile/ShowPage',
+  'views/mobile/EditPage'
 ],
-function (mobile, Backbone, Contact, IndexPage, NewPage, ShowPage) {
+function (mobile, Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
 
   'use strict';
 
@@ -50,6 +51,19 @@ function (mobile, Backbone, Contact, IndexPage, NewPage, ShowPage) {
       var page = new ShowPage({model: model});
       page.show({firstpage: firstpage});
       firstpage = false;
+    },
+    edit: function (id) {
+      if (firstpage) this.navigate(id, {trigger: true, replace: true});
+      var model = this.app.contactlist.get(id);
+      if (!model) return;
+      var page = new EditPage({model: model});
+      page.show();
+      page.on('updated', function () {
+        this.navigate(page.model.id, true);
+      }, this);
+      page.on('deleted', function () {
+        this.navigate('', true);
+      }, this);
     }
   });
 });

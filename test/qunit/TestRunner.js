@@ -19,6 +19,9 @@ require.config({
     'backbone': {
       exports: 'Backbone',
       deps: ['jquery', 'underscore']
+    },
+    'jst': {
+      exports: 'JST'
     }
   }
 });
@@ -29,7 +32,11 @@ require(['jquery'], function ($) {
 
   var tests = [
     'test/models/ContactTest',
-    'test/collections/ContactListTest'
+    'test/collections/ContactListTest',
+    'test/views/pc/ItemViewTest',
+    'test/views/pc/ListViewTest',
+    'test/views/pc/EditViewTest',
+    'test/views/pc/NewViewTest'
   ];
 
   $(function () {

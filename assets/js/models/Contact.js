@@ -1,18 +1,19 @@
 define([
   'underscore',
   'backbone',
-  'backbone.localStorage',
   'md5'
 ],
-function (_, Backbone, LocalStorage, md5) {
+function (_, Backbone, md5) {
 
   'use strict';
 
+  // Contact.prototype.collection is set to ContactList instance in
+  // collections/ContactList due to the circular dependency problem.
+
   return Backbone.Model.extend({
-    localStorage: new LocalStorage('contact'),
     initialize: function () {
       this.listenTo(this, 'change:email', this.updateHash);
-      if (!this.collection) throw new Error("Don't create directly");
+      if (!this.get('hash')) this.updateHash();
     },
     validate: function (attrs) {
       var errors = {};
@@ -22,7 +23,7 @@ function (_, Backbone, LocalStorage, md5) {
           errors.email = 'Invalid address';
         } else if (this.collection.find(function (contact) {
               return this !== contact && contact.get('email') === attrs.email;
-            })) {
+            }, this)) {
           errors.email = 'This address is already in use';
         }
       }
@@ -32,7 +33,15 @@ function (_, Backbone, LocalStorage, md5) {
       return (this.get('name') || '').charAt(0).toUpperCase();
     },
     updateHash: function () {
-      this.set('hash', md5(this.get('email')));
+      var email = this.get('email') || 'dummy';
+      this.set('hash', md5(email.toLowerCase()));
+    },
+    toSafeJSON: function () {
+      var data = this.toJSON();
+      _.each(data, function (value, name) {
+        data[name] = _.escape(value);
+      });
+      return data;
     }
   });
 });

@@ -1,0 +1,56 @@
+<form class="form-horizontal">
+  <div class="alert alert-error alert-block" style="display: none;">
+    <ul>
+    </ul>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="name">Name</label>
+    <div class="controls">
+      <input type="text" id="name" name="name"
+        value="<%= source.name || '' %>" placeholder="Name" required/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="email">Email</label>
+    <div class="controls">
+      <input type="text" id="email" name="email"
+        value="<%= source.email || '' %>" placeholder="Email"
+        pattern="[^\s@]+@\S+\.\S+"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="phone">Phone</label>
+    <div class="controls">
+      <input type="text" id="phone" name="phone"
+        value="<%= source.phone || '' %>" placeholder="Phone"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="facebook">Facebook</label>
+    <div class="controls">
+      <input type="text" id="facebook" name="facebook"
+        value="<%= source.facebook || '' %>" placeholder="Facebook"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="twitter">Twitter</label>
+    <div class="controls">
+      <input type="text" id="twitter" name="twitter"
+        value="<%= source.twitter || '' %>" placeholder="Twitter"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="github">GitHub</label>
+    <div class="controls">
+      <input type="text" id="github" name="github"
+        value="<%= source.github || '' %>" placeholder="GitHub"/>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button class="btn btn-primary submit">Submit</button>
+    <a href="#<%= source.id %>" class="btn cancel">Cancel</a>
+    <% if (source.id) { %>
+      <span class="btn btn-danger delete">Delete</span>
+    <% } %>
+  </div>
+</form>

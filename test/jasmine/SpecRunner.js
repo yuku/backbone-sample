@@ -22,6 +22,9 @@ require.config({
       exports: 'Backbone',
       deps: ['jquery', 'underscore']
     },
+    'jst': {
+      exports: 'JST'
+    },
     'jasmine-html': {
       exports: 'jasmine',
       deps: ['jasmine']
@@ -35,7 +38,11 @@ require(['jquery', 'jasmine-html'], function ($, jasmine) {
 
   var specs = [
     'spec/models/ContactSpec',
-    'spec/collections/ContactListSpec'
+    'spec/collections/ContactListSpec',
+    'spec/views/pc/ItemViewSpec',
+    'spec/views/pc/ListViewSpec',
+    'spec/views/pc/EditViewSpec',
+    'spec/views/pc/NewViewSpec'
   ];
 
   var jasmineEnv = jasmine.getEnv();

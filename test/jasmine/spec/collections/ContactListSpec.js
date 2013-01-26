@@ -7,25 +7,35 @@ function (Contact, ContactList) {
   'use strict';
 
   describe('ContactList', function () {
-    var contact_list;
+    var contactlist;
+
     beforeEach(function () {
-      contact_list = new ContactList();
+      contactlist = new ContactList();
+    });
+
+    afterEach(function () {
+      contactlist.reset();
     });
 
     it('should sort models by Contact#index', function () {
-      contact_list.reset([
+      contactlist.reset([
         {name: 'abc'},
         {name: 'cde'},
         {name: 'bcd'}
       ]);
-      expect(contact_list.at(0).get('name')).toBe('abc');
-      expect(contact_list.at(1).get('name')).toBe('bcd');
-      expect(contact_list.at(2).get('name')).toBe('cde');
+      expect(contactlist.at(0).get('name')).toBe('abc');
+      expect(contactlist.at(1).get('name')).toBe('bcd');
+      expect(contactlist.at(2).get('name')).toBe('cde');
+    });
+
+    it('should be singleton', function () {
+      var other = new ContactList();
+      expect(contactlist).toBe(other);
     });
 
     describe('#model', function () {
       it('should be Contact', function () {
-        expect(contact_list.model).toBe(Contact);
+        expect(contactlist.model).toBe(Contact);
       });
     });
   });

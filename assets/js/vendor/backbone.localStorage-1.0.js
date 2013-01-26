@@ -142,9 +142,9 @@ Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(m
 
   if (resp) {
     if (options && options.success)
-      options.success(resp);
+      options.success(model, resp, options);
     if (syncDfd)
-      syncDfd.resolve(resp);
+      syncDfd.resolve(model, resp, options);
 
   } else {
     errorMessage = errorMessage ? errorMessage
@@ -158,7 +158,7 @@ Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(m
   
   // add compatibility with $.ajax
   // always execute callback for success and error
-  if (options && options.complete) options.complete(resp);
+  if (options && options.complete) options.complete(model, resp, options);
 
   return syncDfd && syncDfd.promise();
 };

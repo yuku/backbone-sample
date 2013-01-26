@@ -1,10 +1,11 @@
-define([
+require([
+  'jquery',
   'backbone',
   'routers/pc',
   'collections/ContactList',
   'fixtures'
 ],
-function (Backbone, Router, ContactList, fixtures) {
+function ($, Backbone, Router, ContactList, fixtures) {
 
   'use strict';
 
@@ -20,5 +21,7 @@ function (Backbone, Router, ContactList, fixtures) {
 
   new Router({app: app});
 
-  Backbone.history.start({root: app.root});
+  $(function () {
+    Backbone.history.start({root: app.root});
+  });
 });

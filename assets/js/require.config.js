@@ -14,7 +14,10 @@ var require = {
     'jquery': {
       exports: 'jQuery'
     },
-    'jquery.mobile': ['jquery', 'jqm-config'],
+    // To edit the deps of jquery.mobile, edit AMD registration section in
+    // vendor/jquery.mobile.js. Even though you declare the dependencies here,
+    // it will be overrided by `grunt requirejs`
+    // 'jquery.mobile': ['jquery', 'jqm-config'],
     'underscore': {
       exports: '_'
     },

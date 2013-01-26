@@ -5,8 +5,27 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no">
     <title>Contacts</title>
     <link rel="stylesheet" href="assets/css/mobile.css"/>
-    <script src="assets/js/require.config.js"></script>
-    <script src="assets/js/vendor/require-2.1.2.js" data-main="mobile"></script>
+    <script>
+      (function () {
+        var s = document.getElementsByTagName('script')[0];
+        var e = function (src, main) {
+          var el = document.createElement('script')
+          el.src = 'assets/js/' + src;
+          main && el.setAttribute('data-main', main);
+          s.parentNode.insertBefore(el, s);
+        };
+        if (location.hostname === 'localhost') {
+          if (location.search !== '?debug') {
+            e('require.config.js');
+            e('vendor/require-2.1.2.js', 'mobile');
+          } else {
+            e('dist/mobile.js');
+          }
+        } else {
+          e('dist/mobile.min.js');
+        }
+      })();
+    </script>
   </head>
   <body>
   </body>

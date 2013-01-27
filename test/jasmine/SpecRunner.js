@@ -7,9 +7,7 @@ require.config({
     'backbone'              : 'vendor/backbone-0.9.10',
     'backbone.localStorage' : 'vendor/backbone.localStorage-1.0',
     'md5'                   : 'vendor/md5',
-    'jasmine'               : '../../test/jasmine/vendor/jasmine-1.3.1',
-    'jasmine-html'          : '../../test/jasmine/vendor/jasmine-html-1.3.1',
-    'spec'                  : '../../test/jasmine/spec/'
+    'spec'                  : '../../test/jasmine/spec'
   },
   shim: {
     'jquery': {
@@ -27,15 +25,11 @@ require.config({
     },
     'jst/mobile': {
       exports: 'JST'
-    },
-    'jasmine-html': {
-      exports: 'jasmine',
-      deps: ['jasmine']
     }
   }
 });
 
-require(['jquery', 'jasmine-html'], function ($, jasmine) {
+require(['jquery'], function ($) {
 
   'use strict';
 

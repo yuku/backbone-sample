@@ -6,6 +6,7 @@ module.exports = function (grunt) {
 
   [
     'grunt-contrib-connect',
+    'grunt-contrib-jasmine',
     'grunt-contrib-jst',
     'grunt-contrib-less',
     'grunt-contrib-mincss',
@@ -133,6 +134,15 @@ module.exports = function (grunt) {
       }
     },
 
+    jasmine: {
+      all: {
+        options: {
+          outfile: 'backbone-sample/test/jasmine/index.html',
+          host: 'http://localhost:8000/'
+        }
+      }
+    },
+
     connect: {
       server: {
         options: {
@@ -142,9 +152,9 @@ module.exports = function (grunt) {
       }
     }
   });
-
   grunt.registerTask('build:css', ['less', 'mincss']);
   grunt.registerTask('build:js', ['jst', 'requirejs']);
   grunt.registerTask('default', ['build:css', 'build:js', 'uglify']);
-  grunt.registerTask('test', ['connect', 'qunit']);
+  grunt.registerTask('test:qunit', ['connect', 'qunit']);
+  grunt.registerTask('test:jasmine', ['connect', 'jasmine']);
 };

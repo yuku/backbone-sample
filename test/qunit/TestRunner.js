@@ -43,7 +43,8 @@ require(['jquery'], function ($) {
   ];
 
   $(function () {
-    require(tests, function () { });
+    require(tests, function () {
+      QUnit.start();
+    });
   });
 });
-

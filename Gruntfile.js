@@ -5,9 +5,11 @@ module.exports = function (grunt) {
   'use strict';
 
   [
+    'grunt-contrib-connect',
     'grunt-contrib-jst',
     'grunt-contrib-less',
     'grunt-contrib-mincss',
+    'grunt-contrib-qunit',
     'grunt-contrib-requirejs',
     'grunt-contrib-uglify',
     'grunt-contrib-watch'
@@ -121,10 +123,28 @@ module.exports = function (grunt) {
           ]
         }
       }
+    },
+
+    qunit: {
+      all: {
+        options: {
+          urls: ['http://localhost:8000/backbone-sample/test/qunit/index.html']
+        }
+      }
+    },
+
+    connect: {
+      server: {
+        options: {
+          port: 8000,
+          base: '../'
+        }
+      }
     }
   });
 
   grunt.registerTask('build:css', ['less', 'mincss']);
   grunt.registerTask('build:js', ['jst', 'requirejs']);
   grunt.registerTask('default', ['build:css', 'build:js', 'uglify']);
+  grunt.registerTask('test', ['connect', 'qunit']);
 };

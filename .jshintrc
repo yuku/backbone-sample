@@ -26,6 +26,7 @@
     "spyOn"          : false,
 
     // Qunit
+    "QUnit"          : false,
     "module"         : false,
     "test"           : false,
     "asyncTest"      : false,

@@ -11,7 +11,7 @@ function ($, mobile, Backbone, Router, ContactList, fixtures) {
   'use strict';
 
   var app = {
-    root: '/contacts',
+    root: '/backbone-sample',
     contactlist: new ContactList()
   };
   app.contactlist.fetch();

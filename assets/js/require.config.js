@@ -1,7 +1,7 @@
 /*jshint unused: false */
 /*global require: true */
 var require = {
-  baseUrl: '/contacts/assets/js',
+  baseUrl: '/backbone-sample/assets/js',
   paths: {
     'jquery'                : 'vendor/jquery-1.8.3',
     'jquery.mobile'         : 'vendor/jquery.mobile-1.2.0',

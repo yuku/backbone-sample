@@ -15334,7 +15334,7 @@ function ($, Backbone, Router, ContactList, fixtures) {
   
 
   var app = {
-    root: '/contacts',
+    root: '/backbone-sample',
     contactlist: new ContactList()
   };
   app.contactlist.fetch();

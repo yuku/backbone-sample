@@ -9,6 +9,7 @@ function (_, Backbone, JST) {
 
   return Backbone.View.extend({
     initialize: function () {
+      _.bindAll(this);
       this.listenTo(this.model, 'invalid', this.renderValidationMessage);
     },
     // View methods
@@ -17,7 +18,7 @@ function (_, Backbone, JST) {
       this.$el.html(JST['pc/new']({source: this.presenter()}));
       // Since `submit` is undelegate-able in Internet Explorer, it is needed
       // to add event listener directrly to the form tag.
-      this.$('form').on('submit', _.bind(this.onSubmit, this));
+      this.$('form').on('submit', this.onSubmit);
       return this;
     },
     renderValidationMessage: function (model, errors) {

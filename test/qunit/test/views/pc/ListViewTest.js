@@ -23,7 +23,7 @@ function (_, ContactList, ListView) {
   test('#count', function () {
     equal(listview.count, 0, 'It is initially 0');
 
-    _.times(3, function () {contactlist.create();});
+    _.times(3, function (i) {contactlist.create({name: 'someone' + i});});
     equal(listview.count, 3, 'It increments when an elem added');
     contactlist.at(0).destroy();
     equal(listview.count, 2, 'It decrements when an elem removed');
@@ -31,13 +31,13 @@ function (_, ContactList, ListView) {
 
   test('#append', function () {
     this.spy(ListView.prototype, 'append');
-    _.times(3, function () {contactlist.create();});
+    _.times(3, function (i) {contactlist.create({name: 'someone' + i});});
     listview = new ListView({collection: contactlist});
     listview.render();
     equal(listview.append.callCount, 3,
       'It is called if collection has models initially');
 
-    var contact = contactlist.create({}, {silent: true});
+    var contact = contactlist.create({name: 'someone'}, {silent: true});
     contactlist.trigger('add', contact);
     equal(listview.append.callCount, 4,
       'It is called when an add event occures on the collection');

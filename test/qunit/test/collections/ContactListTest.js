@@ -29,10 +29,10 @@ function (Contact, ContactList) {
   test('#models', 1, function () {
     contactlist.reset([
       {name: 'abc'},
-      {name: 'cde'},
-      {name: 'bcd'}
+      {name: 'bcd'},
+      {name: 'ACD'}
     ]);
-    deepEqual(contactlist.pluck('name'), ['abc', 'bcd', 'cde'],
+    deepEqual(contactlist.pluck('name'), ['abc', 'ACD', 'bcd'],
       'It is sorted by Contact#index');
   });
 });

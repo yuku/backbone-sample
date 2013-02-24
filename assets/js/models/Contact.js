@@ -30,7 +30,7 @@ function (_, Backbone, md5) {
       return _.isEmpty(errors) ? null : errors;
     },
     index: function () {
-      return (this.get('name') || '').charAt(0).toUpperCase();
+      return this.get('name').toUpperCase();
     },
     updateHash: function () {
       var email = this.get('email') || 'dummy';

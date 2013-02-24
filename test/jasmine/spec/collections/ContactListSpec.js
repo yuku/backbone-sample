@@ -20,12 +20,10 @@ function (Contact, ContactList) {
     it('should sort models by Contact#index', function () {
       contactlist.reset([
         {name: 'abc'},
-        {name: 'cde'},
-        {name: 'bcd'}
+        {name: 'bcd'},
+        {name: 'ACD'}
       ]);
-      expect(contactlist.at(0).get('name')).toBe('abc');
-      expect(contactlist.at(1).get('name')).toBe('bcd');
-      expect(contactlist.at(2).get('name')).toBe('cde');
+      expect(contactlist.pluck('name')).toEqual(['abc', 'ACD', 'bcd']);
     });
 
     it('should be singleton', function () {

@@ -12,7 +12,7 @@ function (Contact, ContactList) {
 
     beforeEach(function () {
       contactlist = new ContactList();
-      contact = new Contact();
+      contact = new Contact({name: 'someone'});
     });
 
     afterEach(function () {
@@ -60,18 +60,14 @@ function (Contact, ContactList) {
     });
 
     describe('#index', function () {
-      it('should return the capitalized first character', function () {
+      it('should return the capitalized name', function () {
         contact.set('name', 'abc');
-        expect(contact.index()).toBe('A');
+        expect(contact.index()).toBe('ABC');
       });
 
-      it('should return the first character for non-ascii name', function () {
+      it('should return raw name for non-ascii name', function () {
         contact.set('name', 'あいう');
-        expect(contact.index()).toBe('あ');
-      });
-
-      it('should return an empty character by default', function () {
-        expect(contact.index()).toBe('');
+        expect(contact.index()).toBe('あいう');
       });
     });
 

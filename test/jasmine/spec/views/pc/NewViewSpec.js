@@ -25,19 +25,19 @@ function (_, ContactList, NewView) {
 
     describe('#renderValidationMessage', function () {
       it('should be called on model\'s `invalid` event', function () {
-        spyOn(NewView.prototype, 'renderValidationMessage');
+        var spy = spyOn(NewView.prototype, 'renderValidationMessage');
         newview = new NewView({model: contact});
         contact.trigger('invalid');
-        expect(newview.renderValidationMessage).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
       });
     });
 
     describe('#onSubmit', function () {
       it('should be called when form submitted', function () {
-        spyOn(NewView.prototype, 'onSubmit').andCallThrough();
+        var spy = spyOn(NewView.prototype, 'onSubmit').andCallThrough();
         newview = new NewView({model: contact});
         newview.render().$('form').submit();
-        expect(newview.onSubmit).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
       });
 
       it('should add model to the collection if succeeded', function () {

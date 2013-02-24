@@ -23,21 +23,20 @@ function (_, ContactList, NewView) {
   });
 
   test('#renderValidationMessage', 1, function () {
-    this.spy(NewView.prototype, 'renderValidationMessage');
+    var spy = this.spy(NewView.prototype, 'renderValidationMessage');
     newview = new NewView({model: contact});
     contact.trigger('invalid');
-    ok(newview.renderValidationMessage.calledOnce,
-      'It is called on model\'s `invalid` event');
+    ok(spy, 'It is called on model\'s `invalid` event');
   });
 
   test('#onSubmit', 3, function () {
-    this.spy(NewView.prototype, 'onSubmit');
+    var spy = this.spy(NewView.prototype, 'onSubmit');
     contact.set('name', 'Somebody');
     newview = new NewView({model: contact});
     ok(!contactlist.get(contact),
       'Initially model is not added to collection');
     newview.render().$('form').submit();
-    ok(newview.onSubmit.calledOnce, 'It is called when form submitted');
+    ok(spy, 'It is called when form submitted');
     ok(contactlist.get(contact),
       'It adds model to the collection');
   });

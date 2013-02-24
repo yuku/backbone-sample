@@ -11,7 +11,7 @@ function (Contact, ContactList) {
   module('Contact', {
     setup: function () {
       contactlist = new ContactList();
-      contact = new Contact();
+      contact = new Contact({name: 'someone'});
     },
     teardown: function () {
       contact.destroy();
@@ -50,22 +50,19 @@ function (Contact, ContactList) {
       'It doesn\'t check unique constraint against `this`');
   });
 
-  test('#index', 3, function () {
-    equal(contact.index(), '',
-      'It returns an empty character by default');
-
+  test('#index', 2, function () {
     contact.set('name', 'abc');
-    equal(contact.index(), 'A',
-      'It returns the capitalized first character');
+    equal(contact.index(), 'ABC',
+      'It returns the capitalized name');
 
     contact.set('name', 'あいう');
-    equal(contact.index(), 'あ',
-      'It returns the first character for non-ascii name');
+    equal(contact.index(), 'あいう',
+      'It returns raw name for non-ascii name');
   });
 
   test('#updateHash', 2, function () {
     this.spy(Contact.prototype, 'updateHash');
-    contact = contactlist.create();
+    contact = contactlist.create({name: 'someone'});
     var previous = contact.get('hash');
     var prevCount = contact.updateHash.callCount;
     contact.set('email', 'whoami@sample.com');

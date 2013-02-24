@@ -27,7 +27,7 @@ function (_, ContactList, ListView) {
       });
 
       it('should equal to the size of collection', function () {
-        _.times(3, function () {contactlist.create();});
+        _.times(3, function (i) {contactlist.create({name: 'someone' + i});});
         expect(listview.count).toBe(3);
         contactlist.at(0).destroy();
         expect(listview.count).toBe(2);
@@ -38,14 +38,14 @@ function (_, ContactList, ListView) {
       it('should called on add event', function () {
         spyOn(ListView.prototype, 'append');
         listview = new ListView({collection: contactlist});
-        var contact = contactlist.create({}, {silent: true});
+        var contact = contactlist.create({name: 'someone'}, {silent: true});
         contactlist.trigger('add', contact);
         expect(listview.append).toHaveBeenCalled();
       });
 
       it('should be called if collection initially has models', function () {
         spyOn(ListView.prototype, 'append');
-        _.times(3, function () {contactlist.create();});
+        _.times(3, function (i) {contactlist.create({name: 'someone' + i});});
         listview = new ListView({collection: contactlist});
         listview.render();
         expect(listview.append.calls.length).toBe(3);

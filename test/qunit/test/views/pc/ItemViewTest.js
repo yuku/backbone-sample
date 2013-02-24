@@ -11,7 +11,7 @@ function (ContactList, ItemView) {
   module('pc/ItemView', {
     setup: function () {
       contactlist = new ContactList();
-      contact = contactlist.create();
+      contact = contactlist.create({name: 'someone'});
       itemview = new ItemView({model: contact});
     },
     teardown: function () {

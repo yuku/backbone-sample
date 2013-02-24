@@ -12,8 +12,7 @@ function (_, ContactList, EditView) {
   module('pc/EditView', {
     setup: function () {
       contactlist = new ContactList();
-      contact = contactlist.create();
-      editview = new EditView({model: contact});
+      contact = contactlist.create({name: 'someone'});
     },
     teardown: function () {
       editview.remove();
@@ -23,21 +22,21 @@ function (_, ContactList, EditView) {
   });
 
   test('#renderValidationMessage', 1, function () {
-    this.spy(EditView.prototype, 'renderValidationMessage');
+    var spy = this.spy(EditView.prototype, 'renderValidationMessage');
     editview = new EditView({model: contact});
     contact.trigger('invalid');
-    ok(editview.renderValidationMessage.calledOnce,
-      'It is called on model\'s `invalid` event');
+    ok(spy, 'It is called on model\'s `invalid` event');
   });
 
   test('#onSubmit', 1, function () {
-    this.spy(EditView.prototype, 'onSubmit');
+    var spy = this.spy(EditView.prototype, 'onSubmit');
     editview = new EditView({model: contact});
     editview.render().$('form').submit();
-    ok(editview.onSubmit.calledOnce, 'It is called when form submitted');
+    ok(spy, 'It is called when form submitted');
   });
 
   test('#getValues', 1, function () {
+    editview = new EditView({model: contact});
     contact.set({
       name: 'foo',
       email: 'bar@sample.com',

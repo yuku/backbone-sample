@@ -12,7 +12,7 @@ function (ContactList, ItemView) {
 
     beforeEach(function () {
       contactlist = new ContactList();
-      contact = contactlist.create();
+      contact = contactlist.create({name: 'someone'});
       itemview = new ItemView({model: contact});
     });
 

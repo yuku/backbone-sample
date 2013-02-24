@@ -13,8 +13,7 @@ function (_, ContactList, EditView) {
 
     beforeEach(function () {
       contactlist = new ContactList();
-      contact = contactlist.create();
-      editview = new EditView({model: contact});
+      contact = contactlist.create({name: 'someone'});
     });
 
     afterEach(function () {
@@ -24,24 +23,25 @@ function (_, ContactList, EditView) {
 
     describe('#renderValidationMessage', function () {
       it('should be called on model\'s `invalid` event', function () {
-        spyOn(EditView.prototype, 'renderValidationMessage');
+        var spy = spyOn(EditView.prototype, 'renderValidationMessage');
         editview = new EditView({model: contact});
         contact.trigger('invalid');
-        expect(editview.renderValidationMessage).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
       });
     });
 
     describe('#onSubmit', function () {
       it('should be called when form submitted', function () {
-        spyOn(EditView.prototype, 'onSubmit').andCallThrough();
+        var spy = spyOn(EditView.prototype, 'onSubmit').andCallThrough();
         editview = new EditView({model: contact});
         editview.render().$('form').submit();
-        expect(editview.onSubmit).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
       });
     });
 
     describe('#getValues', function () {
       it('should return name-value object of form tag', function () {
+        editview = new EditView({model: contact});
         contact.set({
           name: 'foo',
           email: 'bar@sample.com',

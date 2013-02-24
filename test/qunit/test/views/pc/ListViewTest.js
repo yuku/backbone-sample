@@ -20,15 +20,6 @@ function (_, ContactList, ListView) {
     }
   });
 
-  test('#count', function () {
-    equal(listview.count, 0, 'It is initially 0');
-
-    _.times(3, function (i) {contactlist.create({name: 'someone' + i});});
-    equal(listview.count, 3, 'It increments when an elem added');
-    contactlist.at(0).destroy();
-    equal(listview.count, 2, 'It decrements when an elem removed');
-  });
-
   test('#append', function () {
     this.spy(ListView.prototype, 'append');
     _.times(3, function (i) {contactlist.create({name: 'someone' + i});});

@@ -11,9 +11,7 @@ function ($, Backbone, ItemView) {
     tagName: 'ul',
     className: 'unstyled',
     initialize: function () {
-      this.count = 0;  // the number of child itemviews
       this.listenTo(this.collection, 'add', this.append);
-      this.listenTo(this.collection, 'remove', function () { this.count--; });
     },
     // View methods
     // ------------
@@ -29,12 +27,9 @@ function ($, Backbone, ItemView) {
       var index = this.collection.indexOf(model);
       if (index === 0) {
         this.$el.prepend(item_view.el);
-      } else if (this.count === index) {
-        this.$el.append(item_view.el);
       } else {
-        item_view.$el.insertBefore(this.$el.children()[index]);
+        item_view.$el.insertAfter(this.$el.children()[index-1]);
       }
-      this.count++;
     },
     select: function (id) {
       var model = this.collection.get(id);

@@ -21,19 +21,6 @@ function (_, ContactList, ListView) {
       contactlist.reset();
     });
 
-    describe('#count', function () {
-      it('should initially be 0', function () {
-        expect(listview.count).toBe(0);
-      });
-
-      it('should equal to the size of collection', function () {
-        _.times(3, function (i) {contactlist.create({name: 'someone' + i});});
-        expect(listview.count).toBe(3);
-        contactlist.at(0).destroy();
-        expect(listview.count).toBe(2);
-      });
-    });
-
     describe('#append', function () {
       it('should called on add event', function () {
         spyOn(ListView.prototype, 'append');

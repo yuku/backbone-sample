@@ -1,8 +1,9 @@
 define([
+  'models/Contact',
   'collections/ContactList',
   'views/pc/ItemView'
 ],
-function (ContactList, ItemView) {
+function (Contact, ContactList, ItemView) {
 
   'use strict';
 
@@ -10,13 +11,12 @@ function (ContactList, ItemView) {
 
   module('pc/ItemView', {
     setup: function () {
+      contact = new Contact({name: 'itemview'});
       contactlist = new ContactList();
-      contact = contactlist.create({name: 'someone'});
-      itemview = new ItemView({model: contact});
+      contactlist.add(contact);
     },
     teardown: function () {
       itemview.remove();
-      contact.destroy();
       contactlist.reset();
     }
   });
@@ -37,6 +37,7 @@ function (ContactList, ItemView) {
   });
 
   test('#presenter', 1, function () {
+    itemview = new ItemView({model: contact});
     contact.set('name', '<script>');
     equal(itemview.presenter().name, '&lt;script&gt;',
       'It returns escaped mode attrs');

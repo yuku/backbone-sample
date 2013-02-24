@@ -1,9 +1,10 @@
 define([
   'underscore',
+  'models/Contact',
   'collections/ContactList',
   'views/pc/EditView'
 ],
-function (_, ContactList, EditView) {
+function (_, Contact, ContactList, EditView) {
 
   'use strict';
 
@@ -12,12 +13,14 @@ function (_, ContactList, EditView) {
     var contact, contactlist, editview;
 
     beforeEach(function () {
+      contact = new Contact({name: 'editview'});
       contactlist = new ContactList();
-      contact = contactlist.create({name: 'someone'});
+      contactlist.add(contact);
     });
 
     afterEach(function () {
       editview.remove();
+      contact.destroy();
       contactlist.reset();
     });
 

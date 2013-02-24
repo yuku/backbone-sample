@@ -1,9 +1,10 @@
 define([
   'underscore',
+  'models/Contact',
   'collections/ContactList',
   'views/pc/NewView'
 ],
-function (_, ContactList, NewView) {
+function (_, Contact, ContactList, NewView) {
 
   'use strict';
 
@@ -13,8 +14,7 @@ function (_, ContactList, NewView) {
 
     beforeEach(function () {
       contactlist = new ContactList();
-      contact = new contactlist.model(null, {collection: contactlist});
-      newview = new NewView({model: contact});
+      contact = new Contact();
     });
 
     afterEach(function () {
@@ -41,7 +41,7 @@ function (_, ContactList, NewView) {
       });
 
       it('should add model to the collection if succeeded', function () {
-        contact.set('name', 'Somebody');
+        contact.set('name', 'newview');
         newview = new NewView({model: contact});
         expect(contactlist.get(contact)).toBeUndefined();
         newview.render().$('form').submit();
@@ -51,6 +51,7 @@ function (_, ContactList, NewView) {
 
     describe('#getValues', function () {
       it('should return name-value object of form tag', function () {
+        newview = new NewView({model: contact});
         contact.set({
           name: 'foo',
           email: 'bar@sample.com',

@@ -1,9 +1,10 @@
 define([
   'underscore',
+  'models/Contact',
   'collections/ContactList',
   'views/pc/EditView'
 ],
-function (_, ContactList, EditView) {
+function (_, Contact, ContactList, EditView) {
 
   'use strict';
 
@@ -11,8 +12,9 @@ function (_, ContactList, EditView) {
 
   module('pc/EditView', {
     setup: function () {
+      contact = new Contact({name: 'editview'});
       contactlist = new ContactList();
-      contact = contactlist.create({name: 'someone'});
+      contactlist.add(contact);
     },
     teardown: function () {
       editview.remove();

@@ -25,14 +25,17 @@ function (_, ContactList, ListView) {
       it('should called on add event', function () {
         spyOn(ListView.prototype, 'append');
         listview = new ListView({collection: contactlist});
-        var contact = contactlist.create({name: 'someone'}, {silent: true});
-        contactlist.trigger('add', contact);
+        contactlist.add({name: 'listview'});
         expect(listview.append).toHaveBeenCalled();
       });
 
       it('should be called if collection initially has models', function () {
         spyOn(ListView.prototype, 'append');
-        _.times(3, function (i) {contactlist.create({name: 'someone' + i});});
+        contactlist.add([
+          {name: 'listview1'},
+          {name: 'listview2'},
+          {name: 'listview3'}
+        ]);
         listview = new ListView({collection: contactlist});
         listview.render();
         expect(listview.append.calls.length).toBe(3);

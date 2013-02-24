@@ -16,20 +16,22 @@ function (_, ContactList, ListView) {
     },
     teardown: function () {
       listview.remove();
-      contactlist.reset();
     }
   });
 
   test('#append', function () {
     this.spy(ListView.prototype, 'append');
-    _.times(3, function (i) {contactlist.create({name: 'someone' + i});});
+    contactlist.add([
+      {name: 'listview1'},
+      {name: 'listview2'},
+      {name: 'listview3'}
+    ]);
     listview = new ListView({collection: contactlist});
     listview.render();
     equal(listview.append.callCount, 3,
       'It is called if collection has models initially');
 
-    var contact = contactlist.create({name: 'someone'}, {silent: true});
-    contactlist.trigger('add', contact);
+    contactlist.add({name: 'listview4'});
     equal(listview.append.callCount, 4,
       'It is called when an add event occures on the collection');
   });

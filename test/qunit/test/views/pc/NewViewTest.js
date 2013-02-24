@@ -1,9 +1,10 @@
 define([
   'underscore',
+  'models/Contact',
   'collections/ContactList',
   'views/pc/NewView'
 ],
-function (_, ContactList, NewView) {
+function (_, Contact, ContactList, NewView) {
 
   'use strict';
 
@@ -11,9 +12,8 @@ function (_, ContactList, NewView) {
 
   module('pc/NewView', {
     setup: function () {
+      contact = new Contact();
       contactlist = new ContactList();
-      contact = new contactlist.model(null, {collection: contactlist});
-      newview = new NewView({model: contact});
     },
     teardown: function () {
       newview.remove();
@@ -31,7 +31,7 @@ function (_, ContactList, NewView) {
 
   test('#onSubmit', 3, function () {
     var spy = this.spy(NewView.prototype, 'onSubmit');
-    contact.set('name', 'Somebody');
+    contact.set('name', 'newview');
     newview = new NewView({model: contact});
     ok(!contactlist.get(contact),
       'Initially model is not added to collection');
@@ -50,6 +50,7 @@ function (_, ContactList, NewView) {
       twitter: '',
       facebook: ''
     });
+    newview = new NewView({model: contact});
     newview.render();
     deepEqual(newview.getValues(),
       _.pick(contact.attributes,

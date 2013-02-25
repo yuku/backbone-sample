@@ -1,9 +1,7 @@
 define([
-  'jquery',
-  'backbone',
-  'views/pc/AppView'
+  'backbone'
 ],
-function ($, Backbone, AppView) {
+function (Backbone) {
 
   'use strict';
 
@@ -12,14 +10,6 @@ function ($, Backbone, AppView) {
       '': 'index',
       ':id': 'new_or_show',
       ':id/edit': 'edit'
-    },
-    initialize: function (options) {
-      this.app = options.app;
-      this.appview = new AppView({
-        router: this,
-        collection: this.app.contactlist
-      });
-      $('body').append(this.appview.render().el);
     },
     new_or_show: function (id) {
       if (id === 'new') {

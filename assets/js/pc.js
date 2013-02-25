@@ -1,27 +1,30 @@
 require([
   'jquery',
   'backbone',
-  'routers/pc',
   'collections/ContactList',
+  'views/pc/AppView',
+  'routers/pc',
   'fixtures'
 ],
-function ($, Backbone, Router, ContactList, fixtures) {
+function ($, Backbone, ContactList, AppView, Router, fixtures) {
 
   'use strict';
 
-  var app = {
-    root: '/backbone-sample',
-    contactlist: new ContactList()
-  };
-  app.contactlist.fetch();
-  if (app.contactlist.size() === 0) {
-    app.contactlist.update(fixtures);
-    app.contactlist.invoke('save');
+  var router = new Router();
+
+  var contactlist = new ContactList();
+  contactlist.fetch();
+  if (contactlist.isEmpty()) {
+    contactlist.reset(fixtures).invoke('save');
   }
 
-  new Router({app: app});
+  var appview = new AppView({
+    router: router,
+    collection: contactlist
+  });
 
   $(function () {
-    Backbone.history.start({root: app.root});
+    $('body').append(appview.render().el);
+    Backbone.history.start({root: '/backbone-sample'});
   });
 });

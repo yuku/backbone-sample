@@ -54,7 +54,7 @@ function (_, Backbone, JST) {
     // Helper methods
     // --------------
     presenter: function () {
-      return _.defaults(this.model.toSafeJSON(), {id: this.model.id});
+      return this.model.toEscapedJSON();
     },
     getValues: function () {
       var values = {};

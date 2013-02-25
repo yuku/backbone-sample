@@ -86,10 +86,10 @@ function (Contact, ContactList) {
       });
     });
 
-    describe('#toSafeJSON', function () {
+    describe('#toEscapedJSON', function () {
       it('should return html escaped toJSON object', function () {
         contact.set('name', '<script>');
-        expect(contact.toSafeJSON().name).toEqual('&lt;script&gt;');
+        expect(contact.toEscapedJSON().name).toEqual('&lt;script&gt;');
       });
     });
   });

@@ -18,7 +18,7 @@ function (_, Backbone, JST) {
       return this;
     },
     presenter: function () {
-      return _.defaults(this.model.toSafeJSON(), {id: this.model.id});
+      return this.model.toEscapedJSON();
     }
   });
 });

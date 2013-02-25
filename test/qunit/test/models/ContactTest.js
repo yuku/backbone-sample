@@ -72,9 +72,9 @@ function (Contact, ContactList) {
       'It updates hash attr');
   });
 
-  test('#toSafeJSON', 1, function () {
+  test('#toEscapedJSON', 1, function () {
     contact.set('name', '<script>');
-    equal(contact.toSafeJSON().name, '&lt;script&gt;',
+    equal(contact.toEscapedJSON().name, '&lt;script&gt;',
       'It returns html escaped toJSON object');
   });
 });

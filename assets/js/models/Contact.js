@@ -36,7 +36,7 @@ function (_, Backbone, md5) {
       var email = this.get('email') || 'dummy';
       this.set('hash', md5(email.toLowerCase()));
     },
-    toSafeJSON: function () {
+    toEscapedJSON: function () {
       var data = this.toJSON();
       _.each(data, function (value, name) {
         data[name] = _.escape(value);

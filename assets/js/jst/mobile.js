@@ -2,8 +2,7 @@ this["JST"] = this["JST"] || {};
 
 this["JST"]["mobile/_form"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<div data-role="fieldcontain">\n<label for="contact_name">Name:</label>\n<input type="text" name="name" id="contact_name"\nvalue="' +
 ((__t = ( source.name || '' )) == null ? '' : __t) +
@@ -25,17 +24,19 @@ return __p
 
 this["JST"]["mobile/divider"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<li data-role="list-divider">\n' +
-((__t = ( obj.index )) == null ? '' : __t) +
+((__t = ( index )) == null ? '' : __t) +
 '\n</li>';
+
+}
 return __p
 };
 
 this["JST"]["mobile/edit"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<div data-role="header">\n<h1>Edit</h1>\n</div>\n<div data-role="content">\n<form action="#" method="POST">\n' +
 ((__t = ( JST['mobile/_form']({source: source}) )) == null ? '' : __t) +
@@ -49,8 +50,11 @@ return __p
 
 this["JST"]["mobile/index"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<div data-role="header">\n<h1>All Contacts</h1>\n<a href="#new" class="ui-btn-right">New</a>\n</div>\n<div data-role="content">\n</div>';
+
+}
 return __p
 };
 
@@ -85,8 +89,7 @@ return __p
 
 this["JST"]["mobile/new"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<div data-role="header">\n<h1>New</h1>\n</div>\n<div data-role="content">\n<form action="#" method="POST">\n' +
 ((__t = ( JST['mobile/_form']({source: source}) )) == null ? '' : __t) +

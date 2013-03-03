@@ -14204,513 +14204,6 @@ define("backbone", ["jquery","underscore"], (function (global) {
     };
 }(this)));
 
-this["JST"] = this["JST"] || {};
-
-this["JST"]["pc/_form"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-__p += '<form class="form-horizontal">\n<div class="alert alert-error alert-block" style="display: none;">\n<ul>\n</ul>\n</div>\n<div class="control-group">\n<label class="control-label" for="name">Name</label>\n<div class="controls">\n<input type="text" id="name" name="name"\nvalue="' +
-((__t = ( source.name || '' )) == null ? '' : __t) +
-'" placeholder="Name" required/>\n</div>\n</div>\n<div class="control-group">\n<label class="control-label" for="email">Email</label>\n<div class="controls">\n<input type="text" id="email" name="email"\nvalue="' +
-((__t = ( source.email || '' )) == null ? '' : __t) +
-'" placeholder="Email"\npattern="[^\\s@]+@\\S+\\.\\S+"/>\n</div>\n</div>\n<div class="control-group">\n<label class="control-label" for="phone">Phone</label>\n<div class="controls">\n<input type="text" id="phone" name="phone"\nvalue="' +
-((__t = ( source.phone || '' )) == null ? '' : __t) +
-'" placeholder="Phone"/>\n</div>\n</div>\n<div class="control-group">\n<label class="control-label" for="facebook">Facebook</label>\n<div class="controls">\n<input type="text" id="facebook" name="facebook"\nvalue="' +
-((__t = ( source.facebook || '' )) == null ? '' : __t) +
-'" placeholder="Facebook"/>\n</div>\n</div>\n<div class="control-group">\n<label class="control-label" for="twitter">Twitter</label>\n<div class="controls">\n<input type="text" id="twitter" name="twitter"\nvalue="' +
-((__t = ( source.twitter || '' )) == null ? '' : __t) +
-'" placeholder="Twitter"/>\n</div>\n</div>\n<div class="control-group">\n<label class="control-label" for="github">GitHub</label>\n<div class="controls">\n<input type="text" id="github" name="github"\nvalue="' +
-((__t = ( source.github || '' )) == null ? '' : __t) +
-'" placeholder="GitHub"/>\n</div>\n</div>\n<div class="form-actions">\n<button class="btn btn-primary submit">Submit</button>\n<a href="#' +
-((__t = ( source.id )) == null ? '' : __t) +
-'" class="btn cancel">Cancel</a>\n';
- if (source.id) { ;
-__p += '\n<span class="btn btn-danger delete">Delete</span>\n';
- } ;
-__p += '\n</div>\n</form>';
-
-}
-return __p
-};
-
-this["JST"]["pc/app"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
-__p += '<div id="header">\n<h1>Contacts</h1>\n</div>\n<div id="content">\n<div id="sidebar" class="clearfix">\n<div id="sidebar-header">\n<a href="#new" class="new">New Contact</a>\n</div>\n<div id="sidebar-content">\n<div id="contactlist">\n</div>\n</div>\n</div>\n<div id="main">\n</div>\n</div>';
-return __p
-};
-
-this["JST"]["pc/edit"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-__p +=
-((__t = ( JST['pc/_form']({source: source}) )) == null ? '' : __t);
-
-}
-return __p
-};
-
-this["JST"]["pc/item"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-__p += '<a href="#' +
-((__t = ( source.id )) == null ? '' : __t) +
-'">\n<img src="http://www.gravatar.com/avatar/' +
-((__t = ( source.hash )) == null ? '' : __t) +
-'"\nclass="thumbnail"/>\n<h3>' +
-((__t = ( source.name )) == null ? '' : __t) +
-'</h3>\n';
- if (source.email) { ;
-__p += '<p>' +
-((__t = ( source.email )) == null ? '' : __t) +
-'</p>';
- } ;
-__p += '\n';
- if (source.phone) { ;
-__p += '<p>' +
-((__t = ( source.phone )) == null ? '' : __t) +
-'</p>';
- } ;
-__p += '\n</a>';
-
-}
-return __p
-};
-
-this["JST"]["pc/new"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-__p +=
-((__t = ( JST['pc/_form']({source: source}) )) == null ? '' : __t);
-
-}
-return __p
-};
-
-this["JST"]["pc/show"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-__p += '<ul class="pager">\n<li class="previous"><a href="#' +
-((__t = ( source.id )) == null ? '' : __t) +
-'/edit">Edit</a></li>\n</ul>\n<dl class="dl-horizontal">\n<dt>Name</dt>\n<dd>' +
-((__t = ( source.name )) == null ? '' : __t) +
-'</dd>\n<dt>Email</dt>\n<dd>' +
-((__t = ( source.email || '&nbsp;' )) == null ? '' : __t) +
-'</dd>\n<dt>Phone</dt>\n<dd>' +
-((__t = ( source.phone || '&nbsp;' )) == null ? '' : __t) +
-'</dd>\n';
- if (source.facebook) { ;
-__p += '\n<dt>Facebook</dt>\n<dd>\n<a href="https://www.facebook.com/' +
-((__t = ( source.facebook )) == null ? '' : __t) +
-'"\ntarget="_blank">\n' +
-((__t = ( source.facebook )) == null ? '' : __t) +
-'\n</a>\n</dd>\n';
- } ;
-__p += '\n';
- if (source.twitter) { ;
-__p += '\n<dt>Twitter</dt>\n<dd>\n<a href="https://twitter.com/' +
-((__t = ( source.twitter )) == null ? '' : __t) +
-'" target="_blank">\n' +
-((__t = ( source.twitter )) == null ? '' : __t) +
-'\n</a>\n</dd>\n';
- } ;
-__p += '\n';
- if (source.github) { ;
-__p += '\n<dt>Github</dt>\n<dd>\n<a href="https://github.com/' +
-((__t = ( source.github )) == null ? '' : __t) +
-'" target="_blank">\n' +
-((__t = ( source.github )) == null ? '' : __t) +
-'\n</a>\n</dd>\n';
- } ;
-__p += '\n</dl>';
-
-}
-return __p
-};
-define("jst/pc", (function (global) {
-    return function () {
-        var ret, fn;
-        return ret || global.JST;
-    };
-}(this)));
-
-define('views/pc/ItemView',[
-  'underscore',
-  'backbone',
-  'jst/pc'
-],
-function (_, Backbone, JST) {
-
-  
-
-  return Backbone.View.extend({
-    tagName: 'li',
-    initialize: function () {
-      this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.model, 'remove', this.remove);
-    },
-    render: function () {
-      this.$el.html(JST['pc/item']({source: this.presenter()}));
-      return this;
-    },
-    presenter: function () {
-      return _.defaults(this.model.toSafeJSON(), {id: this.model.id});
-    }
-  });
-});
-
-define('views/pc/ListView',[
-  'jquery',
-  'backbone',
-  './ItemView'
-],
-function ($, Backbone, ItemView) {
-
-  
-
-  return Backbone.View.extend({
-    tagName: 'ul',
-    className: 'unstyled',
-    initialize: function () {
-      this.count = 0;  // the number of child itemviews
-      this.listenTo(this.collection, 'add', this.append);
-      this.listenTo(this.collection, 'remove', function () { this.count--; });
-    },
-    // View methods
-    // ------------
-    render: function () {
-      this.collection.each(function (model) {
-        this.append(model);
-      }, this);
-      return this;
-    },
-    append: function (model) {
-      var item_view = (new ItemView({model: model})).render();
-
-      var index = this.collection.indexOf(model);
-      if (index === 0) {
-        this.$el.prepend(item_view.el);
-      } else if (this.count === index) {
-        this.$el.append(item_view.el);
-      } else {
-        item_view.$el.insertBefore(this.$el.children()[index]);
-      }
-      this.count++;
-    },
-    select: function (id) {
-      var model = this.collection.get(id);
-      this.$('.selected').removeClass('selected');
-      if (model) {
-        var index = this.collection.indexOf(model);
-        $(this.$el.children()[index]).addClass('selected');
-      }
-    }
-  });
-});
-
-define('views/pc/ShowView',[
-  'underscore',
-  'backbone',
-  'jst/pc'
-],
-function (_, Backbone, JST) {
-
-  
-
-  return Backbone.View.extend({
-    initialize: function () {
-      this.listenTo(this.model, 'change', this.render);
-    },
-    render: function () {
-      this.$el.html(JST['pc/show']({source: this.presenter()}));
-      return this;
-    },
-    presenter: function () {
-      return _.defaults(this.model.toSafeJSON(), {id: this.model.cid});
-    }
-  });
-});
-
-define('views/pc/EditView',[
-  'underscore',
-  'backbone',
-  'jst/pc'
-],
-function (_, Backbone, JST) {
-
-  
-
-  return Backbone.View.extend({
-    events: {
-      'click .delete': 'onClickDelete'
-    },
-    initialize: function () {
-      _.bindAll(this);
-      this.listenTo(this.model, 'invalid', this.renderValidationMessage);
-    },
-    className: 'edit-view',
-    // View methods
-    // ------------
-    render: function () {
-      this.$el.html(JST['pc/edit']({source: this.presenter()}));
-      // Since `submit` is undelegate-able in Internet Explorer, it is needed
-      // to add event listener directrly to the form tag.
-      this.$('form').on('submit', this.onSubmit);
-      return this;
-    },
-    renderValidationMessage: function (model, errors) {
-      var lis = _.map(errors, function (value, name) {
-        return '<li><strong>' + name + '</strong> ' + value + '</li>';
-      });
-      this.$('.alert')
-        .show()
-        .find('ul').html(lis.join(''));
-      return this;
-    },
-    // Controller methods
-    // ------------------
-    onSubmit: function (e) {
-      e.preventDefault();
-      var self = this;
-      this.$('.alert').hide();
-      this.model.save(this.getValues(), {
-        wait: true,
-        success: function () {
-          self.trigger('updated');
-        }
-      });
-    },
-    onClickDelete: function () {
-      this.model.destroy();
-      this.trigger('deleted');
-    },
-    // Helper methods
-    // --------------
-    presenter: function () {
-      return _.defaults(this.model.toSafeJSON(), {id: this.model.id});
-    },
-    getValues: function () {
-      var values = {};
-      _.each(this.$('form').serializeArray(), function (obj) {
-        values[obj.name] = obj.value;
-      });
-      return values;
-    }
-  });
-});
-
-define('views/pc/NewView',[
-  'underscore',
-  'backbone',
-  'jst/pc'
-],
-function (_, Backbone, JST) {
-
-  
-
-  return Backbone.View.extend({
-    initialize: function () {
-      _.bindAll(this);
-      this.listenTo(this.model, 'invalid', this.renderValidationMessage);
-    },
-    // View methods
-    // ------------
-    render: function () {
-      this.$el.html(JST['pc/new']({source: this.presenter()}));
-      // Since `submit` is undelegate-able in Internet Explorer, it is needed
-      // to add event listener directrly to the form tag.
-      this.$('form').on('submit', this.onSubmit);
-      return this;
-    },
-    renderValidationMessage: function (model, errors) {
-      var lis = _.map(errors, function (value, name) {
-        return '<li><strong>' + name + '</strong> ' + value + '</li>';
-      });
-      this.$('.alert')
-        .show()
-        .find('ul').html(lis.join(''));
-      return this;
-    },
-    // Controller methods
-    // ------------------
-    onSubmit: function (e) {
-      e.preventDefault();
-      var self = this;
-      this.$('.alert').hide();
-      this.model.save(this.getValues(), {
-        wait: true,
-        success: function () {
-          self.model.collection.add(self.model);
-          self.trigger('created');
-        }
-      });
-    },
-    // Helper methods
-    // --------------
-    presenter: function () {
-      return this.model.toSafeJSON();
-    },
-    getValues: function () {
-      var values = {};
-      _.each(this.$('form').serializeArray(), function (obj) {
-        values[obj.name] = obj.value;
-      });
-      return values;
-    }
-  });
-});
-
-define('views/pc/AppView',[
-  'jquery',
-  'underscore',
-  'backbone',
-  './ListView',
-  './ShowView',
-  './EditView',
-  './NewView',
-  'jst/pc'
-],
-function ($, _, Backbone, ListView, ShowView, EditView, NewView, JST) {
-
-  
-
-  return Backbone.View.extend({
-    // The view rendered now
-    mainview: null,
-    events: {
-      'click .new': 'navigateToNew'
-    },
-    initialize: function () {
-      _.bindAll(this, 'onResize', 'fitContainers');
-      this.listenTo(this.options.router, 'route', this.dispatch);
-      $(window).on('resize', this.onResize);
-    },
-    // View methods
-    // ------------
-    render: function () {
-      this.$el.html(JST['pc/app']());
-      this.listview = new ListView({
-        collection: this.collection
-      });
-      this.$('#contactlist').append(this.listview.render().el);
-      _.defer(this.fitContainers);
-      return this;
-    },
-    fitContainers: function () {
-      var height = $(window).height();
-      // Fit #contactlist
-      var sidebarcontent = this.$('#sidebar-content');
-      sidebarcontent.height(height - sidebarcontent.offset().top);
-      // Fit #main
-      var main = this.$('#main');
-      main.height(height - main.offset().top);
-    },
-    dispatch: function (name, args) {
-      if (!_.include(['index', 'show', 'edit', 'new'], name)) return;
-      if (this.mainview) this.mainview.remove();
-      args || (args = []);
-      this.listview.select(args[0]);
-      switch (name) {
-        case 'show':
-          this.showContact.apply(this, args);
-          break;
-        case 'edit':
-          this.editContact.apply(this, args);
-          break;
-        case 'new':
-          this.newContact.apply(this, args);
-          break;
-      }
-    },
-    showContact: function (id) {
-      var model = this.collection.get(id);
-      if (!model) return;
-      this.mainview = new ShowView({model: model});
-      this.$('#main').append(this.mainview.render().el);
-    },
-    editContact: function (id) {
-      if (this.mainview) this.mainview.remove();
-      var model = this.collection.get(id);
-      if (!model) return;
-      this.mainview = new EditView({model: model});
-      this.mainview.on('updated', function () {
-        // navigate to show page and trigger 'route:show' event
-        this.options.router.navigate(this.mainview.model.id, true);
-      }, this);
-      this.mainview.on('deleted', function () {
-        // navigate to index page and trigger 'route:index' event
-        this.options.router.navigate('', true);
-      }, this);
-      this.$('#main').append(this.mainview.render().el);
-    },
-    newContact: function () {
-      if (this.mainview) this.mainview.remove();
-      var model =
-          new this.collection.model(null, {collection: this.collection});
-      this.mainview = new NewView({model: model});
-      this.mainview.on('created', function () {
-        // navigate to show page and trigger 'route:show' event
-        this.options.router.navigate(this.mainview.model.id, true);
-      }, this);
-      this.$('#main').append(this.mainview.render().el);
-    },
-    // Controller methods
-    // ------------------
-    navigateToNew: function (e) {
-      e.preventDefault();
-      this.options.router.navigate('new', true);
-    },
-    onResize: function () {
-      this.fitContainers();
-    }
-  });
-});
-
-define('routers/pc',[
-  'jquery',
-  'backbone',
-  'views/pc/AppView'
-],
-function ($, Backbone, AppView) {
-
-  
-
-  return Backbone.Router.extend({
-    routes: {
-      '': 'index',
-      ':id': 'new_or_show',
-      ':id/edit': 'edit'
-    },
-    initialize: function (options) {
-      this.app = options.app;
-      this.appview = new AppView({
-        router: this,
-        collection: this.app.contactlist
-      });
-      $('body').append(this.appview.render().el);
-    },
-    new_or_show: function (id) {
-      if (id === 'new') {
-        //this.trigger('route:new');
-        this.trigger('route', 'new');
-      } else {
-        //this.trigger('route:show', id);
-        this.trigger('route', 'show', [id]);
-      }
-    }
-  });
-});
-
 /**
  * Backbone localStorage Adapter
  * Version 1.0
@@ -15202,13 +14695,13 @@ function (_, Backbone, md5) {
       return _.isEmpty(errors) ? null : errors;
     },
     index: function () {
-      return (this.get('name') || '').charAt(0).toUpperCase();
+      return this.get('name').toUpperCase();
     },
     updateHash: function () {
       var email = this.get('email') || 'dummy';
       this.set('hash', md5(email.toLowerCase()));
     },
-    toSafeJSON: function () {
+    toEscapedJSON: function () {
       var data = this.toJSON();
       _.each(data, function (value, name) {
         data[name] = _.escape(value);
@@ -15248,6 +14741,499 @@ function (Backbone, LocalStorage, Contact) {
   Contact.prototype.collection = new ContactList();
 
   return ContactList;
+});
+
+this["JST"] = this["JST"] || {};
+
+this["JST"]["pc/_form"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<form class="form-horizontal">\n<div class="alert alert-error alert-block" style="display: none;">\n<ul>\n</ul>\n</div>\n<div class="control-group">\n<label class="control-label" for="name">Name</label>\n<div class="controls">\n<input type="text" id="name" name="name"\nvalue="' +
+((__t = ( source.name || '' )) == null ? '' : __t) +
+'" placeholder="Name" required/>\n</div>\n</div>\n<div class="control-group">\n<label class="control-label" for="email">Email</label>\n<div class="controls">\n<input type="text" id="email" name="email"\nvalue="' +
+((__t = ( source.email || '' )) == null ? '' : __t) +
+'" placeholder="Email"\npattern="[^\\s@]+@\\S+\\.\\S+"/>\n</div>\n</div>\n<div class="control-group">\n<label class="control-label" for="phone">Phone</label>\n<div class="controls">\n<input type="text" id="phone" name="phone"\nvalue="' +
+((__t = ( source.phone || '' )) == null ? '' : __t) +
+'" placeholder="Phone"/>\n</div>\n</div>\n<div class="control-group">\n<label class="control-label" for="facebook">Facebook</label>\n<div class="controls">\n<input type="text" id="facebook" name="facebook"\nvalue="' +
+((__t = ( source.facebook || '' )) == null ? '' : __t) +
+'" placeholder="Facebook"/>\n</div>\n</div>\n<div class="control-group">\n<label class="control-label" for="twitter">Twitter</label>\n<div class="controls">\n<input type="text" id="twitter" name="twitter"\nvalue="' +
+((__t = ( source.twitter || '' )) == null ? '' : __t) +
+'" placeholder="Twitter"/>\n</div>\n</div>\n<div class="control-group">\n<label class="control-label" for="github">GitHub</label>\n<div class="controls">\n<input type="text" id="github" name="github"\nvalue="' +
+((__t = ( source.github || '' )) == null ? '' : __t) +
+'" placeholder="GitHub"/>\n</div>\n</div>\n<div class="form-actions">\n<button class="btn btn-primary submit">Submit</button>\n<a href="#' +
+((__t = ( source.id )) == null ? '' : __t) +
+'" class="btn cancel">Cancel</a>\n';
+ if (source.id) { ;
+__p += '\n<span class="btn btn-danger delete">Delete</span>\n';
+ } ;
+__p += '\n</div>\n</form>';
+
+}
+return __p
+};
+
+this["JST"]["pc/app"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div id="header">\n<h1>Contacts</h1>\n</div>\n<div id="content">\n<div id="sidebar" class="clearfix">\n<div id="sidebar-header">\n<a href="#new" class="new">New Contact</a>\n</div>\n<div id="sidebar-content">\n<div id="contactlist">\n</div>\n</div>\n</div>\n<div id="main">\n</div>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["pc/edit"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p +=
+((__t = ( JST['pc/_form']({source: source}) )) == null ? '' : __t);
+
+}
+return __p
+};
+
+this["JST"]["pc/item"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<a href="#' +
+((__t = ( source.id )) == null ? '' : __t) +
+'">\n<img src="http://www.gravatar.com/avatar/' +
+((__t = ( source.hash )) == null ? '' : __t) +
+'"\nclass="thumbnail"/>\n<h3>' +
+((__t = ( source.name )) == null ? '' : __t) +
+'</h3>\n';
+ if (source.email) { ;
+__p += '<p>' +
+((__t = ( source.email )) == null ? '' : __t) +
+'</p>';
+ } ;
+__p += '\n';
+ if (source.phone) { ;
+__p += '<p>' +
+((__t = ( source.phone )) == null ? '' : __t) +
+'</p>';
+ } ;
+__p += '\n</a>';
+
+}
+return __p
+};
+
+this["JST"]["pc/new"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p +=
+((__t = ( JST['pc/_form']({source: source}) )) == null ? '' : __t);
+
+}
+return __p
+};
+
+this["JST"]["pc/show"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<ul class="pager">\n<li class="previous"><a href="#' +
+((__t = ( source.id )) == null ? '' : __t) +
+'/edit">Edit</a></li>\n</ul>\n<dl class="dl-horizontal">\n<dt>Name</dt>\n<dd>' +
+((__t = ( source.name )) == null ? '' : __t) +
+'</dd>\n<dt>Email</dt>\n<dd>' +
+((__t = ( source.email || '&nbsp;' )) == null ? '' : __t) +
+'</dd>\n<dt>Phone</dt>\n<dd>' +
+((__t = ( source.phone || '&nbsp;' )) == null ? '' : __t) +
+'</dd>\n';
+ if (source.facebook) { ;
+__p += '\n<dt>Facebook</dt>\n<dd>\n<a href="https://www.facebook.com/' +
+((__t = ( source.facebook )) == null ? '' : __t) +
+'"\ntarget="_blank">\n' +
+((__t = ( source.facebook )) == null ? '' : __t) +
+'\n</a>\n</dd>\n';
+ } ;
+__p += '\n';
+ if (source.twitter) { ;
+__p += '\n<dt>Twitter</dt>\n<dd>\n<a href="https://twitter.com/' +
+((__t = ( source.twitter )) == null ? '' : __t) +
+'" target="_blank">\n' +
+((__t = ( source.twitter )) == null ? '' : __t) +
+'\n</a>\n</dd>\n';
+ } ;
+__p += '\n';
+ if (source.github) { ;
+__p += '\n<dt>Github</dt>\n<dd>\n<a href="https://github.com/' +
+((__t = ( source.github )) == null ? '' : __t) +
+'" target="_blank">\n' +
+((__t = ( source.github )) == null ? '' : __t) +
+'\n</a>\n</dd>\n';
+ } ;
+__p += '\n</dl>';
+
+}
+return __p
+};
+define("jst/pc", (function (global) {
+    return function () {
+        var ret, fn;
+        return ret || global.JST;
+    };
+}(this)));
+
+define('views/pc/ItemView',[
+  'underscore',
+  'backbone',
+  'jst/pc'
+],
+function (_, Backbone, JST) {
+
+  
+
+  return Backbone.View.extend({
+    tagName: 'li',
+    initialize: function () {
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'remove', this.remove);
+    },
+    render: function () {
+      this.$el.html(JST['pc/item']({source: this.presenter()}));
+      return this;
+    },
+    presenter: function () {
+      return this.model.toEscapedJSON();
+    }
+  });
+});
+
+define('views/pc/ListView',[
+  'jquery',
+  'backbone',
+  './ItemView'
+],
+function ($, Backbone, ItemView) {
+
+  
+
+  return Backbone.View.extend({
+    tagName: 'ul',
+    className: 'unstyled',
+    initialize: function () {
+      this.listenTo(this.collection, 'add', this.append);
+    },
+    // View methods
+    // ------------
+    render: function () {
+      this.collection.each(function (model) {
+        this.append(model);
+      }, this);
+      return this;
+    },
+    append: function (model) {
+      var item_view = (new ItemView({model: model})).render();
+
+      var index = this.collection.indexOf(model);
+      if (index === 0) {
+        this.$el.prepend(item_view.el);
+      } else {
+        item_view.$el.insertAfter(this.$el.children()[index-1]);
+      }
+    },
+    select: function (id) {
+      var model = this.collection.get(id);
+      this.$('.selected').removeClass('selected');
+      if (model) {
+        var index = this.collection.indexOf(model);
+        $(this.$el.children()[index]).addClass('selected');
+      }
+    }
+  });
+});
+
+define('views/pc/ShowView',[
+  'underscore',
+  'backbone',
+  'jst/pc'
+],
+function (_, Backbone, JST) {
+
+  
+
+  return Backbone.View.extend({
+    initialize: function () {
+      this.listenTo(this.model, 'change', this.render);
+    },
+    render: function () {
+      this.$el.html(JST['pc/show']({source: this.presenter()}));
+      return this;
+    },
+    presenter: function () {
+      return this.model.toEscapedJSON();
+    }
+  });
+});
+
+define('views/pc/EditView',[
+  'underscore',
+  'backbone',
+  'jst/pc'
+],
+function (_, Backbone, JST) {
+
+  
+
+  return Backbone.View.extend({
+    events: {
+      'click .delete': 'onClickDelete'
+    },
+    initialize: function () {
+      _.bindAll(this);
+      this.listenTo(this.model, 'invalid', this.renderValidationMessage);
+    },
+    className: 'edit-view',
+    // View methods
+    // ------------
+    render: function () {
+      this.$el.html(JST['pc/edit']({source: this.presenter()}));
+      // Since `submit` is undelegate-able in Internet Explorer, it is needed
+      // to add event listener directrly to the form tag.
+      this.$('form').on('submit', this.onSubmit);
+      return this;
+    },
+    renderValidationMessage: function (model, errors) {
+      var lis = _.map(errors, function (value, name) {
+        return '<li><strong>' + name + '</strong> ' + value + '</li>';
+      });
+      this.$('.alert')
+        .show()
+        .find('ul').html(lis.join(''));
+      return this;
+    },
+    // Controller methods
+    // ------------------
+    onSubmit: function (e) {
+      e.preventDefault();
+      var self = this;
+      this.$('.alert').hide();
+      this.model.save(this.getValues(), {
+        wait: true,
+        success: function () {
+          self.trigger('updated');
+        }
+      });
+    },
+    onClickDelete: function () {
+      this.model.destroy();
+      this.trigger('deleted');
+    },
+    // Helper methods
+    // --------------
+    presenter: function () {
+      return this.model.toEscapedJSON();
+    },
+    getValues: function () {
+      var values = {};
+      _.each(this.$('form').serializeArray(), function (obj) {
+        values[obj.name] = obj.value;
+      });
+      return values;
+    }
+  });
+});
+
+define('views/pc/NewView',[
+  'underscore',
+  'backbone',
+  'jst/pc'
+],
+function (_, Backbone, JST) {
+
+  
+
+  return Backbone.View.extend({
+    initialize: function () {
+      _.bindAll(this);
+      this.listenTo(this.model, 'invalid', this.renderValidationMessage);
+    },
+    // View methods
+    // ------------
+    render: function () {
+      this.$el.html(JST['pc/new']({source: this.presenter()}));
+      // Since `submit` is undelegate-able in Internet Explorer, it is needed
+      // to add event listener directrly to the form tag.
+      this.$('form').on('submit', this.onSubmit);
+      return this;
+    },
+    renderValidationMessage: function (model, errors) {
+      var lis = _.map(errors, function (value, name) {
+        return '<li><strong>' + name + '</strong> ' + value + '</li>';
+      });
+      this.$('.alert')
+        .show()
+        .find('ul').html(lis.join(''));
+      return this;
+    },
+    // Controller methods
+    // ------------------
+    onSubmit: function (e) {
+      e.preventDefault();
+      var self = this;
+      this.$('.alert').hide();
+      this.model.save(this.getValues(), {
+        wait: true,
+        success: function () {
+          self.model.collection.add(self.model);
+          self.trigger('created');
+        }
+      });
+    },
+    // Helper methods
+    // --------------
+    presenter: function () {
+      return this.model.toEscapedJSON();
+    },
+    getValues: function () {
+      var values = {};
+      _.each(this.$('form').serializeArray(), function (obj) {
+        values[obj.name] = obj.value;
+      });
+      return values;
+    }
+  });
+});
+
+define('views/pc/AppView',[
+  'jquery',
+  'underscore',
+  'backbone',
+  './ListView',
+  './ShowView',
+  './EditView',
+  './NewView',
+  'jst/pc'
+],
+function ($, _, Backbone, ListView, ShowView, EditView, NewView, JST) {
+
+  
+
+  return Backbone.View.extend({
+    // The view rendered now
+    mainview: null,
+    events: {
+      'click .new': 'navigateToNew'
+    },
+    initialize: function () {
+      _.bindAll(this, 'onResize', 'fitContainers');
+      this.listenTo(this.options.router, 'route', this.dispatch);
+      $(window).on('resize', this.onResize);
+    },
+    // View methods
+    // ------------
+    render: function () {
+      this.$el.html(JST['pc/app']());
+      this.listview = new ListView({
+        collection: this.collection
+      });
+      this.$('#contactlist').append(this.listview.render().el);
+      _.defer(this.fitContainers);
+      return this;
+    },
+    fitContainers: function () {
+      var height = $(window).height();
+      // Fit #contactlist
+      var sidebarcontent = this.$('#sidebar-content');
+      sidebarcontent.height(height - sidebarcontent.offset().top);
+      // Fit #main
+      var main = this.$('#main');
+      main.height(height - main.offset().top);
+    },
+    dispatch: function (name, args) {
+      if (!_.include(['index', 'show', 'edit', 'new'], name)) return;
+      if (this.mainview) this.mainview.remove();
+      args || (args = []);
+      this.listview.select(args[0]);
+      switch (name) {
+        case 'show':
+          this.showContact.apply(this, args);
+          break;
+        case 'edit':
+          this.editContact.apply(this, args);
+          break;
+        case 'new':
+          this.newContact.apply(this, args);
+          break;
+      }
+    },
+    showContact: function (id) {
+      var model = this.collection.get(id);
+      if (!model) return;
+      this.mainview = new ShowView({model: model});
+      this.$('#main').append(this.mainview.render().el);
+    },
+    editContact: function (id) {
+      if (this.mainview) this.mainview.remove();
+      var model = this.collection.get(id);
+      if (!model) return;
+      this.mainview = new EditView({model: model});
+      this.mainview.on('updated', function () {
+        // navigate to show page and trigger 'route:show' event
+        this.options.router.navigate(this.mainview.model.id, true);
+      }, this);
+      this.mainview.on('deleted', function () {
+        // navigate to index page and trigger 'route:index' event
+        this.options.router.navigate('', true);
+      }, this);
+      this.$('#main').append(this.mainview.render().el);
+    },
+    newContact: function () {
+      if (this.mainview) this.mainview.remove();
+      var model =
+          new this.collection.model(null, {collection: this.collection});
+      this.mainview = new NewView({model: model});
+      this.mainview.on('created', function () {
+        // navigate to show page and trigger 'route:show' event
+        this.options.router.navigate(this.mainview.model.id, true);
+      }, this);
+      this.$('#main').append(this.mainview.render().el);
+    },
+    // Controller methods
+    // ------------------
+    navigateToNew: function (e) {
+      e.preventDefault();
+      this.options.router.navigate('new', true);
+    },
+    onResize: function () {
+      this.fitContainers();
+    }
+  });
+});
+
+define('routers/pc',[
+  'backbone'
+],
+function (Backbone) {
+
+  
+
+  return Backbone.Router.extend({
+    routes: {
+      '': 'index',
+      ':id': 'new_or_show',
+      ':id/edit': 'edit'
+    },
+    new_or_show: function (id) {
+      if (id === 'new') {
+        //this.trigger('route:new');
+        this.trigger('route', 'new');
+      } else {
+        //this.trigger('route:show', id);
+        this.trigger('route', 'show', [id]);
+      }
+    }
+  });
 });
 
 define('fixtures',[],function () {
@@ -15327,28 +15313,31 @@ define('fixtures',[],function () {
 require([
   'jquery',
   'backbone',
-  'routers/pc',
   'collections/ContactList',
+  'views/pc/AppView',
+  'routers/pc',
   'fixtures'
 ],
-function ($, Backbone, Router, ContactList, fixtures) {
+function ($, Backbone, ContactList, AppView, Router, fixtures) {
 
   
 
-  var app = {
-    root: '/backbone-sample',
-    contactlist: new ContactList()
-  };
-  app.contactlist.fetch();
-  if (app.contactlist.size() === 0) {
-    app.contactlist.update(fixtures);
-    app.contactlist.invoke('save');
+  var router = new Router();
+
+  var contactlist = new ContactList();
+  contactlist.fetch();
+  if (contactlist.isEmpty()) {
+    contactlist.reset(fixtures).invoke('save');
   }
 
-  new Router({app: app});
+  var appview = new AppView({
+    router: router,
+    collection: contactlist
+  });
 
   $(function () {
-    Backbone.history.start({root: app.root});
+    $('body').append(appview.render().el);
+    Backbone.history.start({root: '/backbone-sample'});
   });
 });
 

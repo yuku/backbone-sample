@@ -31,15 +31,17 @@ return __p
 
 this["JST"]["pc/app"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<div id="header">\n<h1>Contacts</h1>\n</div>\n<div id="content">\n<div id="sidebar" class="clearfix">\n<div id="sidebar-header">\n<a href="#new" class="new">New Contact</a>\n</div>\n<div id="sidebar-content">\n<div id="contactlist">\n</div>\n</div>\n</div>\n<div id="main">\n</div>\n</div>';
+
+}
 return __p
 };
 
 this["JST"]["pc/edit"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p +=
 ((__t = ( JST['pc/_form']({source: source}) )) == null ? '' : __t);
@@ -79,8 +81,7 @@ return __p
 
 this["JST"]["pc/new"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p +=
 ((__t = ( JST['pc/_form']({source: source}) )) == null ? '' : __t);

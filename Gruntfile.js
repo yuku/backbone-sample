@@ -9,7 +9,7 @@ module.exports = function (grunt) {
     'grunt-contrib-jasmine',
     'grunt-contrib-jst',
     'grunt-contrib-less',
-    'grunt-contrib-mincss',
+    'grunt-contrib-cssmin',
     'grunt-contrib-qunit',
     'grunt-contrib-requirejs',
     'grunt-contrib-uglify',
@@ -19,7 +19,7 @@ module.exports = function (grunt) {
   });
 
   grunt.initConfig({
-    mincss: {
+    cssmin: {
       mobile: {
         files: {
           'assets/css/mobile.css': [
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
       },
       less: {
         files: ['assets/less/*.less'],
-        tasks: ['less', 'mincss']
+        tasks: ['less', 'cssmin']
       }
     },
 
@@ -152,7 +152,7 @@ module.exports = function (grunt) {
       }
     }
   });
-  grunt.registerTask('build:css', ['less', 'mincss']);
+  grunt.registerTask('build:css', ['less', 'cssmin']);
   grunt.registerTask('build:js', ['jst', 'requirejs']);
   grunt.registerTask('default', ['build:css', 'build:js', 'uglify']);
   grunt.registerTask('test:qunit', ['connect', 'qunit']);

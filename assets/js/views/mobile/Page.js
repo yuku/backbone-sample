@@ -25,13 +25,13 @@ function ($, mobile, Backbone, _) {
       Backbone.View.apply(this, arguments);
     },
     show: function (options) {
-      options || (options = {});
-      _.defaults(options, this.options);
-      this.render().$el.appendTo($('body'));
+      $('body').append(this.render().el);
       if (firstpage) {
         firstpage = false;
         mobile.initializePage();
       } else {
+        options || (options = {});
+        _.defaults(options, this.options);
         mobile.changePage(this.$el, options);
       }
     }

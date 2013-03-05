@@ -1,9 +1,10 @@
 define([
   'underscore',
+  'backbone',
   './Page',
   'jst/mobile'
 ],
-function (_, Page, JST) {
+function (_, Backbone, Page, JST) {
 
   'use strict';
 
@@ -40,25 +41,29 @@ function (_, Page, JST) {
     // ------------------
     onSubmit: function (e) {
       e.preventDefault();
-      var self = this;
+      var model = this.model;
       this.$('.error.active').removeClass('active');
-      this.model.save(this.getValues(), {
+      model.save(this.getValues(), {
         wait: true,
         success: function () {
-          self.model.collection.add(self.model);
-          self.trigger('updated');
+          model.collection.add(model);
+          Backbone.history.navigate(model.id, true);
         }
       });
     },
     onClickDelete: function (e) {
       e.preventDefault();
-      this.model.destroy();
-      this.trigger('deleted');
+      this.model.destroy({
+        wait: true,
+        success: function () {
+          Backbone.history.navigate('', true);
+        }
+      });
     },
     // Helper methods
     // --------------
     presenter: function () {
-      return this.model.toSafeJSON();
+      return this.model.toEscapedJSON();
     },
     getValues: function () {
       var values = {};

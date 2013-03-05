@@ -22,9 +22,7 @@ function (Page, ListView, JST) {
       return instance;
     },
     initialize: function () {
-      var listview = new ListView({
-        collection: this.collection
-      });
+      var listview = new ListView({collection: this.collection});
       this.listenTo(this.collection, 'all', this.remove);
       this.$el
         .html(JST['mobile/index']())

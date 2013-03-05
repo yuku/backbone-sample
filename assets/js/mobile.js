@@ -10,19 +10,16 @@ function ($, mobile, Backbone, Router, ContactList, fixtures) {
 
   'use strict';
 
-  var app = {
-    root: '/backbone-sample',
-    contactlist: new ContactList()
-  };
-  app.contactlist.fetch();
-  if (app.contactlist.size() === 0) {
-    app.contactlist.update(fixtures);
-    app.contactlist.invoke('save');
+  var contactlist = new ContactList();
+  contactlist.fetch();
+  if (contactlist.size() === 0) {
+    contactlist.update(fixtures);
+    contactlist.invoke('save');
   }
 
-  new Router({app: app});
+  new Router({collection: contactlist});
 
   $(function () {
-    Backbone.history.start({root: app.root});
+    Backbone.history.start({root: '/backbone-sample'});
   });
 });

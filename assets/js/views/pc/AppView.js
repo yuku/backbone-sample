@@ -16,7 +16,10 @@ function ($, _, Backbone, ListView, ShowView, EditView, NewView, JST) {
     // The view rendered now
     mainview: null,
     events: {
-      'click .new': 'navigateToNew'
+      'click .new': function (e) {
+        e.preventDefault();
+        Backbone.history.navigate('new', true);
+      }
     },
     initialize: function () {
       _.bindAll(this, 'onResize', 'fitContainers');
@@ -67,37 +70,18 @@ function ($, _, Backbone, ListView, ShowView, EditView, NewView, JST) {
       this.$('#main').append(this.mainview.render().el);
     },
     editContact: function (id) {
-      if (this.mainview) this.mainview.remove();
       var model = this.collection.get(id);
       if (!model) return;
       this.mainview = new EditView({model: model});
-      this.mainview.on('updated', function () {
-        // navigate to show page and trigger 'route:show' event
-        this.options.router.navigate(this.mainview.model.id, true);
-      }, this);
-      this.mainview.on('deleted', function () {
-        // navigate to index page and trigger 'route:index' event
-        this.options.router.navigate('', true);
-      }, this);
       this.$('#main').append(this.mainview.render().el);
     },
     newContact: function () {
-      if (this.mainview) this.mainview.remove();
-      var model =
-          new this.collection.model(null, {collection: this.collection});
+      var model = new this.collection.model();
       this.mainview = new NewView({model: model});
-      this.mainview.on('created', function () {
-        // navigate to show page and trigger 'route:show' event
-        this.options.router.navigate(this.mainview.model.id, true);
-      }, this);
       this.$('#main').append(this.mainview.render().el);
     },
     // Controller methods
     // ------------------
-    navigateToNew: function (e) {
-      e.preventDefault();
-      this.options.router.navigate('new', true);
-    },
     onResize: function () {
       this.fitContainers();
     }

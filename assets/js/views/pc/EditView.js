@@ -9,7 +9,11 @@ function (_, Backbone, JST) {
 
   return Backbone.View.extend({
     events: {
-      'click .delete': 'onClickDelete'
+      'click .delete': 'onClickDelete',
+      'click .cancel': function (e) {
+        e.preventDefault();
+        Backbone.history.navigate(this.model.id, true);
+      }
     },
     initialize: function () {
       _.bindAll(this);
@@ -38,18 +42,22 @@ function (_, Backbone, JST) {
     // ------------------
     onSubmit: function (e) {
       e.preventDefault();
-      var self = this;
+      var model = this.model;
       this.$('.alert').hide();
-      this.model.save(this.getValues(), {
+      model.save(this.getValues(), {
         wait: true,
         success: function () {
-          self.trigger('updated');
+          Backbone.history.navigate(model.id, true);
         }
       });
     },
-    onClickDelete: function () {
-      this.model.destroy();
-      this.trigger('deleted');
+    onClickDelete: function (e) {
+      e.preventDefault();
+      this.model.destroy({
+        success: function () {
+          Backbone.history.navigate('', true);
+        }
+      });
     },
     // Helper methods
     // --------------

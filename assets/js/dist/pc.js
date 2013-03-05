@@ -14920,7 +14920,6 @@ function ($, Backbone, ItemView) {
 
   return Backbone.View.extend({
     tagName: 'ul',
-    className: 'unstyled',
     initialize: function () {
       this.listenTo(this.collection, 'add', this.append);
     },
@@ -14987,7 +14986,11 @@ function (_, Backbone, JST) {
 
   return Backbone.View.extend({
     events: {
-      'click .delete': 'onClickDelete'
+      'click .delete': 'onClickDelete',
+      'click .cancel': function (e) {
+        e.preventDefault();
+        Backbone.history.navigate(this.model.id, true);
+      }
     },
     initialize: function () {
       _.bindAll(this);
@@ -15016,18 +15019,22 @@ function (_, Backbone, JST) {
     // ------------------
     onSubmit: function (e) {
       e.preventDefault();
-      var self = this;
+      var model = this.model;
       this.$('.alert').hide();
-      this.model.save(this.getValues(), {
+      model.save(this.getValues(), {
         wait: true,
         success: function () {
-          self.trigger('updated');
+          Backbone.history.navigate(model.id, true);
         }
       });
     },
-    onClickDelete: function () {
-      this.model.destroy();
-      this.trigger('deleted');
+    onClickDelete: function (e) {
+      e.preventDefault();
+      this.model.destroy({
+        success: function () {
+          Backbone.history.navigate('', true);
+        }
+      });
     },
     // Helper methods
     // --------------
@@ -15054,8 +15061,13 @@ function (_, Backbone, JST) {
   
 
   return Backbone.View.extend({
+    events: {
+      'click .cancel': function (e) {
+        e.preventDefault();
+        Backbone.history.navigate('', true);
+      }
+    },
     initialize: function () {
-      _.bindAll(this);
       this.listenTo(this.model, 'invalid', this.renderValidationMessage);
     },
     // View methods
@@ -15064,7 +15076,7 @@ function (_, Backbone, JST) {
       this.$el.html(JST['pc/new']({source: this.presenter()}));
       // Since `submit` is undelegate-able in Internet Explorer, it is needed
       // to add event listener directrly to the form tag.
-      this.$('form').on('submit', this.onSubmit);
+      this.$('form').on('submit', _.bind(this.onSubmit, this));
       return this;
     },
     renderValidationMessage: function (model, errors) {
@@ -15080,13 +15092,13 @@ function (_, Backbone, JST) {
     // ------------------
     onSubmit: function (e) {
       e.preventDefault();
-      var self = this;
+      var model = this.model;
       this.$('.alert').hide();
-      this.model.save(this.getValues(), {
+      model.save(this.getValues(), {
         wait: true,
         success: function () {
-          self.model.collection.add(self.model);
-          self.trigger('created');
+          model.collection.add(model);
+          Backbone.history.navigate(model.id, true);
         }
       });
     },
@@ -15123,7 +15135,10 @@ function ($, _, Backbone, ListView, ShowView, EditView, NewView, JST) {
     // The view rendered now
     mainview: null,
     events: {
-      'click .new': 'navigateToNew'
+      'click .new': function (e) {
+        e.preventDefault();
+        Backbone.history.navigate('new', true);
+      }
     },
     initialize: function () {
       _.bindAll(this, 'onResize', 'fitContainers');
@@ -15174,37 +15189,18 @@ function ($, _, Backbone, ListView, ShowView, EditView, NewView, JST) {
       this.$('#main').append(this.mainview.render().el);
     },
     editContact: function (id) {
-      if (this.mainview) this.mainview.remove();
       var model = this.collection.get(id);
       if (!model) return;
       this.mainview = new EditView({model: model});
-      this.mainview.on('updated', function () {
-        // navigate to show page and trigger 'route:show' event
-        this.options.router.navigate(this.mainview.model.id, true);
-      }, this);
-      this.mainview.on('deleted', function () {
-        // navigate to index page and trigger 'route:index' event
-        this.options.router.navigate('', true);
-      }, this);
       this.$('#main').append(this.mainview.render().el);
     },
     newContact: function () {
-      if (this.mainview) this.mainview.remove();
-      var model =
-          new this.collection.model(null, {collection: this.collection});
+      var model = new this.collection.model();
       this.mainview = new NewView({model: model});
-      this.mainview.on('created', function () {
-        // navigate to show page and trigger 'route:show' event
-        this.options.router.navigate(this.mainview.model.id, true);
-      }, this);
       this.$('#main').append(this.mainview.render().el);
     },
     // Controller methods
     // ------------------
-    navigateToNew: function (e) {
-      e.preventDefault();
-      this.options.router.navigate('new', true);
-    },
     onResize: function () {
       this.fitContainers();
     }
@@ -15325,10 +15321,13 @@ function ($, Backbone, ContactList, AppView, Router, fixtures) {
   var router = new Router();
 
   var contactlist = new ContactList();
-  contactlist.fetch();
-  if (contactlist.isEmpty()) {
-    contactlist.reset(fixtures).invoke('save');
-  }
+  contactlist.fetch({
+    success: function () {
+      if (contactlist.isEmpty()) {
+        contactlist.reset(fixtures).invoke('save');
+      }
+    }
+  });
 
   var appview = new AppView({
     router: router,

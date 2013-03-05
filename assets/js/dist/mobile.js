@@ -23739,13 +23739,13 @@ function ($, mobile, Backbone, _) {
       Backbone.View.apply(this, arguments);
     },
     show: function (options) {
-      options || (options = {});
-      _.defaults(options, this.options);
-      this.render().$el.appendTo($('body'));
+      $('body').append(this.render().el);
       if (firstpage) {
         firstpage = false;
         mobile.initializePage();
       } else {
+        options || (options = {});
+        _.defaults(options, this.options);
         mobile.changePage(this.$el, options);
       }
     }
@@ -23927,9 +23927,11 @@ function (_, Backbone, JST) {
 
   return Backbone.View.extend({
     tagName: 'li',
-    initialize: function () {
-      //this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.model, 'remove', this.remove);
+    events: {
+      'click a': function (e) {
+        e.preventDefault();
+        Backbone.history.navigate(this.model.id, true);
+      }
     },
     // View methods
     // ------------
@@ -23938,7 +23940,7 @@ function (_, Backbone, JST) {
       return this;
     },
     presenter: function () {
-      return _.defaults(this.model.toSafeJSON(), {id: this.model.id});
+      return _.defaults(this.model.toEscapedJSON(), {id: this.model.id});
     }
   });
 });
@@ -23965,8 +23967,8 @@ function (Backbone, ItemView, JST) {
       var index;
       this.$el.html('');
       this.collection.each(function (contact) {
-        if (index !== contact.index()) {
-          index = contact.index();
+        if (index !== contact.index().charAt(0)) {
+          index = contact.index().charAt(0);
           // Insert list-divider
           this.$el.append(JST['mobile/divider']({index: index}));
         }
@@ -24004,9 +24006,7 @@ function (Page, ListView, JST) {
       return instance;
     },
     initialize: function () {
-      var listview = new ListView({
-        collection: this.collection
-      });
+      var listview = new ListView({collection: this.collection});
       this.listenTo(this.collection, 'all', this.remove);
       this.$el
         .html(JST['mobile/index']())
@@ -24021,10 +24021,11 @@ function (Page, ListView, JST) {
 
 define('views/mobile/NewPage',[
   'underscore',
+  'backbone',
   './Page',
   'jst/mobile'
 ],
-function (_, Page, JST) {
+function (_, Backbone, Page, JST) {
 
   
 
@@ -24060,20 +24061,20 @@ function (_, Page, JST) {
     // ------------------
     onSubmit: function (e) {
       e.preventDefault();
-      var self = this;
+      var model = this.model;
       this.$('.error.active').removeClass('active');
-      this.model.save(this.getValues(), {
+      model.save(this.getValues(), {
         wait: true,
         success: function () {
-          self.model.collection.add(self.model);
-          self.trigger('created');
+          model.collection.add(model);
+          Backbone.history.navigate(model.id, true);
         }
       });
     },
     // Helper methods
     // --------------
     presenter: function () {
-      return this.model.toSafeJSON();
+      return this.model.toEscapedJSON();
     },
     getValues: function () {
       var values = {};
@@ -24107,17 +24108,18 @@ function (_, Page, JST) {
     // Helper methods
     // --------------
     presenter: function () {
-      return this.model.toSafeJSON();
+      return this.model.toEscapedJSON();
     }
   });
 });
 
 define('views/mobile/EditPage',[
   'underscore',
+  'backbone',
   './Page',
   'jst/mobile'
 ],
-function (_, Page, JST) {
+function (_, Backbone, Page, JST) {
 
   
 
@@ -24154,25 +24156,29 @@ function (_, Page, JST) {
     // ------------------
     onSubmit: function (e) {
       e.preventDefault();
-      var self = this;
+      var model = this.model;
       this.$('.error.active').removeClass('active');
-      this.model.save(this.getValues(), {
+      model.save(this.getValues(), {
         wait: true,
         success: function () {
-          self.model.collection.add(self.model);
-          self.trigger('updated');
+          model.collection.add(model);
+          Backbone.history.navigate(model.id, true);
         }
       });
     },
     onClickDelete: function (e) {
       e.preventDefault();
-      this.model.destroy();
-      this.trigger('deleted');
+      this.model.destroy({
+        wait: true,
+        success: function () {
+          Backbone.history.navigate('', true);
+        }
+      });
     },
     // Helper methods
     // --------------
     presenter: function () {
-      return this.model.toSafeJSON();
+      return this.model.toEscapedJSON();
     },
     getValues: function () {
       var values = {};
@@ -24205,7 +24211,7 @@ function (Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
       ':id/edit': 'edit'
     },
     initialize: function (options) {
-      this.app = options.app;
+      this.collection = options.collection;
     },
     new_or_show: function (id) {
       if (id === 'new') {
@@ -24215,23 +24221,17 @@ function (Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
       }
     },
     index: function () {
-      var page = new IndexPage({collection: this.app.contactlist});
+      var page = new IndexPage({collection: this.collection});
       page.show();
       firstpage = false;
     },
     'new': function () {
-      var page = new NewPage({
-        model: new Contact(),
-        collection: this.app.contactlist
-      });
+      var page = new NewPage({model: new Contact()});
       page.show();
-      page.on('created', function () {
-        this.navigate(page.model.id, true);
-      }, this);
       firstpage = false;
     },
     show: function (id) {
-      var model = this.app.contactlist.get(id);
+      var model = this.collection.get(id);
       if (!model) this.navigate('', true);
       var page = new ShowPage({model: model});
       page.show();
@@ -24239,16 +24239,10 @@ function (Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
     },
     edit: function (id) {
       if (firstpage) this.navigate(id, {trigger: true, replace: true});
-      var model = this.app.contactlist.get(id);
+      var model = this.collection.get(id);
       if (!model) this.navigate('', true);
       var page = new EditPage({model: model});
       page.show();
-      page.on('updated', function () {
-        this.navigate(page.model.id, true);
-      }, this);
-      page.on('deleted', function () {
-        this.navigate('', true);
-      }, this);
     }
   });
 });
@@ -24555,20 +24549,17 @@ function ($, mobile, Backbone, Router, ContactList, fixtures) {
 
   
 
-  var app = {
-    root: '/backbone-sample',
-    contactlist: new ContactList()
-  };
-  app.contactlist.fetch();
-  if (app.contactlist.size() === 0) {
-    app.contactlist.update(fixtures);
-    app.contactlist.invoke('save');
+  var contactlist = new ContactList();
+  contactlist.fetch();
+  if (contactlist.size() === 0) {
+    contactlist.update(fixtures);
+    contactlist.invoke('save');
   }
 
-  new Router({app: app});
+  new Router({collection: contactlist});
 
   $(function () {
-    Backbone.history.start({root: app.root});
+    Backbone.history.start({root: '/backbone-sample'});
   });
 });
 

@@ -20,7 +20,7 @@ function (_, Page, JST) {
     // Helper methods
     // --------------
     presenter: function () {
-      return this.model.toSafeJSON();
+      return this.model.toEscapedJSON();
     }
   });
 });

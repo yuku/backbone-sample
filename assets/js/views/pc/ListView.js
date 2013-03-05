@@ -9,7 +9,6 @@ function ($, Backbone, ItemView) {
 
   return Backbone.View.extend({
     tagName: 'ul',
-    className: 'unstyled',
     initialize: function () {
       this.listenTo(this.collection, 'add', this.append);
     },

@@ -13,10 +13,13 @@ function ($, Backbone, ContactList, AppView, Router, fixtures) {
   var router = new Router();
 
   var contactlist = new ContactList();
-  contactlist.fetch();
-  if (contactlist.isEmpty()) {
-    contactlist.reset(fixtures).invoke('save');
-  }
+  contactlist.fetch({
+    success: function () {
+      if (contactlist.isEmpty()) {
+        contactlist.reset(fixtures).invoke('save');
+      }
+    }
+  });
 
   var appview = new AppView({
     router: router,

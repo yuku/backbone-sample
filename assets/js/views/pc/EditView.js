@@ -44,19 +44,14 @@ function (_, Backbone, JST) {
       e.preventDefault();
       var model = this.model;
       this.$('.alert').hide();
-      model.save(this.getValues(), {
-        wait: true,
-        success: function () {
-          Backbone.history.navigate(model.id, true);
-        }
+      model.save(this.getValues()).done(function () {
+        Backbone.history.navigate(model.id, true);
       });
     },
     onClickDelete: function (e) {
       e.preventDefault();
-      this.model.destroy({
-        success: function () {
-          Backbone.history.navigate('', true);
-        }
+      this.model.destroy().done(function () {
+        Backbone.history.navigate('', true);
       });
     },
     // Helper methods

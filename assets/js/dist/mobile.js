@@ -24063,12 +24063,9 @@ function (_, Backbone, Page, JST) {
       e.preventDefault();
       var model = this.model;
       this.$('.error.active').removeClass('active');
-      model.save(this.getValues(), {
-        wait: true,
-        success: function () {
-          model.collection.add(model);
-          Backbone.history.navigate(model.id, true);
-        }
+      model.save(this.getValues()).done(function () {
+        model.collection.add(model);
+        Backbone.history.navigate(model.id, true);
       });
     },
     // Helper methods
@@ -24158,21 +24155,15 @@ function (_, Backbone, Page, JST) {
       e.preventDefault();
       var model = this.model;
       this.$('.error.active').removeClass('active');
-      model.save(this.getValues(), {
-        wait: true,
-        success: function () {
-          model.collection.add(model);
-          Backbone.history.navigate(model.id, true);
-        }
+      model.save(this.getValues()).done(function () {
+        model.collection.add(model);
+        Backbone.history.navigate(model.id, true);
       });
     },
     onClickDelete: function (e) {
       e.preventDefault();
-      this.model.destroy({
-        wait: true,
-        success: function () {
-          Backbone.history.navigate('', true);
-        }
+      this.model.destroy().done(function () {
+        Backbone.history.navigate('', true);
       });
     },
     // Helper methods

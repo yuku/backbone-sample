@@ -23,7 +23,8 @@ module.exports = function (grunt) {
       mobile: {
         files: {
           'assets/css/mobile.css': [
-            'assets/css/vendor/jquery.mobile.structure-1.2.0.css',
+            'assets/css/vendor/jquery.mobile.structure-1.3.0.css',
+            'assets/css/vendor/theme.css',
             'assets/css/mobile.css'
           ]
         }

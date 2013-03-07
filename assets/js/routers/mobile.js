@@ -46,7 +46,10 @@ function (Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
       firstpage = false;
     },
     edit: function (id) {
-      if (firstpage) this.navigate(id, {trigger: true, replace: true});
+      if (firstpage) {
+        this.navigate(id, {trigger: true, replace: true});
+        return;
+      }
       var model = this.collection.get(id);
       if (!model) this.navigate('', true);
       var page = new EditPage({model: model});

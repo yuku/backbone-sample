@@ -1,6 +1,6 @@
 /**
  * Backbone localStorage Adapter
- * Version 1.0
+ * Version 1.1.0
  *
  * https://github.com/jeromegn/Backbone.localStorage
  */
@@ -8,11 +8,11 @@
    if (typeof define === "function" && define.amd) {
       // AMD. Register as an anonymous module.
       define(["underscore","backbone"], function(_, Backbone) {
-        // Use global variables if the locals is undefined.
+        // Use global variables if the locals are undefined.
         return factory(_ || root._, Backbone || root.Backbone);
       });
    } else {
-      // RequireJS isn't being used. Assume underscore and backbone is loaded in <script> tags
+      // RequireJS isn't being used. Assume underscore and backbone are loaded in <script> tags
       factory(_, Backbone);
    }
 }(this, function(_, Backbone) {
@@ -100,21 +100,40 @@ _.extend(Backbone.LocalStorage.prototype, {
   localStorage: function() {
     return localStorage;
   },
-  
+
   // fix for "illegal access" error on Android when JSON.parse is passed null
   jsonData: function (data) {
       return data && JSON.parse(data);
+  },
+
+  // Clear localStorage for specific collection.
+  _clear: function() {
+    var local = this.localStorage(),
+      itemRe = new RegExp("^" + this.name + "-");
+
+    // Remove id-tracking item (e.g., "foo").
+    local.removeItem(this.name);
+
+    // Match all data items (e.g., "foo-ID") and remove.
+    _.chain(local).keys()
+      .filter(function (k) { return itemRe.test(k); })
+      .each(function (k) { local.removeItem(k); });
+  },
+
+  // Size of localStorage.
+  _storageSize: function() {
+    return this.localStorage().length;
   }
 
 });
 
 // localSync delegate to the model or collection's
 // *localStorage* property, which should be an instance of `Store`.
-// window.Store.sync and Backbone.localSync is deprectated, use Backbone.LocalStorage.sync instead
+// window.Store.sync and Backbone.localSync is deprecated, use Backbone.LocalStorage.sync instead
 Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(method, model, options) {
   var store = model.localStorage || model.collection.localStorage;
 
-  var resp, errorMessage, syncDfd = $.Deferred && $.Deferred(); //If $ is having Deferred - use it. 
+  var resp, errorMessage, syncDfd = $.Deferred && $.Deferred(); //If $ is having Deferred - use it.
 
   try {
 
@@ -134,31 +153,42 @@ Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(m
     }
 
   } catch(error) {
-    if (error.code === DOMException.QUOTA_EXCEEDED_ERR && window.localStorage.length === 0)
+    if (error.code === DOMException.QUOTA_EXCEEDED_ERR && store._storageSize() === 0)
       errorMessage = "Private browsing is unsupported";
     else
       errorMessage = error.message;
   }
 
   if (resp) {
+    model.trigger("sync", model, resp, options);
     if (options && options.success)
-      options.success(model, resp, options);
+      if (Backbone.VERSION === "0.9.10") {
+        options.success(model, resp, options);
+      } else {
+        options.success(resp);
+      }
     if (syncDfd)
-      syncDfd.resolve(model, resp, options);
+      syncDfd.resolve(resp);
 
   } else {
     errorMessage = errorMessage ? errorMessage
                                 : "Record Not Found";
-    
+
+    model.trigger("error", model, errorMessage, options);
     if (options && options.error)
-      options.error(errorMessage);
+      if (Backbone.VERSION === "0.9.10") {
+        options.error(model, errorMessage, options);
+      } else {
+        options.error(errorMessage);
+      }
+
     if (syncDfd)
       syncDfd.reject(errorMessage);
   }
-  
+
   // add compatibility with $.ajax
   // always execute callback for success and error
-  if (options && options.complete) options.complete(model, resp, options);
+  if (options && options.complete) options.complete(resp);
 
   return syncDfd && syncDfd.promise();
 };

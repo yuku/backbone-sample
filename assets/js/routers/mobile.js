@@ -1,12 +1,11 @@
 define([
   'backbone',
-  'models/Contact',
   'views/mobile/IndexPage',
   'views/mobile/NewPage',
   'views/mobile/ShowPage',
   'views/mobile/EditPage'
 ],
-function (Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
+function (Backbone, IndexPage, NewPage, ShowPage, EditPage) {
 
   'use strict';
 
@@ -34,7 +33,8 @@ function (Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
       firstpage = false;
     },
     'new': function () {
-      var page = new NewPage({model: new Contact()});
+      var model = new this.collection.model(null, {collection: this.collection});
+      var page = new NewPage({model: model});
       page.show();
       firstpage = false;
     },

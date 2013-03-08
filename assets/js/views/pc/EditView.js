@@ -18,6 +18,13 @@ function (_, Backbone, JST) {
     initialize: function () {
       _.bindAll(this);
       this.listenTo(this.model, 'invalid', this.renderValidationMessage);
+      this.listenTo(this.model, 'sync', function (model) {
+        model.collection.add(model);
+        Backbone.history.navigate(model.id, true);
+      });
+      this.listenTo(this.model, 'destroy', function () {
+        Backbone.history.navigate('', true);
+      });
     },
     className: 'edit-view',
     // View methods
@@ -44,15 +51,11 @@ function (_, Backbone, JST) {
       e.preventDefault();
       var model = this.model;
       this.$('.alert').hide();
-      model.save(this.getValues()).done(function () {
-        Backbone.history.navigate(model.id, true);
-      });
+      model.save(this.getValues());
     },
     onClickDelete: function (e) {
       e.preventDefault();
-      this.model.destroy().done(function () {
-        Backbone.history.navigate('', true);
-      });
+      this.model.destroy();
     },
     // Helper methods
     // --------------

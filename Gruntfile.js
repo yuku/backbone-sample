@@ -38,7 +38,8 @@ module.exports = function (grunt) {
         },
         processContent: function (src) {
           return src.replace(/(^\s+|\s+$)/gm, '');
-        }
+        },
+        amd: true
       },
       pc: {
         files: {
@@ -80,30 +81,25 @@ module.exports = function (grunt) {
     },
 
     requirejs: {
+      options: {
+        mainConfigFile: 'assets/js/require.config.js',
+        baseUrl: './assets/js',
+        paths: {
+          requirejs: 'vendor/require-2.1.2'
+        },
+        include: ['requirejs'],
+        optimize: 'none'
+      },
       pc: {
         options: {
-          mainConfigFile: 'assets/js/require.config.js',
-          baseUrl: './assets/js',
           out: 'assets/js/dist/pc.js',
-          paths: {
-            requirejs: 'vendor/require-2.1.2'
-          },
-          include: ['requirejs'],
-          name: 'pc',
-          optimize: 'none'
+          name: 'pc'
         }
       },
       mobile: {
         options: {
-          mainConfigFile: 'assets/js/require.config.js',
-          baseUrl: './assets/js',
           out: 'assets/js/dist/mobile.js',
-          paths: {
-            requirejs: 'vendor/require-2.1.2'
-          },
-          include: ['requirejs'],
-          name: 'mobile',
-          optimize: 'none'
+          name: 'mobile'
         }
       }
     },

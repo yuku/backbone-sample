@@ -1,3 +1,5 @@
+define(function(){
+
 this["JST"] = this["JST"] || {};
 
 this["JST"]["mobile/_form"] = function(obj) {
@@ -155,3 +157,7 @@ __p += '\n</ul>\n</div>';
 }
 return __p
 };
+
+  return this["JST"];
+
+});

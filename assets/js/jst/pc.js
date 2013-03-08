@@ -1,3 +1,5 @@
+define(function(){
+
 this["JST"] = this["JST"] || {};
 
 this["JST"]["pc/_form"] = function(obj) {
@@ -97,7 +99,7 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<ul class="pager">\n<li class="previous"><a href="#' +
 ((__t = ( source.id )) == null ? '' : __t) +
-'/edit">Edit</a></li>\n</ul>\n<dl class="dl-horizontal">\n<dt>Name</dt>\n<dd>' +
+'/edit" class="edit">Edit</a></li>\n</ul>\n<dl class="dl-horizontal">\n<dt>Name</dt>\n<dd>' +
 ((__t = ( source.name )) == null ? '' : __t) +
 '</dd>\n<dt>Email</dt>\n<dd>' +
 ((__t = ( source.email || '&nbsp;' )) == null ? '' : __t) +
@@ -132,3 +134,7 @@ __p += '\n</dl>';
 }
 return __p
 };
+
+  return this["JST"];
+
+});

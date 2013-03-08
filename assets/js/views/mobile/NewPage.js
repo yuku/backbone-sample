@@ -16,8 +16,11 @@ function (_, Backbone, Page, JST) {
       transition: 'slideup'
     },
     initialize: function () {
-      _.bindAll(this);
       this.listenTo(this.model, 'invalid', this.renderValidationMessage);
+      this.listenTo(this.model, 'sync', function (model) {
+        model.collection.add(model);
+        Backbone.history.navigate(model.id, true);
+      });
     },
     // View methods
     // ------------
@@ -25,7 +28,7 @@ function (_, Backbone, Page, JST) {
       this.$el.html(JST['mobile/new']({source: this.presenter()}));
       // Since `submit` is undelegate-able in Internet Explorer, it is needed
       // to add event listener directrly to the form tag.
-      this.$('form').on('submit', this.onSubmit);
+      this.$('form').on('submit', _.bind(this.onSubmit, this));
       return this;
     },
     renderValidationMessage: function (model, errors) {
@@ -42,10 +45,7 @@ function (_, Backbone, Page, JST) {
       e.preventDefault();
       var model = this.model;
       this.$('.error.active').removeClass('active');
-      model.save(this.getValues()).done(function () {
-        model.collection.add(model);
-        Backbone.history.navigate(model.id, true);
-      });
+      model.save(this.getValues());
     },
     // Helper methods
     // --------------

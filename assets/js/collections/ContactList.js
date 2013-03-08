@@ -23,9 +23,5 @@ function (Backbone, LocalStorage, Contact) {
     }
   });
 
-  // Set Contact.prototype.collection here due to the circular dependency
-  // problem.
-  Contact.prototype.collection = new ContactList();
-
   return ContactList;
 });

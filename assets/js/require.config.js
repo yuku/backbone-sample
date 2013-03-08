@@ -11,9 +11,6 @@ var require = {
     'md5'                   : 'vendor/md5'
   },
   shim: {
-    'jquery': {
-      exports: 'jQuery'
-    },
     // To edit the deps of jquery.mobile, edit AMD registration section in
     // vendor/jquery.mobile.js. Even though you declare the dependencies here,
     // it will be overrided by `grunt requirejs`
@@ -24,12 +21,6 @@ var require = {
     'backbone': {
       exports: 'Backbone',
       deps: ['jquery', 'underscore']
-    },
-    'jst/pc': {
-      exports: 'JST'
-    },
-    'jst/mobile': {
-      exports: 'JST'
     }
   }
 };

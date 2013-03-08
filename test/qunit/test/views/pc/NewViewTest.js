@@ -12,8 +12,8 @@ function (_, Contact, ContactList, NewView) {
 
   module('pc/NewView', {
     setup: function () {
-      contact = new Contact();
       contactlist = new ContactList();
+      contact = new Contact(null, {collection: contactlist});
     },
     teardown: function () {
       newview.remove();
@@ -37,8 +37,7 @@ function (_, Contact, ContactList, NewView) {
       'Initially model is not added to collection');
     newview.render().$('form').submit();
     ok(spy, 'It is called when form submitted');
-    ok(contactlist.get(contact),
-      'It adds model to the collection');
+    ok(contactlist.get(contact), 'It adds model to the collection');
   });
 
   test('#getValues', 1, function () {

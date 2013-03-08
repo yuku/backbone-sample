@@ -11,7 +11,7 @@ function (Contact, ContactList) {
   module('Contact', {
     setup: function () {
       contactlist = new ContactList();
-      contact = new Contact({name: 'someone'});
+      contact = new Contact({name: 'someone'}, {collection: contactlist});
     },
     teardown: function () {
       contact.destroy();
@@ -20,8 +20,6 @@ function (Contact, ContactList) {
   });
 
   test('new instance', function () {
-    ok(contact.collection instanceof ContactList,
-      'It refer ContactList instance by #collection');
     ok(!contactlist.get(contact), 'It isn\'t added to the collection');
   });
 
@@ -38,7 +36,7 @@ function (Contact, ContactList) {
     contact.set('email', 'abc@sample.com');
     contactlist.add(contact);
 
-    var other = new Contact();
+    var other = new Contact(null, {collection: contactlist});
     other.set('email', contact.get('email'), {validate: true});
     errors = other.validationError || {};
     equal(errors.email, 'This address is already in use',

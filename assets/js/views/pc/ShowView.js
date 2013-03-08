@@ -8,8 +8,11 @@ function (_, Backbone, JST) {
   'use strict';
 
   return Backbone.View.extend({
-    initialize: function () {
-      this.listenTo(this.model, 'change', this.render);
+    events: {
+      'click .edit': function (e) {
+        e.preventDefault(); 
+        Backbone.history.navigate(this.model.id + '/edit', true);
+      }
     },
     render: function () {
       this.$el.html(JST['pc/show']({source: this.presenter()}));

@@ -25319,6 +25319,749 @@ define("backbone", ["jquery","underscore"], (function (global) {
     };
 }(this)));
 
+define('views/mobile/Page',[
+  'jquery',
+  'jquery.mobile',
+  'backbone',
+  'underscore'
+],
+function ($, mobile, Backbone, _) {
+
+  
+
+  var firstpage = true;
+
+  return Backbone.View.extend({
+    constructor: function () {
+      // default options
+      this.options = _.extend({
+        changeHash: false,
+        role: 'page',
+        dataUrl: location.pathname
+      }, this.options);
+      // default attributes
+      this.attributes = _.extend({
+        'data-role': 'page'
+      }, this.attributes);
+      Backbone.View.apply(this, arguments);
+    },
+    show: function (options) {
+      $('body').append(this.render().el);
+      if (firstpage) {
+        firstpage = false;
+        mobile.initializePage();
+      } else {
+        options || (options = {});
+        _.defaults(options, this.options);
+        mobile.changePage(this.$el, options);
+      }
+    }
+  });
+});
+
+define('jst/mobile',[],function(){
+
+this["JST"] = this["JST"] || {};
+
+this["JST"]["mobile/_form"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div data-role="fieldcontain">\n<label for="contact_name">Name:</label>\n<input type="text" name="name" id="contact_name"\nvalue="' +
+((__t = ( source.name || '' )) == null ? '' : __t) +
+'" />\n<div class="error" id="error_name"></div>\n</div>\n<div data-role="fieldcontain">\n<label for="contact_phone">Phone:</label>\n<input type="text" name="phone" id="contact_phone"\nvalue="' +
+((__t = ( source.phone || '' )) == null ? '' : __t) +
+'" />\n<div class="error" id="error_phone"></div>\n</div>\n<div data-role="fieldcontain">\n<label for="contact_email">Email:</label>\n<input type="text" name="email" id="contact_email"\nvalue="' +
+((__t = ( source.email || '' )) == null ? '' : __t) +
+'" />\n<div class="error" id="error_email"></div>\n</div>\n<div data-role="fieldcontain">\n<label for="contact_twitter">Twitter:</label>\n<input type="text" name="twitter" id="contact_twitter"\nvalue="' +
+((__t = ( source.twitter || '' )) == null ? '' : __t) +
+'" />\n<div class="error" id="error_twitter"></div>\n</div>\n<div data-role="fieldcontain">\n<label for="contact_facebook">Github:</label>\n<input type="text" name="github" id="contact_github"\nvalue="' +
+((__t = ( source.github || '' )) == null ? '' : __t) +
+'" />\n<div class="error" id="error_github"></div>\n</div>\n<div data-role="fieldcontain">\n<label for="contact_facebook">Facebook:</label>\n<input type="text" name="facebook" id="contact_facebook"\nvalue="' +
+((__t = ( source.facebook || '' )) == null ? '' : __t) +
+'" />\n<div class="error" id="error_facebook"></div>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["mobile/divider"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<li data-role="list-divider">\n' +
+((__t = ( index )) == null ? '' : __t) +
+'\n</li>';
+
+}
+return __p
+};
+
+this["JST"]["mobile/edit"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div data-role="header">\n<h1>Edit</h1>\n</div>\n<div data-role="content">\n<form action="#" method="POST">\n' +
+((__t = ( JST['mobile/_form']({source: source}) )) == null ? '' : __t) +
+'\n<div class="ui-body ui-body-c">\n<fieldset class="ui-grid-a">\n<div class="ui-block-a">\n<a href="#' +
+((__t = ( source.id )) == null ? '' : __t) +
+'" data-role="button" data-theme="c">Cancel</a>\n</div>\n<div class="ui-block-b">\n<button class="save" data-theme="b">Save</button>\n</div>\n</fieldset>\n<hr/>\n<span data-role="button" class="delete" data-theme="d">Delete</span>\n</div>\n</form>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["mobile/index"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div data-role="header">\n<h1>All Contacts</h1>\n<a href="#new" class="ui-btn-right">New</a>\n</div>\n<div data-role="content">\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["mobile/item"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<a href="#' +
+((__t = ( source.id )) == null ? '' : __t) +
+'">\n<img src="http://www.gravatar.com/avatar/' +
+((__t = ( source.hash )) == null ? '' : __t) +
+'"/>\n<h3 class="contact-name">' +
+((__t = ( source.name )) == null ? '' : __t) +
+'</h3>\n';
+ if (source.phone) { ;
+__p += '<p>Phone: ' +
+((__t = ( source.phone )) == null ? '' : __t) +
+'</p>';
+ } ;
+__p += '\n';
+ if (source.email) { ;
+__p += '<p>Email: ' +
+((__t = ( source.email )) == null ? '' : __t) +
+'</p>';
+ } ;
+__p += '\n</a>';
+
+}
+return __p
+};
+
+this["JST"]["mobile/new"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div data-role="header">\n<h1>New</h1>\n</div>\n<div data-role="content">\n<form action="#" method="POST">\n' +
+((__t = ( JST['mobile/_form']({source: source}) )) == null ? '' : __t) +
+'\n<div class="ui-body ui-body-c">\n<fieldset class="ui-grid-a">\n<div class="ui-block-a">\n<a href="#" data-role="button" data-theme="c">Cancel</a>\n</div>\n<div class="ui-block-b">\n<button class="save" data-theme="b">Save</button>\n</div>\n</fieldset>\n</div>\n</form>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["mobile/show"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<div data-role="header">\n<a href="#" data-icon="back" class="back ui-btn-left">All Contacts</a>\n<h1>Info</h1>\n<a href="#' +
+((__t = ( source.id )) == null ? '' : __t) +
+'/edit" class="edit ui-btn-right">Edit</a>\n</div>\n<div data-role="content">\n<div class="contact-head">\n<div class="avatar">\n<img src="http://www.gravatar.com/avatar/' +
+((__t = ( source.hash )) == null ? '' : __t) +
+'"/>\n</div>\n<div class="name">\n<h3 data-name="name">' +
+((__t = ( source.name )) == null ? '' : __t) +
+'</h3>\n</div>\n</div>\n<ul data-role="listview" data-inset="true">\n';
+ if (source.phone) { ;
+__p += '\n<li data-icon="false">\n<a href="tel:' +
+((__t = ( source.phone )) == null ? '' : __t) +
+'">\n<dl>\n<dt>Phone</dt>\n<dd>' +
+((__t = ( source.phone || '' )) == null ? '' : __t) +
+'</dd>\n</dl>\n</a>\n</li>\n';
+ } ;
+__p += '\n';
+ if (source.email) { ;
+__p += '\n<li data-icon="false" data-name="email">\n<a href="mailto:' +
+((__t = ( source.email )) == null ? '' : __t) +
+'">\n<dl>\n<dt>Email</dt>\n<dd>' +
+((__t = ( source.email  || '' )) == null ? '' : __t) +
+'</dd>\n</dl>\n</a>\n</li>\n';
+ } ;
+__p += '\n';
+ if (source.twitter) { ;
+__p += '\n<li data-icon="false" data-name="twitter">\n<a href="https://twitter.com/' +
+((__t = ( source.twitter )) == null ? '' : __t) +
+'" target="_blank">\n<dl>\n<dt>Twitter</dt>\n<dd>' +
+((__t = ( source.twitter )) == null ? '' : __t) +
+'</dd>\n</dl>\n</a>\n</li>\n';
+ } ;
+__p += '\n';
+ if (source.github) { ;
+__p += '\n<li data-icon="false" data-name="github">\n<a href="https://github.com/' +
+((__t = ( source.github )) == null ? '' : __t) +
+'" target="_blank">\n<dl>\n<dt>GitHub</dt>\n<dd>' +
+((__t = ( source.github )) == null ? '' : __t) +
+'</dd>\n</dl>\n</a>\n</li>\n';
+ } ;
+__p += '\n';
+ if (source.facebook) { ;
+__p += '\n<li data-icon="false" data-name="facebook">\n<a href="https://www.facebook.com/' +
+((__t = ( source.facebook )) == null ? '' : __t) +
+'" target="_blank">\n<dl>\n<dt>Facebook</dt>\n<dd>' +
+((__t = ( source.facebook )) == null ? '' : __t) +
+'</dd>\n</dl>\n</a>\n</li>\n';
+ } ;
+__p += '\n</ul>\n</div>';
+
+}
+return __p
+};
+
+  return this["JST"];
+
+});
+define('views/mobile/ItemView',[
+  'underscore',
+  'backbone',
+  'jst/mobile'
+],
+function (_, Backbone, JST) {
+
+  
+
+  return Backbone.View.extend({
+    tagName: 'li',
+    events: {
+      'click a': function (e) {
+        e.preventDefault();
+        Backbone.history.navigate(this.model.id, true);
+      }
+    },
+    // View methods
+    // ------------
+    render: function () {
+      this.$el.html(JST['mobile/item']({source: this.presenter()}));
+      return this;
+    },
+    presenter: function () {
+      return _.defaults(this.model.toEscapedJSON(), {id: this.model.id});
+    }
+  });
+});
+
+define('views/mobile/ListView',[
+  'backbone',
+  './ItemView',
+  'jst/mobile'
+],
+function (Backbone, ItemView, JST) {
+
+  
+
+  return Backbone.View.extend({
+    tagName: 'ul',
+    attributes: {
+      'data-role': 'listview',
+      'data-filter': 'true',
+      'data-filter-placeholder': 'Search'
+    },
+    // View methods
+    // ------------
+    render: function () {
+      var index;
+      this.$el.html('');
+      this.collection.each(function (contact) {
+        if (index !== contact.index().charAt(0)) {
+          index = contact.index().charAt(0);
+          // Insert list-divider
+          this.$el.append(JST['mobile/divider']({index: index}));
+        }
+        var itemview = new ItemView({
+          model: contact
+        });
+        this.$el.append(itemview.render().el);
+      }, this);
+      return this;
+    }
+  });
+});
+
+define('views/mobile/IndexPage',[
+  './Page',
+  './ListView',
+  'jst/mobile'
+],
+function (Page, ListView, JST) {
+
+  
+
+  // Singleton
+  var instance;
+
+  return Page.extend({
+    options: {
+      reverse: true
+    },
+    constructor: function () {
+      if (!instance) {
+        instance = this;
+        Page.apply(instance, arguments);
+      }
+      return instance;
+    },
+    initialize: function () {
+      var listview = new ListView({collection: this.collection});
+      this.listenTo(this.collection, 'all', this.remove);
+      this.$el
+        .html(JST['mobile/index']())
+        .find('[data-role=content]').append(listview.render().el);
+    },
+    remove: function () {
+      instance = null;
+      Page.prototype.remove.apply(this, arguments);
+    }
+  });
+});
+
+define('views/mobile/NewPage',[
+  'underscore',
+  'backbone',
+  './Page',
+  'jst/mobile'
+],
+function (_, Backbone, Page, JST) {
+
+  
+
+  return Page.extend({
+    events: {
+      pagehide: 'remove'
+    },
+    options: {
+      transition: 'slideup'
+    },
+    initialize: function () {
+      this.listenTo(this.model, 'invalid', this.renderValidationMessage);
+      this.listenTo(this.model, 'sync', function (model) {
+        model.collection.add(model);
+        Backbone.history.navigate(model.id, true);
+      });
+    },
+    // View methods
+    // ------------
+    render: function () {
+      this.$el.html(JST['mobile/new']({source: this.presenter()}));
+      // Since `submit` is undelegate-able in Internet Explorer, it is needed
+      // to add event listener directrly to the form tag.
+      this.$('form').on('submit', _.bind(this.onSubmit, this));
+      return this;
+    },
+    renderValidationMessage: function (model, errors) {
+      _.each(errors, function (value, name) {
+        this.$("#error_" + name)
+          .addClass("active")
+          .text(value);
+      }, this);
+      return this;
+    },
+    // Controller methods
+    // ------------------
+    onSubmit: function (e) {
+      e.preventDefault();
+      var model = this.model;
+      this.$('.error.active').removeClass('active');
+      model.save(this.getValues());
+    },
+    // Helper methods
+    // --------------
+    presenter: function () {
+      return this.model.toEscapedJSON();
+    },
+    getValues: function () {
+      var values = {};
+      _.each(this.$('form').serializeArray(), function (obj) {
+        values[obj.name] = obj.value;
+      });
+      return values;
+    }
+  });
+});
+
+define('views/mobile/ShowPage',[
+  'underscore',
+  './Page',
+  'jst/mobile'
+],
+function (_, Page, JST) {
+
+  
+
+  return Page.extend({
+    events: {
+      pagehide: 'remove'
+    },
+    // View methods
+    // ------------
+    render: function () {
+      this.$el.html(JST['mobile/show']({source: this.presenter()}));
+      return this;
+    },
+    // Helper methods
+    // --------------
+    presenter: function () {
+      return this.model.toEscapedJSON();
+    }
+  });
+});
+
+define('views/mobile/EditPage',[
+  'underscore',
+  'backbone',
+  './Page',
+  'jst/mobile'
+],
+function (_, Backbone, Page, JST) {
+
+  
+
+  return Page.extend({
+    events: {
+      'pagehide': 'remove',
+      'click .delete': 'onClickDelete'
+    },
+    options: {
+      transition: 'pop'
+    },
+    initialize: function () {
+      _.bindAll(this, 'onSubmit');
+      this.listenTo(this.model, 'invalid', this.renderValidationMessage);
+      this.listenTo(this.model, 'sync', function (model) {
+        model.collection.add(model);
+        Backbone.history.navigate(model.id, true);
+      });
+      this.listenTo(this.model, 'destroy', function () {
+        Backbone.history.navigate('', true);
+      });
+    },
+    // View methods
+    // ------------
+    render: function () {
+      this.$el.html(JST['mobile/edit']({source: this.presenter()}));
+      // Since `submit` is undelegate-able in Internet Explorer, it is needed
+      // to add event listener directrly to the form tag.
+      this.$('form').on('submit', this.onSubmit);
+      return this;
+    },
+    renderValidationMessage: function (model, errors) {
+      _.each(errors, function (value, name) {
+        this.$("#error_" + name)
+          .addClass("active")
+          .text(value);
+      }, this);
+      return this;
+    },
+    // Controller methods
+    // ------------------
+    onSubmit: function (e) {
+      e.preventDefault();
+      var model = this.model;
+      this.$('.error.active').removeClass('active');
+      model.save(this.getValues());
+    },
+    onClickDelete: function (e) {
+      e.preventDefault();
+      this.model.destroy();
+    },
+    // Helper methods
+    // --------------
+    presenter: function () {
+      return this.model.toEscapedJSON();
+    },
+    getValues: function () {
+      var values = {};
+      _.each(this.$('form').serializeArray(), function (obj) {
+        values[obj.name] = obj.value;
+      });
+      return values;
+    }
+  });
+});
+
+define('routers/mobile',[
+  'backbone',
+  'views/mobile/IndexPage',
+  'views/mobile/NewPage',
+  'views/mobile/ShowPage',
+  'views/mobile/EditPage'
+],
+function (Backbone, IndexPage, NewPage, ShowPage, EditPage) {
+
+  
+
+  var firstpage = true;
+
+  return Backbone.Router.extend({
+    routes: {
+      '': 'index',
+      ':id': 'new_or_show',
+      ':id/edit': 'edit'
+    },
+    initialize: function (options) {
+      this.collection = options.collection;
+    },
+    new_or_show: function (id) {
+      if (id === 'new') {
+        this["new"]();
+      } else {
+        this.show(id);
+      }
+    },
+    index: function () {
+      var page = new IndexPage({collection: this.collection});
+      page.show();
+      firstpage = false;
+    },
+    'new': function () {
+      var model = new this.collection.model(null, {collection: this.collection});
+      var page = new NewPage({model: model});
+      page.show();
+      firstpage = false;
+    },
+    show: function (id) {
+      var model = this.collection.get(id);
+      if (!model) this.navigate('', true);
+      var page = new ShowPage({model: model});
+      page.show();
+      firstpage = false;
+    },
+    edit: function (id) {
+      if (firstpage) {
+        this.navigate(id, {trigger: true, replace: true});
+        return;
+      }
+      var model = this.collection.get(id);
+      if (!model) this.navigate('', true);
+      var page = new EditPage({model: model});
+      page.show();
+    }
+  });
+});
+
+/**
+ * Backbone localStorage Adapter
+ * Version 1.1.0
+ *
+ * https://github.com/jeromegn/Backbone.localStorage
+ */
+(function (root, factory) {
+   if (typeof define === "function" && define.amd) {
+      // AMD. Register as an anonymous module.
+      define('backbone.localStorage',["underscore","backbone"], function(_, Backbone) {
+        // Use global variables if the locals are undefined.
+        return factory(_ || root._, Backbone || root.Backbone);
+      });
+   } else {
+      // RequireJS isn't being used. Assume underscore and backbone are loaded in <script> tags
+      factory(_, Backbone);
+   }
+}(this, function(_, Backbone) {
+// A simple module to replace `Backbone.sync` with *localStorage*-based
+// persistence. Models are given GUIDS, and saved into a JSON object. Simple
+// as that.
+
+// Hold reference to Underscore.js and Backbone.js in the closure in order
+// to make things work even if they are removed from the global namespace
+
+// Generate four random hex digits.
+function S4() {
+   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+};
+
+// Generate a pseudo-GUID by concatenating random hexadecimal.
+function guid() {
+   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+};
+
+// Our Store is represented by a single JS object in *localStorage*. Create it
+// with a meaningful name, like the name you'd give a table.
+// window.Store is deprectated, use Backbone.LocalStorage instead
+Backbone.LocalStorage = window.Store = function(name) {
+  this.name = name;
+  var store = this.localStorage().getItem(this.name);
+  this.records = (store && store.split(",")) || [];
+};
+
+_.extend(Backbone.LocalStorage.prototype, {
+
+  // Save the current state of the **Store** to *localStorage*.
+  save: function() {
+    this.localStorage().setItem(this.name, this.records.join(","));
+  },
+
+  // Add a model, giving it a (hopefully)-unique GUID, if it doesn't already
+  // have an id of it's own.
+  create: function(model) {
+    if (!model.id) {
+      model.id = guid();
+      model.set(model.idAttribute, model.id);
+    }
+    this.localStorage().setItem(this.name+"-"+model.id, JSON.stringify(model));
+    this.records.push(model.id.toString());
+    this.save();
+    return this.find(model);
+  },
+
+  // Update a model by replacing its copy in `this.data`.
+  update: function(model) {
+    this.localStorage().setItem(this.name+"-"+model.id, JSON.stringify(model));
+    if (!_.include(this.records, model.id.toString()))
+      this.records.push(model.id.toString()); this.save();
+    return this.find(model);
+  },
+
+  // Retrieve a model from `this.data` by id.
+  find: function(model) {
+    return this.jsonData(this.localStorage().getItem(this.name+"-"+model.id));
+  },
+
+  // Return the array of all models currently in storage.
+  findAll: function() {
+    return _(this.records).chain()
+      .map(function(id){
+        return this.jsonData(this.localStorage().getItem(this.name+"-"+id));
+      }, this)
+      .compact()
+      .value();
+  },
+
+  // Delete a model from `this.data`, returning it.
+  destroy: function(model) {
+    if (model.isNew())
+      return false
+    this.localStorage().removeItem(this.name+"-"+model.id);
+    this.records = _.reject(this.records, function(id){
+      return id === model.id.toString();
+    });
+    this.save();
+    return model;
+  },
+
+  localStorage: function() {
+    return localStorage;
+  },
+
+  // fix for "illegal access" error on Android when JSON.parse is passed null
+  jsonData: function (data) {
+      return data && JSON.parse(data);
+  },
+
+  // Clear localStorage for specific collection.
+  _clear: function() {
+    var local = this.localStorage(),
+      itemRe = new RegExp("^" + this.name + "-");
+
+    // Remove id-tracking item (e.g., "foo").
+    local.removeItem(this.name);
+
+    // Match all data items (e.g., "foo-ID") and remove.
+    _.chain(local).keys()
+      .filter(function (k) { return itemRe.test(k); })
+      .each(function (k) { local.removeItem(k); });
+  },
+
+  // Size of localStorage.
+  _storageSize: function() {
+    return this.localStorage().length;
+  }
+
+});
+
+// localSync delegate to the model or collection's
+// *localStorage* property, which should be an instance of `Store`.
+// window.Store.sync and Backbone.localSync is deprecated, use Backbone.LocalStorage.sync instead
+Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(method, model, options) {
+  var store = model.localStorage || model.collection.localStorage;
+
+  var resp, errorMessage, syncDfd = $.Deferred && $.Deferred(); //If $ is having Deferred - use it.
+
+  try {
+
+    switch (method) {
+      case "read":
+        resp = model.id != undefined ? store.find(model) : store.findAll();
+        break;
+      case "create":
+        resp = store.create(model);
+        break;
+      case "update":
+        resp = store.update(model);
+        break;
+      case "delete":
+        resp = store.destroy(model);
+        break;
+    }
+
+  } catch(error) {
+    if (error.code === DOMException.QUOTA_EXCEEDED_ERR && store._storageSize() === 0)
+      errorMessage = "Private browsing is unsupported";
+    else
+      errorMessage = error.message;
+  }
+
+  if (resp) {
+    model.trigger("sync", model, resp, options);
+    if (options && options.success)
+      if (Backbone.VERSION === "0.9.10") {
+        options.success(model, resp, options);
+      } else {
+        options.success(resp);
+      }
+    if (syncDfd)
+      syncDfd.resolve(resp);
+
+  } else {
+    errorMessage = errorMessage ? errorMessage
+                                : "Record Not Found";
+
+    model.trigger("error", model, errorMessage, options);
+    if (options && options.error)
+      if (Backbone.VERSION === "0.9.10") {
+        options.error(model, errorMessage, options);
+      } else {
+        options.error(errorMessage);
+      }
+
+    if (syncDfd)
+      syncDfd.reject(errorMessage);
+  }
+
+  // add compatibility with $.ajax
+  // always execute callback for success and error
+  if (options && options.complete) options.complete(resp);
+
+  return syncDfd && syncDfd.promise();
+};
+
+Backbone.ajaxSync = Backbone.sync;
+
+Backbone.getSyncMethod = function(model) {
+  if(model.localStorage || (model.collection && model.collection.localStorage)) {
+    return Backbone.localSync;
+  }
+
+  return Backbone.ajaxSync;
+};
+
+// Override 'Backbone.sync' to default to localSync,
+// the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
+Backbone.sync = function(method, model, options) {
+  return Backbone.getSyncMethod(model).apply(this, [method, model, options]);
+};
+
+return Backbone.LocalStorage;
+}));
 /*
  * JavaScript MD5 1.0
  * https://github.com/blueimp/JavaScript-MD5
@@ -25603,9 +26346,6 @@ function (_, Backbone, md5) {
 
   
 
-  // Contact.prototype.collection is set to ContactList instance in
-  // collections/ContactList due to the circular dependency problem.
-
   return Backbone.Model.extend({
     initialize: function () {
       this.listenTo(this, 'change:email', this.updateHash);
@@ -25642,716 +26382,6 @@ function (_, Backbone, md5) {
   });
 });
 
-define('views/mobile/Page',[
-  'jquery',
-  'jquery.mobile',
-  'backbone',
-  'underscore'
-],
-function ($, mobile, Backbone, _) {
-
-  
-
-  var firstpage = true;
-
-  return Backbone.View.extend({
-    constructor: function () {
-      // default options
-      this.options = _.extend({
-        changeHash: false,
-        role: 'page',
-        dataUrl: location.pathname
-      }, this.options);
-      // default attributes
-      this.attributes = _.extend({
-        'data-role': 'page'
-      }, this.attributes);
-      Backbone.View.apply(this, arguments);
-    },
-    show: function (options) {
-      $('body').append(this.render().el);
-      if (firstpage) {
-        firstpage = false;
-        mobile.initializePage();
-      } else {
-        options || (options = {});
-        _.defaults(options, this.options);
-        mobile.changePage(this.$el, options);
-      }
-    }
-  });
-});
-
-this["JST"] = this["JST"] || {};
-
-this["JST"]["mobile/_form"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div data-role="fieldcontain">\n<label for="contact_name">Name:</label>\n<input type="text" name="name" id="contact_name"\nvalue="' +
-((__t = ( source.name || '' )) == null ? '' : __t) +
-'" />\n<div class="error" id="error_name"></div>\n</div>\n<div data-role="fieldcontain">\n<label for="contact_phone">Phone:</label>\n<input type="text" name="phone" id="contact_phone"\nvalue="' +
-((__t = ( source.phone || '' )) == null ? '' : __t) +
-'" />\n<div class="error" id="error_phone"></div>\n</div>\n<div data-role="fieldcontain">\n<label for="contact_email">Email:</label>\n<input type="text" name="email" id="contact_email"\nvalue="' +
-((__t = ( source.email || '' )) == null ? '' : __t) +
-'" />\n<div class="error" id="error_email"></div>\n</div>\n<div data-role="fieldcontain">\n<label for="contact_twitter">Twitter:</label>\n<input type="text" name="twitter" id="contact_twitter"\nvalue="' +
-((__t = ( source.twitter || '' )) == null ? '' : __t) +
-'" />\n<div class="error" id="error_twitter"></div>\n</div>\n<div data-role="fieldcontain">\n<label for="contact_facebook">Github:</label>\n<input type="text" name="github" id="contact_github"\nvalue="' +
-((__t = ( source.github || '' )) == null ? '' : __t) +
-'" />\n<div class="error" id="error_github"></div>\n</div>\n<div data-role="fieldcontain">\n<label for="contact_facebook">Facebook:</label>\n<input type="text" name="facebook" id="contact_facebook"\nvalue="' +
-((__t = ( source.facebook || '' )) == null ? '' : __t) +
-'" />\n<div class="error" id="error_facebook"></div>\n</div>';
-
-}
-return __p
-};
-
-this["JST"]["mobile/divider"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<li data-role="list-divider">\n' +
-((__t = ( index )) == null ? '' : __t) +
-'\n</li>';
-
-}
-return __p
-};
-
-this["JST"]["mobile/edit"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div data-role="header">\n<h1>Edit</h1>\n</div>\n<div data-role="content">\n<form action="#" method="POST">\n' +
-((__t = ( JST['mobile/_form']({source: source}) )) == null ? '' : __t) +
-'\n<div class="ui-body ui-body-c">\n<fieldset class="ui-grid-a">\n<div class="ui-block-a">\n<a href="#' +
-((__t = ( source.id )) == null ? '' : __t) +
-'" data-role="button" data-theme="c">Cancel</a>\n</div>\n<div class="ui-block-b">\n<button class="save" data-theme="b">Save</button>\n</div>\n</fieldset>\n<hr/>\n<span data-role="button" class="delete" data-theme="d">Delete</span>\n</div>\n</form>\n</div>';
-
-}
-return __p
-};
-
-this["JST"]["mobile/index"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div data-role="header">\n<h1>All Contacts</h1>\n<a href="#new" class="ui-btn-right">New</a>\n</div>\n<div data-role="content">\n</div>';
-
-}
-return __p
-};
-
-this["JST"]["mobile/item"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-__p += '<a href="#' +
-((__t = ( source.id )) == null ? '' : __t) +
-'">\n<img src="http://www.gravatar.com/avatar/' +
-((__t = ( source.hash )) == null ? '' : __t) +
-'"/>\n<h3 class="contact-name">' +
-((__t = ( source.name )) == null ? '' : __t) +
-'</h3>\n';
- if (source.phone) { ;
-__p += '<p>Phone: ' +
-((__t = ( source.phone )) == null ? '' : __t) +
-'</p>';
- } ;
-__p += '\n';
- if (source.email) { ;
-__p += '<p>Email: ' +
-((__t = ( source.email )) == null ? '' : __t) +
-'</p>';
- } ;
-__p += '\n</a>';
-
-}
-return __p
-};
-
-this["JST"]["mobile/new"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div data-role="header">\n<h1>New</h1>\n</div>\n<div data-role="content">\n<form action="#" method="POST">\n' +
-((__t = ( JST['mobile/_form']({source: source}) )) == null ? '' : __t) +
-'\n<div class="ui-body ui-body-c">\n<fieldset class="ui-grid-a">\n<div class="ui-block-a">\n<a href="#" data-role="button" data-theme="c">Cancel</a>\n</div>\n<div class="ui-block-b">\n<button class="save" data-theme="b">Save</button>\n</div>\n</fieldset>\n</div>\n</form>\n</div>';
-
-}
-return __p
-};
-
-this["JST"]["mobile/show"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-__p += '<div data-role="header">\n<a href="#" data-icon="back" class="back ui-btn-left">All Contacts</a>\n<h1>Info</h1>\n<a href="#' +
-((__t = ( source.id )) == null ? '' : __t) +
-'/edit" class="edit ui-btn-right">Edit</a>\n</div>\n<div data-role="content">\n<div class="contact-head">\n<div class="avatar">\n<img src="http://www.gravatar.com/avatar/' +
-((__t = ( source.hash )) == null ? '' : __t) +
-'"/>\n</div>\n<div class="name">\n<h3 data-name="name">' +
-((__t = ( source.name )) == null ? '' : __t) +
-'</h3>\n</div>\n</div>\n<ul data-role="listview" data-inset="true">\n';
- if (source.phone) { ;
-__p += '\n<li data-icon="false">\n<a href="tel:' +
-((__t = ( source.phone )) == null ? '' : __t) +
-'">\n<dl>\n<dt>Phone</dt>\n<dd>' +
-((__t = ( source.phone || '' )) == null ? '' : __t) +
-'</dd>\n</dl>\n</a>\n</li>\n';
- } ;
-__p += '\n';
- if (source.email) { ;
-__p += '\n<li data-icon="false" data-name="email">\n<a href="mailto:' +
-((__t = ( source.email )) == null ? '' : __t) +
-'">\n<dl>\n<dt>Email</dt>\n<dd>' +
-((__t = ( source.email  || '' )) == null ? '' : __t) +
-'</dd>\n</dl>\n</a>\n</li>\n';
- } ;
-__p += '\n';
- if (source.twitter) { ;
-__p += '\n<li data-icon="false" data-name="twitter">\n<a href="https://twitter.com/' +
-((__t = ( source.twitter )) == null ? '' : __t) +
-'" target="_blank">\n<dl>\n<dt>Twitter</dt>\n<dd>' +
-((__t = ( source.twitter )) == null ? '' : __t) +
-'</dd>\n</dl>\n</a>\n</li>\n';
- } ;
-__p += '\n';
- if (source.github) { ;
-__p += '\n<li data-icon="false" data-name="github">\n<a href="https://github.com/' +
-((__t = ( source.github )) == null ? '' : __t) +
-'" target="_blank">\n<dl>\n<dt>GitHub</dt>\n<dd>' +
-((__t = ( source.github )) == null ? '' : __t) +
-'</dd>\n</dl>\n</a>\n</li>\n';
- } ;
-__p += '\n';
- if (source.facebook) { ;
-__p += '\n<li data-icon="false" data-name="facebook">\n<a href="https://www.facebook.com/' +
-((__t = ( source.facebook )) == null ? '' : __t) +
-'" target="_blank">\n<dl>\n<dt>Facebook</dt>\n<dd>' +
-((__t = ( source.facebook )) == null ? '' : __t) +
-'</dd>\n</dl>\n</a>\n</li>\n';
- } ;
-__p += '\n</ul>\n</div>';
-
-}
-return __p
-};
-define("jst/mobile", (function (global) {
-    return function () {
-        var ret, fn;
-        return ret || global.JST;
-    };
-}(this)));
-
-define('views/mobile/ItemView',[
-  'underscore',
-  'backbone',
-  'jst/mobile'
-],
-function (_, Backbone, JST) {
-
-  
-
-  return Backbone.View.extend({
-    tagName: 'li',
-    events: {
-      'click a': function (e) {
-        e.preventDefault();
-        Backbone.history.navigate(this.model.id, true);
-      }
-    },
-    // View methods
-    // ------------
-    render: function () {
-      this.$el.html(JST['mobile/item']({source: this.presenter()}));
-      return this;
-    },
-    presenter: function () {
-      return _.defaults(this.model.toEscapedJSON(), {id: this.model.id});
-    }
-  });
-});
-
-define('views/mobile/ListView',[
-  'backbone',
-  './ItemView',
-  'jst/mobile'
-],
-function (Backbone, ItemView, JST) {
-
-  
-
-  return Backbone.View.extend({
-    tagName: 'ul',
-    attributes: {
-      'data-role': 'listview',
-      'data-filter': 'true',
-      'data-filter-placeholder': 'Search'
-    },
-    // View methods
-    // ------------
-    render: function () {
-      var index;
-      this.$el.html('');
-      this.collection.each(function (contact) {
-        if (index !== contact.index().charAt(0)) {
-          index = contact.index().charAt(0);
-          // Insert list-divider
-          this.$el.append(JST['mobile/divider']({index: index}));
-        }
-        var itemview = new ItemView({
-          model: contact
-        });
-        this.$el.append(itemview.render().el);
-      }, this);
-      return this;
-    }
-  });
-});
-
-define('views/mobile/IndexPage',[
-  './Page',
-  './ListView',
-  'jst/mobile'
-],
-function (Page, ListView, JST) {
-
-  
-
-  // Singleton
-  var instance;
-
-  return Page.extend({
-    options: {
-      reverse: true
-    },
-    constructor: function () {
-      if (!instance) {
-        instance = this;
-        Page.apply(instance, arguments);
-      }
-      return instance;
-    },
-    initialize: function () {
-      var listview = new ListView({collection: this.collection});
-      this.listenTo(this.collection, 'all', this.remove);
-      this.$el
-        .html(JST['mobile/index']())
-        .find('[data-role=content]').append(listview.render().el);
-    },
-    remove: function () {
-      instance = null;
-      Page.prototype.remove.apply(this, arguments);
-    }
-  });
-});
-
-define('views/mobile/NewPage',[
-  'underscore',
-  'backbone',
-  './Page',
-  'jst/mobile'
-],
-function (_, Backbone, Page, JST) {
-
-  
-
-  return Page.extend({
-    events: {
-      pagehide: 'remove'
-    },
-    options: {
-      transition: 'slideup'
-    },
-    initialize: function () {
-      _.bindAll(this);
-      this.listenTo(this.model, 'invalid', this.renderValidationMessage);
-    },
-    // View methods
-    // ------------
-    render: function () {
-      this.$el.html(JST['mobile/new']({source: this.presenter()}));
-      // Since `submit` is undelegate-able in Internet Explorer, it is needed
-      // to add event listener directrly to the form tag.
-      this.$('form').on('submit', this.onSubmit);
-      return this;
-    },
-    renderValidationMessage: function (model, errors) {
-      _.each(errors, function (value, name) {
-        this.$("#error_" + name)
-          .addClass("active")
-          .text(value);
-      }, this);
-      return this;
-    },
-    // Controller methods
-    // ------------------
-    onSubmit: function (e) {
-      e.preventDefault();
-      var model = this.model;
-      this.$('.error.active').removeClass('active');
-      model.save(this.getValues()).done(function () {
-        model.collection.add(model);
-        Backbone.history.navigate(model.id, true);
-      });
-    },
-    // Helper methods
-    // --------------
-    presenter: function () {
-      return this.model.toEscapedJSON();
-    },
-    getValues: function () {
-      var values = {};
-      _.each(this.$('form').serializeArray(), function (obj) {
-        values[obj.name] = obj.value;
-      });
-      return values;
-    }
-  });
-});
-
-define('views/mobile/ShowPage',[
-  'underscore',
-  './Page',
-  'jst/mobile'
-],
-function (_, Page, JST) {
-
-  
-
-  return Page.extend({
-    events: {
-      pagehide: 'remove'
-    },
-    // View methods
-    // ------------
-    render: function () {
-      this.$el.html(JST['mobile/show']({source: this.presenter()}));
-      return this;
-    },
-    // Helper methods
-    // --------------
-    presenter: function () {
-      return this.model.toEscapedJSON();
-    }
-  });
-});
-
-define('views/mobile/EditPage',[
-  'underscore',
-  'backbone',
-  './Page',
-  'jst/mobile'
-],
-function (_, Backbone, Page, JST) {
-
-  
-
-  return Page.extend({
-    events: {
-      'pagehide': 'remove',
-      'click .delete': 'onClickDelete'
-    },
-    options: {
-      transition: 'pop'
-    },
-    initialize: function () {
-      _.bindAll(this, 'onSubmit');
-      this.listenTo(this.model, 'invalid', this.renderValidationMessage);
-    },
-    // View methods
-    // ------------
-    render: function () {
-      this.$el.html(JST['mobile/edit']({source: this.presenter()}));
-      // Since `submit` is undelegate-able in Internet Explorer, it is needed
-      // to add event listener directrly to the form tag.
-      this.$('form').on('submit', this.onSubmit);
-      return this;
-    },
-    renderValidationMessage: function (model, errors) {
-      _.each(errors, function (value, name) {
-        this.$("#error_" + name)
-          .addClass("active")
-          .text(value);
-      }, this);
-      return this;
-    },
-    // Controller methods
-    // ------------------
-    onSubmit: function (e) {
-      e.preventDefault();
-      var model = this.model;
-      this.$('.error.active').removeClass('active');
-      model.save(this.getValues()).done(function () {
-        model.collection.add(model);
-        Backbone.history.navigate(model.id, true);
-      });
-    },
-    onClickDelete: function (e) {
-      e.preventDefault();
-      this.model.destroy().done(function () {
-        Backbone.history.navigate('', true);
-      });
-    },
-    // Helper methods
-    // --------------
-    presenter: function () {
-      return this.model.toEscapedJSON();
-    },
-    getValues: function () {
-      var values = {};
-      _.each(this.$('form').serializeArray(), function (obj) {
-        values[obj.name] = obj.value;
-      });
-      return values;
-    }
-  });
-});
-
-define('routers/mobile',[
-  'backbone',
-  'models/Contact',
-  'views/mobile/IndexPage',
-  'views/mobile/NewPage',
-  'views/mobile/ShowPage',
-  'views/mobile/EditPage'
-],
-function (Backbone, Contact, IndexPage, NewPage, ShowPage, EditPage) {
-
-  
-
-  var firstpage = true;
-
-  return Backbone.Router.extend({
-    routes: {
-      '': 'index',
-      ':id': 'new_or_show',
-      ':id/edit': 'edit'
-    },
-    initialize: function (options) {
-      this.collection = options.collection;
-    },
-    new_or_show: function (id) {
-      if (id === 'new') {
-        this["new"]();
-      } else {
-        this.show(id);
-      }
-    },
-    index: function () {
-      var page = new IndexPage({collection: this.collection});
-      page.show();
-      firstpage = false;
-    },
-    'new': function () {
-      var page = new NewPage({model: new Contact()});
-      page.show();
-      firstpage = false;
-    },
-    show: function (id) {
-      var model = this.collection.get(id);
-      if (!model) this.navigate('', true);
-      var page = new ShowPage({model: model});
-      page.show();
-      firstpage = false;
-    },
-    edit: function (id) {
-      if (firstpage) this.navigate(id, {trigger: true, replace: true});
-      var model = this.collection.get(id);
-      if (!model) this.navigate('', true);
-      var page = new EditPage({model: model});
-      page.show();
-    }
-  });
-});
-
-/**
- * Backbone localStorage Adapter
- * Version 1.0
- *
- * https://github.com/jeromegn/Backbone.localStorage
- */
-(function (root, factory) {
-   if (typeof define === "function" && define.amd) {
-      // AMD. Register as an anonymous module.
-      define('backbone.localStorage',["underscore","backbone"], function(_, Backbone) {
-        // Use global variables if the locals is undefined.
-        return factory(_ || root._, Backbone || root.Backbone);
-      });
-   } else {
-      // RequireJS isn't being used. Assume underscore and backbone is loaded in <script> tags
-      factory(_, Backbone);
-   }
-}(this, function(_, Backbone) {
-// A simple module to replace `Backbone.sync` with *localStorage*-based
-// persistence. Models are given GUIDS, and saved into a JSON object. Simple
-// as that.
-
-// Hold reference to Underscore.js and Backbone.js in the closure in order
-// to make things work even if they are removed from the global namespace
-
-// Generate four random hex digits.
-function S4() {
-   return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-};
-
-// Generate a pseudo-GUID by concatenating random hexadecimal.
-function guid() {
-   return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-};
-
-// Our Store is represented by a single JS object in *localStorage*. Create it
-// with a meaningful name, like the name you'd give a table.
-// window.Store is deprectated, use Backbone.LocalStorage instead
-Backbone.LocalStorage = window.Store = function(name) {
-  this.name = name;
-  var store = this.localStorage().getItem(this.name);
-  this.records = (store && store.split(",")) || [];
-};
-
-_.extend(Backbone.LocalStorage.prototype, {
-
-  // Save the current state of the **Store** to *localStorage*.
-  save: function() {
-    this.localStorage().setItem(this.name, this.records.join(","));
-  },
-
-  // Add a model, giving it a (hopefully)-unique GUID, if it doesn't already
-  // have an id of it's own.
-  create: function(model) {
-    if (!model.id) {
-      model.id = guid();
-      model.set(model.idAttribute, model.id);
-    }
-    this.localStorage().setItem(this.name+"-"+model.id, JSON.stringify(model));
-    this.records.push(model.id.toString());
-    this.save();
-    return this.find(model);
-  },
-
-  // Update a model by replacing its copy in `this.data`.
-  update: function(model) {
-    this.localStorage().setItem(this.name+"-"+model.id, JSON.stringify(model));
-    if (!_.include(this.records, model.id.toString()))
-      this.records.push(model.id.toString()); this.save();
-    return this.find(model);
-  },
-
-  // Retrieve a model from `this.data` by id.
-  find: function(model) {
-    return this.jsonData(this.localStorage().getItem(this.name+"-"+model.id));
-  },
-
-  // Return the array of all models currently in storage.
-  findAll: function() {
-    return _(this.records).chain()
-      .map(function(id){
-        return this.jsonData(this.localStorage().getItem(this.name+"-"+id));
-      }, this)
-      .compact()
-      .value();
-  },
-
-  // Delete a model from `this.data`, returning it.
-  destroy: function(model) {
-    if (model.isNew())
-      return false
-    this.localStorage().removeItem(this.name+"-"+model.id);
-    this.records = _.reject(this.records, function(id){
-      return id === model.id.toString();
-    });
-    this.save();
-    return model;
-  },
-
-  localStorage: function() {
-    return localStorage;
-  },
-  
-  // fix for "illegal access" error on Android when JSON.parse is passed null
-  jsonData: function (data) {
-      return data && JSON.parse(data);
-  }
-
-});
-
-// localSync delegate to the model or collection's
-// *localStorage* property, which should be an instance of `Store`.
-// window.Store.sync and Backbone.localSync is deprectated, use Backbone.LocalStorage.sync instead
-Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(method, model, options) {
-  var store = model.localStorage || model.collection.localStorage;
-
-  var resp, errorMessage, syncDfd = $.Deferred && $.Deferred(); //If $ is having Deferred - use it. 
-
-  try {
-
-    switch (method) {
-      case "read":
-        resp = model.id != undefined ? store.find(model) : store.findAll();
-        break;
-      case "create":
-        resp = store.create(model);
-        break;
-      case "update":
-        resp = store.update(model);
-        break;
-      case "delete":
-        resp = store.destroy(model);
-        break;
-    }
-
-  } catch(error) {
-    if (error.code === DOMException.QUOTA_EXCEEDED_ERR && window.localStorage.length === 0)
-      errorMessage = "Private browsing is unsupported";
-    else
-      errorMessage = error.message;
-  }
-
-  if (resp) {
-    if (options && options.success)
-      options.success(model, resp, options);
-    if (syncDfd)
-      syncDfd.resolve(model, resp, options);
-
-  } else {
-    errorMessage = errorMessage ? errorMessage
-                                : "Record Not Found";
-    
-    if (options && options.error)
-      options.error(errorMessage);
-    if (syncDfd)
-      syncDfd.reject(errorMessage);
-  }
-  
-  // add compatibility with $.ajax
-  // always execute callback for success and error
-  if (options && options.complete) options.complete(model, resp, options);
-
-  return syncDfd && syncDfd.promise();
-};
-
-Backbone.ajaxSync = Backbone.sync;
-
-Backbone.getSyncMethod = function(model) {
-  if(model.localStorage || (model.collection && model.collection.localStorage)) {
-    return Backbone.localSync;
-  }
-
-  return Backbone.ajaxSync;
-};
-
-// Override 'Backbone.sync' to default to localSync,
-// the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
-Backbone.sync = function(method, model, options) {
-  return Backbone.getSyncMethod(model).apply(this, [method, model, options]);
-};
-
-return Backbone.LocalStorage;
-}));
-
 define('collections/ContactList',[
   'backbone',
   'backbone.localStorage',
@@ -26376,10 +26406,6 @@ function (Backbone, LocalStorage, Contact) {
       return instance;
     }
   });
-
-  // Set Contact.prototype.collection here due to the circular dependency
-  // problem.
-  Contact.prototype.collection = new ContactList();
 
   return ContactList;
 });

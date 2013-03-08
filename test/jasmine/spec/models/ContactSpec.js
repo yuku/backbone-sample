@@ -12,7 +12,7 @@ function (Contact, ContactList) {
 
     beforeEach(function () {
       contactlist = new ContactList();
-      contact = new Contact({name: 'someone'});
+      contact = new Contact({name: 'someone'}, {collection: contactlist});
     });
 
     afterEach(function () {
@@ -23,10 +23,6 @@ function (Contact, ContactList) {
     describe('new instance', function () {
       it('should not added to the collection', function () {
         expect(!!contactlist.get(contact)).toBe(false);
-      });
-
-      it('should refer ContactList instance by #collection', function () {
-        expect(contact.collection instanceof ContactList).toBe(true);
       });
     });
 
@@ -49,7 +45,7 @@ function (Contact, ContactList) {
         contact.set('email', 'abc@sample.com');
         contactlist.add(contact);
 
-        var other = new Contact();
+        var other = new Contact(null, {collection: contactlist});
         other.set('email', contact.get('email'), {validate: true});
         var errors = other.validationError || {};
         expect(errors.email).toBe('This address is already in use');

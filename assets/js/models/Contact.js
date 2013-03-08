@@ -7,9 +7,6 @@ function (_, Backbone, md5) {
 
   'use strict';
 
-  // Contact.prototype.collection is set to ContactList instance in
-  // collections/ContactList due to the circular dependency problem.
-
   return Backbone.Model.extend({
     initialize: function () {
       this.listenTo(this, 'change:email', this.updateHash);

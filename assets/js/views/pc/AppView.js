@@ -76,7 +76,7 @@ function ($, _, Backbone, ListView, ShowView, EditView, NewView, JST) {
       this.$('#main').append(this.mainview.render().el);
     },
     newContact: function () {
-      var model = new this.collection.model();
+      var model = new this.collection.model(null, {collection: this.collection});
       this.mainview = new NewView({model: model});
       this.$('#main').append(this.mainview.render().el);
     },

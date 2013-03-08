@@ -16,6 +16,10 @@ function (_, Backbone, JST) {
     },
     initialize: function () {
       this.listenTo(this.model, 'invalid', this.renderValidationMessage);
+      this.listenTo(this.model, 'sync', function (model) {
+        model.collection.add(model);
+        Backbone.history.navigate(model.id, true);
+      });
     },
     // View methods
     // ------------
@@ -41,10 +45,7 @@ function (_, Backbone, JST) {
       e.preventDefault();
       var model = this.model;
       this.$('.alert').hide();
-      model.save(this.getValues()).done(function () {
-        model.collection.add(model);
-        Backbone.history.navigate(model.id, true);
-      });
+      model.save(this.getValues());
     },
     // Helper methods
     // --------------

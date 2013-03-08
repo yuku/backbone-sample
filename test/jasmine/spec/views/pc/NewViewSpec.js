@@ -14,7 +14,7 @@ function (_, Contact, ContactList, NewView) {
 
     beforeEach(function () {
       contactlist = new ContactList();
-      contact = new Contact();
+      contact = new Contact(null, {collection: contactlist});
     });
 
     afterEach(function () {

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>「Backbone.jsガイドブック」サポートページ</title>
+  <meta name="keywords" content="JavaScript,Backbone.js"/>
+  <meta name="description"
+      content="「Backbone.jsガイドブック」のサポートページ"/>
+  <meta name="author" content="高橋侑久"/>
+  <style>
+    body {
+      font-size: 14px;
+      line-height: 22px;
+      font-family: Helvetica Neue, Helvetica, Arial;
+      background: #f4f4f4 url(docs/images/background.png);
+    }
+    ol {
+      list-style: none;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif !important;
+      background: #fff;
+      position: fixed;
+      z-index: 10;
+      top: 0; left: 0; bottom: 0;
+      width: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding: 15px 0 30px 30px;
+      border-right: 1px solid #bbb;
+      box-shadow: 0 0 20px #ccc;
+      -webkit-box-shadow: 0 0 20px #ccc;
+      -moz-box-shadow: 0 0 20px #ccc;
+    }
+    #sidebar ol {
+      padding: 0px;
+      font-size: 10px;
+      font-weight: normal;
+    }
+    a.toc_title, a.toc_title:visited {
+      text-decoration: underline;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    #sidebar a, #sidebar:visited {
+      display: block;
+      color: black;
+      text-decoration: none;
+    }
+    /* Sidebar end */
+
+    /* Content */
+    #content {
+      position: relative;
+      width: 550px;
+      margin: 40px 0 50px 260px;
+    }
+    h1 {
+      font-size: 25px;
+    }
+    h1 strong {
+      font-weight: normal;
+      text-transform: uppercase; 
+      font-family: 'Helvetica Neue', Helvetica, 'Hiragino Kaku Gothic Pro',
+      'Lucida Grande', Verdana, Arial, Meiryo, メイリオ, sans-serif;
+    }
+    #cover {
+      width: 290px;
+      border: 1px solid #bbb;
+      vertical-align: top;
+    }
+    #info table {
+      margin-left: 10px;
+      display: inline-block;
+    }
+    #info table th {
+      text-align: right;
+    }
+    #table-of-contents > ol > li {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <a class="toc_title" href="#">
+      Backbone.jsガイドブック
+    </a>
+
+    <a class="toc_title" href="#overview">
+      内容紹介
+    </a>
+
+    <a class="toc_title" href="#table-of-contents">
+      もくじ
+    </a>
+    <ol>
+      <li><a href="#toc-backbone-basic">1章 Backbone の基礎</a></li>
+      <li><a href="#toc-backbone-objects">2章 Backbone オブジェクト</a></li>
+      <li><a href="#toc-sample-app">3章 サンプルアプリケーション「Todos」</a></li>
+      <li><a href="#toc-modules">4章 JavaScript におけるモジュール管理</a></li>
+      <li><a href="#toc-tests">5章 アプリケーションのテスト</a></li>
+      <li><a href="#toc-tasks">6章 タスクの自動化</a></li>
+      <li><a href="#toc-tutorial">7章 Backbone アプリケーションの開発</a></li>
+      <li><a href="#toc-appendix">付録</a></li>
+      <li><a href="#toc-column">コラム</a></li>
+    </ol>
+
+    <a class="toc_title" href="#sample-code">
+      サンプルへのリンク
+    </a>
+
+    <a class="toc_title" href="#errata">
+      正誤表
+    </a>
+
+    <a class="toc_title" href="#about">
+      ページのデザインについて
+    </a>
+  </div>
+  <div id="content" itemscope itemprop="http://schema.org/Book">
+    <h1><strong>Backbone.jsガイドブック</strong>&nbsp;サポートページ</h1>
+    <link itemprop="bookFormat" href="http://schema.org/Paperback"/>
+    <meta itemprop="inLanguage" content="ja"/>
+
+    <section id="info">
+      <img id="cover" alt="Backbone.jsガイドブック"
+          src="http://www.rutles.net/upload/save_image/350-backbone.jpg"
+          itemprop="thumbnailUrl"/>
+
+      <table>
+        <tr>
+          <th>タイトル</th>
+          <td itemprop="name">Backbone.jsガイドブック</td>
+        </tr>
+        <tr>
+          <th>著者</th>
+          <td itemprop="author">高橋侑久</td>
+        </tr>
+        <tr>
+          <th>出版社</th>
+          <td itemprop="publisher">株式会社ラトルズ</td>
+        </tr>
+        <tr>
+          <th>発売日</th>
+          <td itemprop="datePublished">2013-04-25</td>
+        </tr>
+        <tr>
+          <th>本のサイズ</th>
+          <td>
+            B5判/1色刷
+            <span itemprop="numberOfPages">280</span>ページ
+          </td>
+        </tr>
+        <tr>
+          <th>ISBN-13</th>
+          <td itemprop="isbn">978-4-89977-350-4</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center;">
+            <a target="_blank" href="http://www.amazon.co.jp/gp/product/4899773501/ref=as_li_ss_il?ie=UTF8&camp=247&creative=7399&creativeASIN=4899773501&linkCode=as2&tag=yuku-22">
+              <img src="https://images-na.ssl-images-amazon.com/images/G/09/extranet/associates/buttons/remote-buy-jp3._V192237359_.gif"/>
+            </a>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="overview">
+      <h2>内容紹介</h2>
+      <p>
+        USA Today、LinkedIn Mobile、Hulu、WordPress.com、Foursquare 等々有名サイトがこぞって採用している Backbone.js に、日本初のガイドブックが登場。
+        JavaScript の大規模開発に今注目されているフレームワークが Backbone.js
+        です。
+      </p>
+      <p>
+        本書は、プログラマの技術情報共有サービス Qiita での連載「<a href="http://qiita.com/items/16b799d0ec0a0ae3f78e">Backbone.js入門</a>」をもとに、著者がその後1年に亘ってBackboneを使ってきた中で得た経験を踏まえ、かなり大きく加筆修正したものです。
+        最大の変更点は最新のメジャーバージョンリリースである Backbone1.0 (2013年3月リリース)への完璧対応です。
+      </p>
+      <p>
+        ドキュメントにはなかなか書かれないベストプラクティス、デザインパターン、アンチパターンといったノウハウや、 Backboneが中~大規模アプリケーションを実装するためのフレームワークであることから、それを支える周辺技術(モジュール管理、テスト、タスク自動化など)についても大きく取り上げています。
+      </p>
+      <p>
+        またこれらの知識を総動員したチュートリアルを用意しました。
+        チュートリアルではBackboneが最も得意とするSPA形式のアプリケーションと、jQueryMobileを用いたモバイルサイトの実装を行いますので、より実際のコーディングにBackbone.jsを生かせます。
+      </p>
+    </section>
+
+    <section id="table-of-contents">
+      <h2>もくじ</h2>
+      <ol>
+        <li id="toc-backbone-basic">1章 Backbone の基礎</li>
+        <ol>
+          <li>1-1 Backbone とは何か</li>
+          <ol>
+            <li>Backbone の概要</li>
+            <li>Backbone の特徴</li>
+            <li>Backbone を下から支える Underscore とは</li>
+          </ol>
+          <li>1-2 GUI MVC プログラミング</li>
+          <ol>
+            <li>JavaScript を MVC で書く理由</li>
+            <li>GUI における MVC</li>
+            <li>Backbone 流 MVC</li>
+          </ol>
+          <li>1-3 Backbone オブジェクト指向プログラミング</li>
+          <ol>
+            <li>クラス拡張</li>
+            <li>シングルトンパターン</li>
+            <li>Mixin</li>
+          </ol>
+          <li>1-4 Backbone.Events</li>
+          <ol>
+            <li>オブザーバパターン</li>
+            <li>Events を使う</li>
+            <li>発展的な使い方</li>
+          </ol>
+        </ol>
+        <li id="toc-backbone-objects">2章 Backbone オブジェクト</li>
+        <ol>
+          <li>2-1 Backbone.Model</li>
+          <ol>
+            <li>Model の使い方</li>
+            <li>ベスト・プラクティス</li>
+          </ol>
+          <li>2-2 Backbone.Collection</li>
+          <ol>
+            <li>Collection の使い方</li>
+            <li>ベスト・プラクティス</li>
+          </ol>
+          <li>2-3 Backbone.View</li>
+          <ol>
+            <li>View の使い方</li>
+            <li>ベスト・プラクティス</li>
+          </ol>
+          <li>2-4 Backbone.Router と History</li>
+          <ol>
+            <li>Router の使い方</li>
+            <li>ベスト・プラクティス</li>
+          </ol>
+          <li>2-5 Backbone.sync</li>
+          <ol>
+            <li>デフォルトの動作</li>
+            <li>sync の拡張</li>
+          </ol>
+        </ol>
+        <li id="toc-sample-app">3章 サンプルアプリケーション「Todos」</li>
+        <ol>
+          <li>3-1 Todos の動作を追う</li>
+          <ol>
+            <li>アプリケーションの起動</li>
+            <li>Todo の作成</li>
+            <li>チェックボックスの選択</li>
+            <li>Todo の編集</li>
+            <li>Todo の削除</li>
+            <li>一括の選択と削除</li>
+            <li>まとめ</li>
+          </ol>
+          <li>3-2 課題</li>
+          <ol>
+            <li>1 テストを書く</li>
+            <li>2 Todos のリファクタリング</li>
+            <li>3 機能追加</li>
+          </ol>
+        </ol>
+        <li id="toc-modules">4章 JavaScript におけるモジュール管理</li>
+        <ol>
+          <li>4-1 RequireJS</li>
+          <ol>
+            <li>インストールと JavaScript ファイルのロード</li>
+            <li>モジュールの定義</li>
+            <li>RequireJS の設定</li>
+            <li>プラグイン</li>
+          </ol>
+          <li>4-2 r.js</li>
+          <ol>
+            <li>r.js の使い方</li>
+            <li>r.js の設定項目</li>
+            <li>設定例</li>
+          </ol>
+        </ol>
+        <li id="toc-tests">5章 アプリケーションのテスト</li>
+        <ol>
+          <li>5-1 QUnit</li>
+          <ol>
+            <li>QUnit の準備</li>
+            <li>テストの作成</li>
+            <li>複数のテストをまとめる</li>
+            <li>DOM 操作をする処理のテスト</li>
+            <li>非同期処理を含む処理のテスト</li>
+            <li>テストの進行状況をフックする</li>
+            <li>RequireJS を使っている場合</li>
+            <li>Sinon によるテストダブル</li>
+          </ol>
+          <li>5-2 Jasmine</li>
+          <ol>
+            <li>Jasmine の準備</li>
+            <li>スペックの作成</li>
+            <li>DOM 操作をする処理のテスト</li>
+            <li>非同期処理を含む処理のテスト</li>
+            <li>スペックを無効にする</li>
+            <li>テストダブル</li>
+          </ol>
+          <li>5-3 Backbone のテスト</li>
+          <ol>
+            <li>どこまでテストするか</li>
+            <li>View は DOM 操作を極力切り出す</li>
+            <li>XSS のテスト</li>
+            <li>同期処理のテスト</li>
+            <li>イベントハンドラに対するスパイを設定する</li>
+          </ol>
+        </ol>
+        <li id="toc-tasks">6章 タスクの自動化</li>
+        <ol>
+          <li>6-1 npm</li>
+          <ol>
+            <li>npm のインストール</li>
+            <li>パッケージのインストール</li>
+          </ol>
+          <li>6-2 Grunt</li>
+          <ol>
+            <li>Grunt のインストール</li>
+            <li>設定ファイルの書き方</li>
+            <li>タスクを作る</li>
+            <li>プラグイン</li>
+          </ol>
+        </ol>
+        <li id="toc-tutorial">7章 Backbone アプリケーションの開発</li>
+        <ol>
+          <li>7-1 開発環境のセットアップ</li>
+          <ol>
+            <li>ファイル校正</li>
+            <li>RequireJS の設定</li>
+          </ol>
+          <li>7-2 PC サイトの作成</li>
+          <ol>
+            <li>モデルの設計</li>
+            <li>Router と AppView</li>
+            <li>連絡先一覧の表示</li>
+            <li>連絡先の作成機能</li>
+            <li>Contact のバリデーション</li>
+            <li>連絡先の詳細表示</li>
+            <li>連絡先の編集</li>
+            <li>デプロイの準備</li>
+            <li>今後の展望</li>
+          </ol>
+          <li>7-3 jQuery Mobile を用いたモバイルアプリの開発</li>
+          <ol>
+            <li>jQuery Mobile とは</li>
+            <li>jQuery Mobile の基礎</li>
+            <li>jQuery Mobile のセットアップ</li>
+            <li>Page の実装</li>
+            <li>Router の作成</li>
+            <li>各ページの実装</li>
+            <li>アプリケーションの起動</li>
+            <li>今後の展望</li>
+          </ol>
+        </ol>
+        <li id="toc-appendix">付録</li>
+        <ol>
+          <li>A Underscore.js リファレンス</li>
+          <li>B Backbone.js リファレンス</li>
+          <li>C jQuery.Deferred</li>
+          <li>D Rails で Backbone を使う</li>
+        </ol>
+        <li id="toc-column">コラム</li>
+        <ol>
+          <li>Backbone は MV◯ である論争</li>
+          <li>なぜコンテキストの指定が必要か</li>
+          <li>なぜ listenTo と stopListening が導入されたか</li>
+          <li>Underscore より速い？ Lo-Dash</li>
+          <li>jQuery より軽量？ Zepto</li>
+          <li>ステートパターン</li>
+          <li>プラグイン紹介その 1 - Backbone.relational</li>
+          <li>プラグイン紹介その 2 - backbone-forms</li>
+          <li>プラグイン紹介その 3 - Marionette</li>
+          <li>プラグイン紹介その 4 - Backbone Boilerplate</li>
+          <li>Ajax と pushState</li>
+          <li>HTTP PATCH メソッドとは</li>
+          <li>デフォルトの Backbone.sync() を使っている場合</li>
+          <li>Backbone の生みの親 Jeremy Ashkenas 氏</li>
+        </ol>
+      </ol>
+    </section>
+
+    <section id="sample-code">
+      <h2>サンプルへのリンク</h2>
+      <p>
+      『3章 サンプルアプリケーション 「Todos」』 の課題と 『7章 Backbone
+      アプリケーションの開発』のソースコードとアプリケーションへのリンクです。
+      </p>
+      <table>
+        <tr>
+          <th>ソースコード</th>
+          <td>
+            <a href="https://github.com/taka84u9/backbone-sample">
+              https://github.com/taka84u9/backbone-sample
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <th>アプリケーション</th>
+          <td>
+            <a href="http://taka84u9.github.com/backbone-sample">
+              http://taka84u9.github.com/backbone-sample
+            </a>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="errata">
+      <h2>正誤表</h2>
+      <p>
+        誤りは見つかっていません。
+      </p>
+    </section>
+
+    <section id="about">
+      <h2>ページのデザインについて</h2>
+      <p>
+        Backbone では一貫性のために<a href="http://backbonejs.org">backbonejs.org</a>
+        と同様のスタイルを各プラグインのページが採用することが推奨・許可されています。
+        本ページでもその流れに沿って、ページのデザインを意図的に backbonejs.org
+        と似せています。
+      </p>
+      <p>
+        参照：
+        <a href="https://github.com/documentcloud/backbone/issues/2077">
+          Okay to use the styling/layout of Backbone's docs for Backbone-relational?
+        </a>
+      </p>
+    </section>
+  </div>
+</body>
+</html>

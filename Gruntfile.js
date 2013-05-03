@@ -151,7 +151,8 @@ module.exports = function (grunt) {
   });
   grunt.registerTask('build:css', ['less', 'cssmin']);
   grunt.registerTask('build:js', ['jst', 'requirejs']);
-  grunt.registerTask('default', ['build:css', 'build:js', 'uglify']);
+  grunt.registerTask('build', ['build:css', 'build:js', 'uglify']);
   grunt.registerTask('test:qunit', ['connect', 'qunit']);
   grunt.registerTask('test:jasmine', ['connect', 'jasmine']);
+  grunt.registerTask('default', ['connect', 'watch']);
 };

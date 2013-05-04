@@ -65,6 +65,18 @@
     nextOrder: function () {
       if (!this.length) return 1;
       return this.last().get("order") + 1;
+    },
+
+    swap: function (idA, idB) {
+      var tmp, modelA, modelB;
+      modelA = this.get(idA);
+      modelB = this.get(idB);
+      if (modelA && modelB) {
+        tmp = modelA.get('order');
+        modelA.save('order', modelB.get('order'), {silent: true});
+        modelB.save('order', tmp, {silent: true});
+        this.sort();
+      }
     }
   });
 
@@ -79,16 +91,24 @@
 
     tagName: "li",
 
+    moving: false,  // ドラッグされているかどうか
+
     template: function (data) {
       return template("#item-template")(data);
     },
 
     events: {
-      "click .toggle": "toggleDone",
-      "dblclick .view": "edit",
+      "click .toggle":   "toggleDone",
+      "dblclick .view":  "edit",
       "click a.destroy": "clear",
-      "keypress .edit": "updateOnEnter",
-      "blur .edit": "close"
+      "keypress .edit":  "updateOnEnter",
+      "blur .edit":      "close",
+
+      // Todoをドラッグ・アンド・ドロップで並び替えられるようにする
+      "dragstart": "onDragStart",
+      "dragend": "onDragEnd",
+      "drop": "onDrop",
+      "dragover": "onDragOver",
     },
 
     initialize: function () {
@@ -137,6 +157,33 @@
 
     clear: function () {
       this.model.destroy();
+    },
+
+    onDragStart: function (e) {
+      this.moving = true;
+      this.$el.addClass('moving');
+      e.originalEvent.dataTransfer.setData('application/x-todo-id',
+                                           this.model.id);
+    },
+
+    onDragEnd: function () {
+      this.moving = false;
+      this.$el.removeClass('moving');
+    },
+
+    onDrop: function (e) {
+      e.preventDefault();
+      // 自分自身へドロップした場合は何もしない
+      if (!this.moving) {
+        var id, model, tmp;
+        id = e.originalEvent.dataTransfer.getData('application/x-todo-id');
+        this.model.collection.swap(id, this.model.id);
+      }
+    },
+
+    onDragOver: function (e) {
+      // ドロップ可能にする
+      e.preventDefault();
     }
 
   });
@@ -163,11 +210,13 @@
 
       this.input = this.$("#new-todo");
       this.allCheckbox = this.$("#toggle-all")[0];
+      this.list = this.$("#todo-list");
 
       this.listenTo(this.collection, "add", this.addOne);
       // 本来はここにresetイベントの購読が行われているが、Backbone1.0から
       // Collection#fetchがsetをデフォルトで使うようになったので削除した。
       this.listenTo(this.collection, "all", this.render);
+      this.listenTo(this.collection, "sort", this.reorder);
 
       this.footer = this.$("footer");
       this.main = $("#main");
@@ -194,13 +243,18 @@
       this.allCheckbox.checked = !remaining;
     },
 
-    // コントローラメソッド
-    // --------------------
     addOne: function (todo) {
       var view = new TodoView({ model: todo });
-      this.$("#todo-list").append(view.render().el);
+      this.list.append(view.render().el);
     },
 
+    reorder: function () {
+      this.list.html('');
+      this.addAll();
+    },
+
+    // コントローラメソッド
+    // --------------------
     addAll: function () {
       this.collection.each(this.addOne, this);
     },

@@ -4,14 +4,22 @@ body {
 	padding: 0;
 }
 
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+  cursor: move;
+}
+
 body {
 	font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
 	line-height: 1.4em;
 	background: #eeeeee;
 	color: #333333;
-	width: 520px;
-	margin: 0 auto;
-	-webkit-font-smoothing: antialiased;
 }
 
 #todoapp {
@@ -28,6 +36,9 @@ body {
 	-ms-border-radius: 0 0 5px 5px;
 	-o-border-radius: 0 0 5px 5px;
 	border-radius: 0 0 5px 5px;
+	width: 520px;
+	margin: 0 auto;
+	-webkit-font-smoothing: antialiased;
 }
 
 #todoapp h1 {
@@ -117,6 +128,10 @@ body {
 	width: 444px;
 	padding: 13px 15px 14px 20px;
 	margin: 0;
+}
+
+#todo-list li.moving .view {
+    opacity: 0.4;
 }
 
 #todo-list li.editing .view {

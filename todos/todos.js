@@ -1,12 +1,20 @@
 /*global jQuery: false _: false Backbone: false */
 
-(function ($, _, Backbone) {
+(function (global) {
 
   "use strict";
 
   // DOM の読み込みが完了する前に定義する
 
-  var Todo = Backbone.Model.extend({
+  var $ = global.jQuery,
+      _ = global._,
+      Backbone = global.Backbone;
+
+  // アプリケーションの名前空間
+  // テストのために外部に公開する
+  var Todos = global.Todos = {};
+
+  var Todo = Todos.Todo = Backbone.Model.extend({
     defaults: {
       done: false
     },
@@ -15,55 +23,59 @@
       this.on("remove", function () { this.unset("order"); }, this);
     },
 
-    // 変更なし
     toggle: function () {
       this.save({ done: !this.get("done") });
     }
   });
 
-  var TodoList = Backbone.Collection.extend({
+  var TodoList = Todos.TodoList = Backbone.Collection.extend({
     model: Todo,
 
     localStorage: new Backbone.LocalStorage("todos"),
 
-    //
+    // Modelの特定の属性値で昇順にソートする場合は名前だけでよい
+    comparator: "order",
+
+    // Todo#defaultsからTodoList#nextOrderにアクセスせずにTodoListに追加
+    // されるタイミングで付与するようにする。
+    // Collectionにはset, reset, push, shiftなどのメソッドが定義されているが、
+    // これらは全て内部でaddを使っている。
     add: function (models) {
-      _.isArray(models) || (models = [models]);
+      if (!_.isArray(models)) models = [models];
       _.each(models, function (model) {
-        if (model instanceof Todo) {
+        if (model instanceof Todo && !model.has('order')) {
           model.set('order', this.nextOrder());
-        } else {
+        } else if (!model.hasOwnProperty('order')) {
           model.order = this.nextOrder();
         }
       }, this);
-      TodoList.__super__.add.apply(this, arguments);
+      Backbone.Collection.prototype.add.apply(this, arguments);
     },
 
-    // 変更なし
+    // 完了しているTodoを返す
     done: function () {
-      return this.filter(function (todo) { return todo.get("done"); });
+      return this.where({done: true});
     },
 
-    // 変更なし
+    // 完了していないTodoを返す
     remaining: function () {
-      return this.reject(function (todo) { return todo.get("done"); });
+      return this.where({done: false});
     },
 
-    // 変更なし
     nextOrder: function () {
       if (!this.length) return 1;
       return this.last().get("order") + 1;
-    },
-
-    // Modelの特定の属性値で昇順にソートする場合は名前だけでよい
-    comparator: "order"
+    }
   });
 
+  // ヘルパー関数
+  // DOMセレクタを受け取って、それをUnderscoreテンプレート化したものを返す。
+  // 同じセレクタの場合はキャッシュを使うので不要なDOMアクセスを抑制できる。
   var template = _.memoize(function (selector) {
     return _.template($(selector).html());
   });
 
-  var TodoView = Backbone.View.extend({
+  var TodoView = Todos.TodoView = Backbone.View.extend({
 
     tagName: "li",
 
@@ -71,7 +83,6 @@
       return template("#item-template")(data);
     },
 
-    // 変更なし
     events: {
       "click .toggle": "toggleDone",
       "dblclick .view": "edit",
@@ -80,13 +91,13 @@
       "blur .edit": "close"
     },
 
-    // 変更なし
     initialize: function () {
       this.listenTo(this.model, "change", this.render);
       this.listenTo(this.model, "destroy", this.remove);
     },
 
-    // 変更なし
+    // ビューメソッド
+    // --------------
     render: function () {
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.toggleClass("done", this.model.get("done"));
@@ -94,7 +105,8 @@
       return this;
     },
 
-    // 変更なし
+    // コントローラメソッド
+    // --------------------
     toggleDone: function () {
       this.model.toggle();
     },
@@ -123,22 +135,20 @@
       if (e.keyCode == 13) this.close();
     },
 
-    // 変更なし
     clear: function () {
       this.model.destroy();
     }
 
   });
 
-  var AppView = Backbone.View.extend({
+  var AppView = Todos.AppView = Backbone.View.extend({
 
     el: "#todoapp",
 
-    statsTemplate: function (data) {
+    template: function (data) {
       return template("#stats-template")(data);
     },
 
-    // 変更なし
     events: {
       "keypress #new-todo": "createOnEnter",
       "click #clear-completed": "clearCompleted",
@@ -146,13 +156,17 @@
     },
 
     initialize: function () {
+      // もともとはグローバル変数だったTodosをcollectionプロパティに格納する。
+      // これによりaddAllやclearCompletedなどのメソッド内でTodosの代わりに
+      // this.collectionにアクセスするように変更できる。
       this.collection = new TodoList();
 
       this.input = this.$("#new-todo");
       this.allCheckbox = this.$("#toggle-all")[0];
 
       this.listenTo(this.collection, "add", this.addOne);
-      this.listenTo(this.collection, "reset", this.addAll);
+      // 本来はここにresetイベントの購読が行われているが、Backbone1.0から
+      // Collection#fetchがsetをデフォルトで使うようになったので削除した。
       this.listenTo(this.collection, "all", this.render);
 
       this.footer = this.$("footer");
@@ -161,7 +175,8 @@
       this.collection.fetch();
     },
 
-    // Todos を this.collection に変更
+    // ビューメソッド
+    // --------------
     render: function () {
       var done = this.collection.done().length;
       var remaining = this.collection.remaining().length;
@@ -170,7 +185,7 @@
         this.main.show();
         this.footer
           .show()
-          .html(this.statsTemplate({ done: done, remaining: remaining }));
+          .html(this.template({ done: done, remaining: remaining }));
       } else {
         this.main.hide();
         this.footer.hide();
@@ -179,33 +194,34 @@
       this.allCheckbox.checked = !remaining;
     },
 
-    // 変更なし
+    // コントローラメソッド
+    // --------------------
     addOne: function (todo) {
       var view = new TodoView({ model: todo });
       this.$("#todo-list").append(view.render().el);
     },
 
-    // Todos を this.collection に変更
     addAll: function () {
       this.collection.each(this.addOne, this);
     },
 
     createOnEnter: function (e) {
-      var value = this.input.val();  // キャッシュ
+      var value = this.input.val();
       if (e.keyCode !== 13) return;
       if (!value) return;
 
       this.collection.create({ title: value });
+      // コントローラメソッド内でビューを変更しているが、これくらいは許容。
+      // もっと込み入ってくるのであればclearInputメソッドを作って、それを
+      // 実行するようにする。
       this.input.val("");
     },
 
-    // Todos を this.collection に変更
     clearCompleted: function () {
       _.invoke(this.collection.done(), "destroy");
       return false;
     },
 
-    // Todos を this.collection に変更
     toggleAllComplete: function () {
       var done = this.allCheckbox.checked;
       this.collection.each(function (todo) { todo.save({ done: done }); });
@@ -220,4 +236,4 @@
 
   });
 
-})(jQuery, _, Backbone);
+})(this);

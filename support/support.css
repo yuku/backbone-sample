@@ -72,3 +72,20 @@ h1 strong {
 #table-of-contents > ol > li {
     font-weight: bold;
 }
+#errata table {
+    border: 1px solid #ddd;
+    background-color: white;
+    border-collapse: collapse;
+    margin: 0px;
+}
+#errata td,  #errata th {
+    border-left: 1px solid #ddd;
+    padding: 5px;
+    margin: 0px;
+}
+#errata td {
+    border-top: 1px solid #ddd;
+}
+#errata td:first-child, #errata th:first-child {
+    border-left: none;
+}

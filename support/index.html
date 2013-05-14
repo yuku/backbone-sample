@@ -339,9 +339,27 @@
 
     <section id="errata">
       <h2>正誤表</h2>
-      <p>
-        誤りは見つかっていません。
-      </p>
+      <table>
+        <tr>
+          <th>ページ</th>
+          <th>誤り</th>
+          <th>正解</th>
+        </tr>
+        <tr>
+          <td>p.92 中段</td>
+          <td><code>_.empty</code></td>
+          <td>
+            <code><strong>_.isEmpty</strong></code>
+            <br/>
+            またこのif文は直前に<code>buffers[base].push()</code>を実行していることから不要です。
+          </td>
+        </tr>
+        <tr>
+          <td>p.229 isEmpty</td>
+          <td>配列やオブジェクトが要素を含めば真を返します。</td>
+          <td>配列やオブジェクトが要素を<strong>含まなければ</strong>真を返します。</td>
+        </tr>
+      </table>
     </section>
 
     <section id="about">

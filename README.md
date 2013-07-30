@@ -15,20 +15,20 @@
 
 リファクタリング後
 
-- [code](https://github.com/taka84u9/backbone-sample/tree/gh-pages/todos)
-- [app](http://taka84u9.github.io/backbone-sample/todos/index.html) - ブラウザアプリケーション
+- [code](https://github.com/yuku-t/backbone-sample/tree/gh-pages/todos)
+- [app](http://yuku-t.github.io/backbone-sample/todos/index.html) - ブラウザアプリケーション
 
 ### 7章
 
 アプリケーション「Contacts」
 
-- [pc](http://taka84u9.github.io/backbone-sample/pc.html) - ブラウザアプリケーション
-- [mobile](http://taka84u9.github.io/backbone-sample/mobile.html) - jQuery Mobile を使ったモバイルアプリ
+- [pc](http://yuku-t.github.io/backbone-sample/pc.html) - ブラウザアプリケーション
+- [mobile](http://yuku-t.github.io/backbone-sample/mobile.html) - jQuery Mobile を使ったモバイルアプリ
 
 テスト
 
-- [QUnit](http://taka84u9.github.io/backbone-sample/test/qunit/index.html)
-- [Jasmine](http://taka84u9.github.io/backbone-sample/test/jasmine/index.html)
+- [QUnit](http://yuku-t.github.io/backbone-sample/test/qunit/index.html)
+- [Jasmine](http://yuku-t.github.io/backbone-sample/test/jasmine/index.html)
 
 ローカルマシンで動かす
 ----------------------
@@ -38,7 +38,7 @@
 2. Gitリポジトリをローカルマシンにクローンする
 
    ```
-   % git clone git://github.com/taka84u9/backbone-sample.git
+   % git clone git://github.com/yuku-t/backbone-sample.git
    % git submodule update --init
    ```
 

@@ -26554,9 +26554,9 @@ define('fixtures',[],function () {
     },
     {
       name: "Yuku Takahashi",
-      email: "taka84u9@gmail.com",
-      twitter: "taka84u9",
-      github: "taka84u9"
+      email: "yuku-t@gmail.com",
+      twitter: "yuku-t",
+      github: "yuku-t"
     }
   ];
 });
